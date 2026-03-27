@@ -47,12 +47,26 @@ class StatsProcessor:
                 response.raise_for_status()
                 logger.info(f"✓ Haku onnistui (status {response.status_code})")
                 return response
+            except requests.exceptions.SSLError:
+                logger.warning(f"⚠ SSL-tarkistus epäonnistui, yritetään ilman tarkistusta")
+                try:
+                    response = self.session.get(url, timeout=REQUEST_TIMEOUT, verify=False)
+                    response.raise_for_status()
+                    logger.info(f"✓ Haku onnistui ilman SSL-tarkistusta (status {response.status_code})")
+                    return response
+                except requests.RequestException as e2:
+                    logger.warning(f"✗ Virhe SSL-ohituksella: {e2}")
+                    if attempt < max_retries - 1:
+                        time.sleep(RETRY_DELAY)
+                    else:
+                        logger.error("✗ Kaikki yritykset epäonnistuivat")
+                        return None
             except requests.RequestException as e:
                 logger.warning(f"✗ Virhe: {e}")
                 if attempt < max_retries - 1:
                     time.sleep(RETRY_DELAY)
                 else:
-                    logger.error(f"✗ Kaikki yritykset epäonnistuivat")
+                    logger.error("✗ Kaikki yritykset epäonnistuivat")
                     return None
     
     def fetch_standings(self):

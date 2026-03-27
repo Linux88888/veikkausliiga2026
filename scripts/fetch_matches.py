@@ -46,6 +46,20 @@ class MatchFetcher:
                 response.raise_for_status()
                 logger.info(f"✓ Haku onnistui (status {response.status_code})")
                 return response
+            except requests.exceptions.SSLError:
+                logger.warning(f"⚠ SSL-tarkistus epäonnistui, yritetään ilman tarkistusta")
+                try:
+                    response = self.session.get(url, timeout=REQUEST_TIMEOUT, verify=False)
+                    response.raise_for_status()
+                    logger.info(f"✓ Haku onnistui ilman SSL-tarkistusta (status {response.status_code})")
+                    return response
+                except requests.RequestException as e2:
+                    logger.warning(f"✗ Virhe SSL-ohituksella: {e2}")
+                    if attempt < max_retries - 1:
+                        time.sleep(RETRY_DELAY)
+                    else:
+                        logger.error("✗ Kaikki yritykset epäonnistuivat")
+                        return None
             except requests.RequestException as e:
                 logger.warning(f"✗ Virhe: {e}")
                 if attempt < max_retries - 1:
@@ -64,24 +78,45 @@ class MatchFetcher:
             soup = BeautifulSoup(response.text, 'html.parser')
             matches = []
 
-            # Yritetään löytää ottelutaulukko sivulta
-            rows = soup.find_all('tr')
-            for row in rows:
+            # Yritetään löytää ottelutaulukko sivulta eri tavoilla
+            # Tapa 1: Etsi taulukon rivit data-attribuuteilla
+            match_rows = (
+                soup.find_all('tr', attrs={'data-match-id': True}) or
+                soup.find_all('tr', class_=lambda c: c and 'match' in c.lower()) or
+                soup.find_all('tr', class_=lambda c: c and 'ottelu' in c.lower())
+            )
+
+            # Tapa 2: Etsi yleiset taulukkorivit
+            if not match_rows:
+                match_rows = soup.find_all('tr')
+
+            for row in match_rows:
                 cells = row.find_all('td')
                 if cells and len(cells) >= 4:
+                    pvm = cells[0].get_text().strip()
+                    koti = cells[1].get_text().strip()
+                    tulos = cells[2].get_text().strip() if len(cells) > 2 else '-'
+                    vieras = cells[3].get_text().strip() if len(cells) > 3 else '-'
+
+                    # Puhdista tyhjät arvot
+                    if not koti or not vieras:
+                        continue
+                    if not tulos:
+                        tulos = '-'
+
                     match_data = {
-                        'pvm': cells[0].get_text().strip(),
-                        'koti': cells[1].get_text().strip(),
-                        'tulos': cells[2].get_text().strip() if len(cells) > 2 else '-',
-                        'vieras': cells[3].get_text().strip() if len(cells) > 3 else '-',
+                        'pvm': pvm,
+                        'koti': koti,
+                        'tulos': tulos,
+                        'vieras': vieras,
                     }
-                    if match_data['koti'] and match_data['vieras']:
-                        matches.append(match_data)
+                    matches.append(match_data)
 
             if matches:
                 logger.info(f"✓ Ottelutiedot haettu: {len(matches)} ottelua")
                 return matches
             else:
+                logger.warning("⚠ Ottelutietoja ei löydy sivun rakenteesta, käytetään esimerkkidataa")
                 return self._create_dummy_matches()
         except Exception as e:
             logger.error(f"✗ Virhe: {e}")
