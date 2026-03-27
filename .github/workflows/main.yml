@@ -20,84 +20,64 @@ jobs:
       with:
         python-version: '3.9'
 
+    - name: Create output directory
+      run: mkdir -p output
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        echo "✓ Dependencies installed"
 
-    - name: Check Python environment
+    - name: Test config imports
       run: |
-        echo "=== Python Info ==="
-        python --version
-        pip list
-        echo ""
-        echo "=== Working Directory ==="
-        pwd
-        ls -la
+        echo "=== Testing Config ==="
+        python -c "from scripts.config import *; print('✓ Config imported successfully')"
 
-    - name: Run fetch_stats.py with debug
+    - name: Run fetch_stats.py
       run: |
         echo "=== Running fetch_stats.py ==="
-        python -u scripts/fetch_stats.py
+        python scripts/fetch_stats.py
         echo "Exit code: $?"
-        echo ""
 
-    - name: Run match_predictor.py with debug
+    - name: Run match_predictor.py
       run: |
         echo "=== Running match_predictor.py ==="
-        python -u scripts/match_predictor.py
+        python scripts/match_predictor.py
         echo "Exit code: $?"
-        echo ""
 
-    - name: Run attendance_analyzer.py with debug
+    - name: Run attendance_analyzer.py
       run: |
         echo "=== Running attendance_analyzer.py ==="
-        python -u scripts/attendance_analyzer.py
+        python scripts/attendance_analyzer.py
         echo "Exit code: $?"
-        echo ""
-
-    - name: Check if output directory was created
-      run: |
-        echo "=== Checking output directory ==="
-        if [ -d "output" ]; then
-          echo "✓ Output directory EXISTS"
-          ls -lah output/
-          echo ""
-          echo "=== Files in output directory ==="
-          find output -type f -exec ls -lh {} \;
-        else
-          echo "✗ Output directory NOT FOUND"
-          echo "Creating output directory manually..."
-          mkdir -p output
-          ls -la
-        fi
 
     - name: Run main.py
       run: |
         echo "=== Running main.py ==="
-        python -u scripts/main.py
+        python scripts/main.py
         echo "Exit code: $?"
 
-    - name: Final check - List all generated files
+    - name: Check output directory
       run: |
-        echo "=== Directory listing after all scripts ==="
-        ls -lah
-        echo ""
-        echo "=== Contents of output directory ==="
+        echo "=== Output directory contents ==="
         if [ -d "output" ]; then
+          echo "✓ Output directory EXISTS"
           ls -lah output/
           echo ""
-          echo "=== Content preview of each file ==="
+          echo "=== File details ==="
           for file in output/*.md; do
             if [ -f "$file" ]; then
-              echo ""
-              echo "--- File: $file ---"
+              echo "File: $file"
+              echo "Size: $(wc -c < $file) bytes"
               echo "Lines: $(wc -l < $file)"
-              head -30 "$file"
+              echo "---"
             fi
           done
         else
-          echo "❌ Output directory DOES NOT EXIST"
+          echo "❌ Output directory NOT found!"
+          echo "Current directory contents:"
+          ls -lah
         fi
 
     - name: Upload artifacts
@@ -109,11 +89,11 @@ jobs:
         retention-days: 30
         if-no-files-found: warn
 
-    - name: Test Summary
-      if: always()
+    - name: Success summary
+      if: success()
       run: |
         echo "=========================================="
-        echo "✅ TEST WORKFLOW COMPLETED"
+        echo "✅ WORKFLOW SUCCESS!"
         echo "=========================================="
         echo "Repository: Linux88888/veikkausliiga2026"
         echo "Python Version: 3.9"
@@ -121,6 +101,16 @@ jobs:
           echo "Output files generated:"
           ls -1 output/ | sed 's/^/  ✓ /'
         else
-          echo "⚠️  No output files generated"
+          echo "⚠️  No output directory"
         fi
+        echo "Artifacts uploaded: test-output"
+        echo "=========================================="
+
+    - name: Failure summary
+      if: failure()
+      run: |
+        echo "=========================================="
+        echo "❌ WORKFLOW FAILED!"
+        echo "=========================================="
+        echo "Check the logs above for details"
         echo "=========================================="
