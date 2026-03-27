@@ -1,1 +1,11 @@
+# Veikkausliiga 2026 - Yleisömäärät
 
+*Analysoitu: 2026-03-27 12:12:30*
+
+## Tilastot
+
+- **Yhteensä katsojia**: 850,000
+- **Otteluja**: 180
+- **Keskiarvo**: 4,722 katsojaa/ottelu
+- **Korkein**: 15,000 katsojaa
+- **Matalin**: 1,200 katsojaa

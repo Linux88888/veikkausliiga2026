@@ -44,9 +44,24 @@ jobs:
 
     - name: Check output files
       run: |
-        if [ -d "output" ]; then
-          echo "✓ Output files generated:"
-          ls -lah output/
+        echo "=== Output-kansion tiedostot ==="
+        ls -lah output/
+        echo ""
+        echo "=== Tarkistetaan vaaditut raportit ==="
+        MISSING=0
+        for FILE in Tilastot2026.md Ennusteet2026.md Yleiso2026.md; do
+          if [ -f "output/$FILE" ]; then
+            echo "✓ output/$FILE löytyy"
+          else
+            echo "✗ output/$FILE PUUTTUU!"
+            MISSING=1
+          fi
+        done
+        if [ "$MISSING" -eq 1 ]; then
+          echo "❌ Jokin raportti puuttuu!"
+          exit 1
+        else
+          echo "✅ Kaikki raportit löytyvät!"
         fi
 
     - name: Commit and push output files
