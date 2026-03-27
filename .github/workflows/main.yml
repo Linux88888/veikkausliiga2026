@@ -30,32 +30,35 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run fetch_stats.py
-      run: python scripts/fetch_stats.py
-
-    - name: Run match_predictor.py
-      run: python scripts/match_predictor.py
-
-    - name: Run attendance_analyzer.py
-      run: python scripts/attendance_analyzer.py
-
-    - name: Run main.py
+    - name: Run main.py (generates all reports)
       run: python scripts/main.py
 
-    - name: Check output files
+    - name: Verify required output files
       run: |
-        if [ -d "output" ]; then
-          echo "✓ Output files generated:"
-          ls -lah output/
+        echo "✓ Output files generated:"
+        ls -lah output/
+        missing=0
+        for f in output/Tilastot2026.md output/Ennusteet2026.md output/Yleiso2026.md; do
+          if [ -f "$f" ]; then
+            echo "✓ $f"
+          else
+            echo "✗ PUUTTUU: $f"
+            missing=1
+          fi
+        done
+        if [ "$missing" -eq 1 ]; then
+          echo "❌ Yksi tai useampi tiedosto puuttuu!"
+          exit 1
         fi
+        echo "✅ Kaikki raportit löytyvät."
 
     - name: Commit and push output files
       run: |
         git config user.name "GitHub Actions"
         git config user.email "actions@github.com"
         git add output/
-        git commit -m "🔄 Update output files - $(date '+%Y-%m-%d %H:%M:%S')" || true
-        git push
+        git diff --cached --quiet || git commit -m "🔄 Update output files - $(date '+%Y-%m-%d %H:%M:%S')"
+        git push || true
 
     - name: Upload artifacts (backup)
       if: always()
