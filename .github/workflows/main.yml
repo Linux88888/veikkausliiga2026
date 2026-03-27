@@ -27,60 +27,36 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        echo "✓ Dependencies installed"
-
-    - name: Test config imports
-      run: |
-        echo "=== Testing Config ==="
-        python -c "from scripts.config import *; print('✓ Config imported successfully')"
 
     - name: Run fetch_stats.py
-      run: |
-        echo "=== Running fetch_stats.py ==="
-        python scripts/fetch_stats.py
-        echo "Exit code: $?"
+      run: python scripts/fetch_stats.py
 
     - name: Run match_predictor.py
-      run: |
-        echo "=== Running match_predictor.py ==="
-        python scripts/match_predictor.py
-        echo "Exit code: $?"
+      run: python scripts/match_predictor.py
 
     - name: Run attendance_analyzer.py
-      run: |
-        echo "=== Running attendance_analyzer.py ==="
-        python scripts/attendance_analyzer.py
-        echo "Exit code: $?"
+      run: python scripts/attendance_analyzer.py
 
     - name: Run main.py
-      run: |
-        echo "=== Running main.py ==="
-        python scripts/main.py
-        echo "Exit code: $?"
+      run: python scripts/main.py
 
-    - name: Check output directory
+    - name: Check output files
       run: |
-        echo "=== Output directory contents ==="
         if [ -d "output" ]; then
-          echo "✓ Output directory EXISTS"
+          echo "✓ Output files generated:"
           ls -lah output/
-          echo ""
-          echo "=== File details ==="
-          for file in output/*.md; do
-            if [ -f "$file" ]; then
-              echo "File: $file"
-              echo "Size: $(wc -c < $file) bytes"
-              echo "Lines: $(wc -l < $file)"
-              echo "---"
-            fi
-          done
-        else
-          echo "❌ Output directory NOT found!"
-          echo "Current directory contents:"
-          ls -lah
         fi
 
-    - name: Upload artifacts
+    - name: Commit and push output files
+      if: always()
+      run: |
+        git config user.name "GitHub Actions Bot"
+        git config user.email "actions@github.com"
+        git add -A output/
+        git commit -m "Update output files - $(date '+%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+        git push
+
+    - name: Upload artifacts (backup)
       if: always()
       uses: actions/upload-artifact@v4
       with:
@@ -88,29 +64,3 @@ jobs:
         path: output/
         retention-days: 30
         if-no-files-found: warn
-
-    - name: Success summary
-      if: success()
-      run: |
-        echo "=========================================="
-        echo "✅ WORKFLOW SUCCESS!"
-        echo "=========================================="
-        echo "Repository: Linux88888/veikkausliiga2026"
-        echo "Python Version: 3.9"
-        if [ -d "output" ]; then
-          echo "Output files generated:"
-          ls -1 output/ | sed 's/^/  ✓ /'
-        else
-          echo "⚠️  No output directory"
-        fi
-        echo "Artifacts uploaded: test-output"
-        echo "=========================================="
-
-    - name: Failure summary
-      if: failure()
-      run: |
-        echo "=========================================="
-        echo "❌ WORKFLOW FAILED!"
-        echo "=========================================="
-        echo "Check the logs above for details"
-        echo "=========================================="
