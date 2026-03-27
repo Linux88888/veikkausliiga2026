@@ -13,37 +13,55 @@ Veikkausliiga 2026 is an advanced football league management system designed to 
 ## Project Structure
 ```
 .
-├── src/                 # Source code files
-├── docs/                # Documentation
-├── reports/             # Generated reports
-├── tests/               # Unit tests
-└── README.md            # Project documentation
+├── scripts/             # Python scripts that generate reports
+│   ├── main.py          # Entry point — runs all four analyzers
+│   ├── config.py        # URLs, team list, request settings
+│   ├── fetch_stats.py   # → output/Tilastot2026.md  (sarjataulukko)
+│   ├── match_predictor.py  # → output/Ennusteet2026.md (otteluennusteet)
+│   ├── attendance_analyzer.py # → output/Yleiso2026.md (yleisömäärät)
+│   └── fetch_matches.py # → output/Ottelut2026.md  (otteluohjelma)
+├── output/              # Generated Markdown reports (versioned)
+│   ├── Tilastot2026.md  # Sarjataulukko
+│   ├── Ennusteet2026.md # Otteluennusteet
+│   ├── Yleiso2026.md    # Yleisömäärätilastot
+│   └── Ottelut2026.md   # Otteluohjelma ja tulokset
+├── .github/workflows/   # CI/CD workflow
+└── README.md
 ```
+
+## Output-tiedostot — mistä luvut tulevat?
+
+Skriptit hakevat tiedot ensisijaisesti **veikkausliiga.com**-sivustolta:
+
+| Tiedosto | Lähde | Fallback |
+|---|---|---|
+| `Tilastot2026.md` | `veikkausliiga.com/tilastot/2026/veikkausliiga/joukkueet/` | Kiinteä esimerkkidata |
+| `Ottelut2026.md` | `veikkausliiga.com/tilastot/2026/veikkausliiga/ottelut/` | Kiinteä esimerkkidata |
+| `Ennusteet2026.md` | Laskettu ottelutilastoista | Kiinteät testiprobabiliteetit |
+| `Yleiso2026.md` | Yleisötilastot sivustolta | Kiinteä esimerkkidata |
+
+> **Huom:** GitHub Copilot -agentin sandbox-ympäristö ei pysty tavoittamaan veikkausliiga.com-sivustoa palomuurirajoitusten vuoksi. Tällöin skriptit tuottavat tiedostot **esimerkkidatalla** (kiinteät arvot) ja merkitsevät sen raportin yläosaan varoituksella `⚠ Lähde: Esimerkkidata`.
+>
+> Oikeat tiedot saadaan, kun `python scripts/main.py` ajetaan ympäristössä, jolla on pääsy veikkausliiga.com-sivustolle (esim. paikallisesti tai sallimalla sivusto Copilot-agentin [allowlist-asetuksista](https://github.com/Linux88888/veikkausliiga2026/settings/copilot/coding_agent)).
+
+## Miksi agentti ei voi suoraan puskea mainiin?
+
+GitHub Copilot -koodausagentti toimii aina **feature-branchillä** (`copilot/**`) ja luo pull requestin `main`-haaraan. Tämä on GitHubin tietoturvasuunnitelma:
+
+- `main`-haara on suojattu (branch protection) — suorat pushit estetty
+- PR-malli mahdollistaa ihmisvalvonnan ennen koodin yhdistämistä
+- Agentti ei voi ohittaa branch protection -sääntöjä
+
+**CI-workflow puskee kuitenkin automaattisesti generoitujen raporttien päivitykset takaisin `copilot/**`-haaraan** jokaisen ajon jälkeen (`git push origin HEAD:"$BRANCH"`).
+
+Jos haluat vähentää manuaalista työtä, voit ottaa käyttöön **auto-merge** PR:ssä — tällöin PR yhdistyy automaattisesti, kun CI-tarkistukset menevät läpi.
 
 ## Usage Instructions
 1. Clone the repository: `git clone https://github.com/Linux88888/veikkausliiga2026.git`
 2. Navigate to the project directory: `cd veikkausliiga2026`
-3. Install necessary dependencies: `npm install`
-4. Start the application: `npm start`
-
-## Generated Reports
-The application can generate reports in various formats, including PDF and HTML. Access the reports in the `reports/` directory after running the report generation command.
-
-## Team List
-- Team A
-- Team B
-- Team C
-- Team D
-
-## Improvements Compared to 2024
-- Enhanced user interface for better user experience.
-- Improved match scheduling algorithms.
-- New features for player statistics tracking.
-- Optimized database queries for faster performance.
-
-## Configuration Guide
-- Configuration files are located under the `config/` directory.
-- Modify the settings within `config/settings.json` to customize your installation.
+3. Install dependencies: `pip install -r requirements.txt`
+4. Generate all reports: `python scripts/main.py`
+5. View reports in `output/` directory
 
 ## License
 This project is licensed under the MIT License. See the `LICENSE` file for more information.
@@ -53,6 +71,3 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 
 ## Contributions
 Contributions are welcome! Please submit a pull request or open an issue for suggestions and improvements.
-
-## Support
-For support, contact the project maintainer at linux88888@example.com
