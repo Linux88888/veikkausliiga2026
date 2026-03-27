@@ -40,7 +40,7 @@ WATCHED_PLAYERS = [
 VEIKKAUSLIIGA_BASE_URL = "https://www.veikkausliiga.com/tilastot/2026"
 STANDINGS_URL = f"{VEIKKAUSLIIGA_BASE_URL}/veikkausliiga/joukkueet/"
 PLAYERS_URL = f"{VEIKKAUSLIIGA_BASE_URL}/veikkausliiga/pelaajat/"
-MATCHES_URL = f"{VEIKKAUSLIIGA_BASE_URL}/veikkausliiga/ottelut/"
+MATCHES_URL = f"{VEIKKAUSLIIGA_BASE_URL}/veikkausliiga/ottelut/?group=1"
 
 # Konfiguraation tallennuspaikka
 CONFIG_DIR = Path(__file__).parent.parent

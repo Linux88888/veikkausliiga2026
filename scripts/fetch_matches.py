@@ -108,7 +108,7 @@ class MatchFetcher:
         """Tallentaa ottelutiedot raporttiin"""
         try:
             is_dummy = any(m.get('_is_dummy') for m in matches)
-            report_path = get_output_path("Ottelut2026.md")
+            report_path = get_output_path("Ottelut.md")
             played = [m for m in matches if m['tulos'] and m['tulos'] != '-']
             upcoming = [m for m in matches if not m['tulos'] or m['tulos'] == '-']
 

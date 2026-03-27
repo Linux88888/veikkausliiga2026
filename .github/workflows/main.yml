@@ -38,7 +38,7 @@ jobs:
         echo "✓ Output files generated:"
         ls -lah output/
         missing=0
-        for f in output/Tilastot2026.md output/Ennusteet2026.md output/Yleiso2026.md output/Ottelut2026.md; do
+        for f in output/Tilastot2026.md output/Ennusteet2026.md output/Yleiso2026.md output/Ottelut.md; do
           if [ -f "$f" ]; then
             echo "✓ $f"
           else
