@@ -1,6 +1,6 @@
 # Veikkausliiga 2026 - Sarjataulukko
 
-*Päivitetty: 2026-03-27 13:17:39*
+*Päivitetty: 2026-03-27 13:39:03*
 
 *⚠ Lähde: Esimerkkidata (veikkausliiga.com ei tavoitettavissa) — luvut eivät ole oikeita*
 
