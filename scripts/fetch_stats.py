@@ -96,19 +96,25 @@ class StatsProcessor:
     def _create_dummy_standings(self):
         """Luo testidatan jos haku epäonnistuu"""
         dummy_data = [
-            {'sijoitus': '1', 'joukkue': 'HJK', 'ottelut': '5', 'voitot': '4', 'tasapelit': '1', 'tappiot': '0', 'tehdyt_maalit': '12', 'paassetyt_maalit': '3'},
-            {'sijoitus': '2', 'joukkue': 'Ilves', 'ottelut': '5', 'voitot': '4', 'tasapelit': '0', 'tappiot': '1', 'tehdyt_maalit': '11', 'paassetyt_maalit': '5'},
-            {'sijoitus': '3', 'joukkue': 'KuPS', 'ottelut': '5', 'voitot': '3', 'tasapelit': '1', 'tappiot': '1', 'tehdyt_maalit': '10', 'paassetyt_maalit': '6'},
+            {'sijoitus': '1', 'joukkue': 'HJK', 'ottelut': '5', 'voitot': '4', 'tasapelit': '1', 'tappiot': '0', 'tehdyt_maalit': '12', 'paassetyt_maalit': '3', '_is_dummy': True},
+            {'sijoitus': '2', 'joukkue': 'Ilves', 'ottelut': '5', 'voitot': '4', 'tasapelit': '0', 'tappiot': '1', 'tehdyt_maalit': '11', 'paassetyt_maalit': '5', '_is_dummy': True},
+            {'sijoitus': '3', 'joukkue': 'KuPS', 'ottelut': '5', 'voitot': '3', 'tasapelit': '1', 'tappiot': '1', 'tehdyt_maalit': '10', 'paassetyt_maalit': '6', '_is_dummy': True},
         ]
-        logger.info(f"⚠ Käytetään testidataa: {len(dummy_data)} joukkuetta")
+        logger.warning(f"⚠ Käytetään esimerkkidataa (veikkausliiga.com ei tavoitettavissa): {len(dummy_data)} joukkuetta")
         return dummy_data
     
     def save_standings_report(self, standings):
         """Tallentaa sarjataulukon raporttiin"""
         try:
+            is_dummy = any(row.get('_is_dummy') for row in standings)
             report_path = get_output_path("Tilastot2026.md")
             with open(report_path, 'w', encoding='utf-8') as f:
                 f.write("# Veikkausliiga 2026 - Sarjataulukko\n\n")
+                f.write(f"*Päivitetty: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*\n\n")
+                if is_dummy:
+                    f.write(f"*⚠ Lähde: Esimerkkidata (veikkausliiga.com ei tavoitettavissa) — luvut eivät ole oikeita*\n\n")
+                else:
+                    f.write(f"*Lähde: {STANDINGS_URL}*\n\n")
                 f.write("| # | Joukkue | Ot | V | T | T | TM | PM |\n")
                 f.write("|---|---------|----|----|----|----|----|----|-----|\n")
                 for row in standings:

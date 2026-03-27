@@ -22,7 +22,7 @@ class AttendanceAnalyzer:
         logger.info("YLEISÖMÄÄRÄ-ANALYYSI - Veikkausliiga 2026")
         logger.info("="*60)
         
-        # Testidataa
+        # Esimerkkidata — tulevaisuudessa haetaan oikealta sivulta
         attendance_data = {
             'total_attendance': 850000,
             'matches': 180,
@@ -40,6 +40,7 @@ class AttendanceAnalyzer:
         with open(report_path, 'w', encoding='utf-8') as f:
             f.write("# Veikkausliiga 2026 - Yleisömäärät\n\n")
             f.write(f"*Analysoitu: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*\n\n")
+            f.write("*⚠ Lähde: Esimerkkidata — luvut eivät ole oikeita katsojalukuja*\n\n")
             f.write(f"## Tilastot\n\n")
             f.write(f"- **Yhteensä katsojia**: {attendance_data['total_attendance']:,}\n")
             f.write(f"- **Otteluja**: {attendance_data['matches']}\n")

@@ -90,23 +90,24 @@ class MatchFetcher:
     def _create_dummy_matches(self):
         """Luo esimerkkidatan jos haku epäonnistuu"""
         dummy_matches = [
-            {'pvm': '2026-04-01', 'koti': 'HJK',      'tulos': '2-1', 'vieras': 'Ilves'},
-            {'pvm': '2026-04-01', 'koti': 'KuPS',     'tulos': '1-1', 'vieras': 'FC Inter'},
-            {'pvm': '2026-04-01', 'koti': 'SJK',      'tulos': '3-0', 'vieras': 'VPS'},
-            {'pvm': '2026-04-05', 'koti': 'FC Lahti', 'tulos': '-',   'vieras': 'HJK'},
-            {'pvm': '2026-04-05', 'koti': 'Ilves',    'tulos': '-',   'vieras': 'KuPS'},
-            {'pvm': '2026-04-05', 'koti': 'FF Jaro',  'tulos': '-',   'vieras': 'SJK'},
-            {'pvm': '2026-04-08', 'koti': 'VPS',      'tulos': '-',   'vieras': 'FC Lahti'},
-            {'pvm': '2026-04-08', 'koti': 'FC Inter', 'tulos': '-',   'vieras': 'FF Jaro'},
-            {'pvm': '2026-04-12', 'koti': 'HJK',      'tulos': '-',   'vieras': 'KuPS'},
-            {'pvm': '2026-04-12', 'koti': 'AC Oulu',  'tulos': '-',   'vieras': 'Ilves'},
+            {'pvm': '2026-04-01', 'koti': 'HJK',      'tulos': '2-1', 'vieras': 'Ilves',    '_is_dummy': True},
+            {'pvm': '2026-04-01', 'koti': 'KuPS',     'tulos': '1-1', 'vieras': 'FC Inter', '_is_dummy': True},
+            {'pvm': '2026-04-01', 'koti': 'SJK',      'tulos': '3-0', 'vieras': 'VPS',      '_is_dummy': True},
+            {'pvm': '2026-04-05', 'koti': 'FC Lahti', 'tulos': '-',   'vieras': 'HJK',      '_is_dummy': True},
+            {'pvm': '2026-04-05', 'koti': 'Ilves',    'tulos': '-',   'vieras': 'KuPS',     '_is_dummy': True},
+            {'pvm': '2026-04-05', 'koti': 'FF Jaro',  'tulos': '-',   'vieras': 'SJK',      '_is_dummy': True},
+            {'pvm': '2026-04-08', 'koti': 'VPS',      'tulos': '-',   'vieras': 'FC Lahti', '_is_dummy': True},
+            {'pvm': '2026-04-08', 'koti': 'FC Inter', 'tulos': '-',   'vieras': 'FF Jaro',  '_is_dummy': True},
+            {'pvm': '2026-04-12', 'koti': 'HJK',      'tulos': '-',   'vieras': 'KuPS',     '_is_dummy': True},
+            {'pvm': '2026-04-12', 'koti': 'AC Oulu',  'tulos': '-',   'vieras': 'Ilves',    '_is_dummy': True},
         ]
-        logger.info(f"⚠ Käytetään esimerkkidataa: {len(dummy_matches)} ottelua")
+        logger.warning(f"⚠ Käytetään esimerkkidataa (veikkausliiga.com ei tavoitettavissa): {len(dummy_matches)} ottelua")
         return dummy_matches
 
     def save_matches_report(self, matches):
         """Tallentaa ottelutiedot raporttiin"""
         try:
+            is_dummy = any(m.get('_is_dummy') for m in matches)
             report_path = get_output_path("Ottelut2026.md")
             played = [m for m in matches if m['tulos'] and m['tulos'] != '-']
             upcoming = [m for m in matches if not m['tulos'] or m['tulos'] == '-']
@@ -114,7 +115,10 @@ class MatchFetcher:
             with open(report_path, 'w', encoding='utf-8') as f:
                 f.write("# Veikkausliiga 2026 - Ottelut\n\n")
                 f.write(f"*Päivitetty: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*\n\n")
-                f.write(f"*Lähde: {MATCHES_URL}*\n\n")
+                if is_dummy:
+                    f.write(f"*⚠ Lähde: Esimerkkidata (veikkausliiga.com ei tavoitettavissa) — tulokset eivät ole oikeita*\n\n")
+                else:
+                    f.write(f"*Lähde: {MATCHES_URL}*\n\n")
 
                 if played:
                     f.write("## Pelatut ottelut\n\n")

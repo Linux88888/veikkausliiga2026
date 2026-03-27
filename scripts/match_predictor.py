@@ -22,6 +22,7 @@ class MatchPredictor:
         logger.info("OTTELUENNUSTEET - Veikkausliiga 2026")
         logger.info("="*60)
         
+        # Esimerkkidata — tulevaisuudessa haetaan oikeista ottelutilastoista
         predictions = [
             {'home': 'HJK', 'away': 'Ilves', 'home_win_prob': 0.55, 'over25_prob': 0.62},
             {'home': 'KuPS', 'away': 'FC Inter', 'home_win_prob': 0.48, 'over25_prob': 0.58},
@@ -35,6 +36,7 @@ class MatchPredictor:
         with open(report_path, 'w', encoding='utf-8') as f:
             f.write("# Veikkausliiga 2026 - Otteluennusteet\n\n")
             f.write(f"*Analysoitu: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*\n\n")
+            f.write("*⚠ Lähde: Esimerkkidata — ennusteet perustuvat kiinteisiin testiarvoihin, eivät oikeisiin tilastoihin*\n\n")
             f.write("## Ennustetut ottelut\n\n")
             f.write("| Koti | Vieras | Kotiin % | Yli 2.5 % |\n")
             f.write("|------|--------|----------|----------|\n")
