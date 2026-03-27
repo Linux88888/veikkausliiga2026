@@ -25,66 +25,79 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Verify project structure
+    - name: Check Python environment
       run: |
-        echo "=== Repository Structure ==="
-        ls -la
+        echo "=== Python Info ==="
+        python --version
+        pip list
         echo ""
-        echo "=== Scripts Directory ==="
-        ls -la scripts/
+        echo "=== Working Directory ==="
+        pwd
+        ls -la
 
-    - name: Test imports
-      run: |
-        echo "=== Testing Python Imports ==="
-        python -c "import sys; print(f'Python version: {sys.version}')"
-        python -c "from scripts.config import TEAMS_2026, WATCHED_PLAYERS; print(f'✓ Config loaded: {len(TEAMS_2026)} teams, {len(WATCHED_PLAYERS)} players')"
-        python -c "import requests; print('✓ Requests library imported')"
-        python -c "import bs4; print('✓ BeautifulSoup4 library imported')"
-
-    - name: Run configuration test
-      run: |
-        echo "=== Configuration Test ==="
-        python -c "from scripts.config import *; print('✓ All config values loaded successfully')"
-
-    - name: Run fetch_stats.py
+    - name: Run fetch_stats.py with debug
       run: |
         echo "=== Running fetch_stats.py ==="
-        python scripts/fetch_stats.py
-        echo "✓ fetch_stats.py completed"
+        python -u scripts/fetch_stats.py
+        echo "Exit code: $?"
+        echo ""
 
-    - name: Run match_predictor.py
+    - name: Run match_predictor.py with debug
       run: |
         echo "=== Running match_predictor.py ==="
-        python scripts/match_predictor.py
-        echo "✓ match_predictor.py completed"
+        python -u scripts/match_predictor.py
+        echo "Exit code: $?"
+        echo ""
 
-    - name: Run attendance_analyzer.py
+    - name: Run attendance_analyzer.py with debug
       run: |
         echo "=== Running attendance_analyzer.py ==="
-        python scripts/attendance_analyzer.py
-        echo "✓ attendance_analyzer.py completed"
+        python -u scripts/attendance_analyzer.py
+        echo "Exit code: $?"
+        echo ""
+
+    - name: Check if output directory was created
+      run: |
+        echo "=== Checking output directory ==="
+        if [ -d "output" ]; then
+          echo "✓ Output directory EXISTS"
+          ls -lah output/
+          echo ""
+          echo "=== Files in output directory ==="
+          find output -type f -exec ls -lh {} \;
+        else
+          echo "✗ Output directory NOT FOUND"
+          echo "Creating output directory manually..."
+          mkdir -p output
+          ls -la
+        fi
 
     - name: Run main.py
       run: |
-        echo "=== Running main.py (Main Script) ==="
-        python scripts/main.py
-        echo "✓ main.py completed"
+        echo "=== Running main.py ==="
+        python -u scripts/main.py
+        echo "Exit code: $?"
 
-    - name: Check generated output
+    - name: Final check - List all generated files
       run: |
-        echo "=== Generated Output Files ==="
+        echo "=== Directory listing after all scripts ==="
+        ls -lah
+        echo ""
+        echo "=== Contents of output directory ==="
         if [ -d "output" ]; then
-          echo "Output directory contents:"
           ls -lah output/
           echo ""
-          echo "=== Checking markdown files ==="
+          echo "=== Content preview of each file ==="
           for file in output/*.md; do
             if [ -f "$file" ]; then
-              echo "File: $file ($(wc -l < $file) lines)"
+              echo ""
+              echo "--- File: $file ---"
+              echo "Lines: $(wc -l < $file)"
+              head -30 "$file"
             fi
           done
         else
-          echo "No output directory found"
+          echo "❌ Output directory DOES NOT EXIST"
         fi
 
     - name: Upload artifacts
@@ -94,19 +107,20 @@ jobs:
         name: test-output
         path: output/
         retention-days: 30
+        if-no-files-found: warn
 
     - name: Test Summary
       if: always()
       run: |
         echo "=========================================="
-        echo "✅ TEST WORKFLOW COMPLETED SUCCESSFULLY"
+        echo "✅ TEST WORKFLOW COMPLETED"
         echo "=========================================="
         echo "Repository: Linux88888/veikkausliiga2026"
         echo "Python Version: 3.9"
-        echo "All modules tested:"
-        echo "  ✓ config.py"
-        echo "  ✓ fetch_stats.py"
-        echo "  ✓ match_predictor.py"
-        echo "  ✓ attendance_analyzer.py"
-        echo "  ✓ main.py"
+        if [ -d "output" ]; then
+          echo "Output files generated:"
+          ls -1 output/ | sed 's/^/  ✓ /'
+        else
+          echo "⚠️  No output files generated"
+        fi
         echo "=========================================="
