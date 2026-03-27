@@ -105,6 +105,21 @@ class StatsProcessor:
     
     def run(self):
         """Pääfunktio - suorittaa kaikki analyysit"""
+            def save_standings_report(self, standings):
+        """Tallentaa sarjataulukon raporttiin"""
+        try:
+            report_path = get_output_path("Tilastot2026.md")
+            with open(report_path, 'w', encoding='utf-8') as f:
+                f.write("# Veikkausliiga 2026 - Sarjataulukko\n\n")
+                f.write("| # | Joukkue | Ot | V | T | T | TM | PM | Pist |\n")
+                f.write("|---|---------|----|----|----|----|----|----|------|\n")
+                for row in standings:
+                    f.write(f"| {row['sijoitus']} | {row['joukkue']} | {row['ottelut']} | {row['voitot']} | {row['tasapelit']} | {row['tappiot']} | {row['tehdyt_maalit']} | {row['paastetyt_maalit']} | - |\n")
+            logger.info(f"✓ Report saved: {report_path}")
+            return True
+        except Exception as e:
+            logger.error(f"✗ Error saving report: {e}")
+            return False
         logger.info("\n" + "="*60)
         logger.info("TILASTOTIETOJEN HAKU - Veikkausliiga 2026")
         logger.info("="*60)
