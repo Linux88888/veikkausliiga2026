@@ -80,7 +80,7 @@ class StatsProcessor:
                         'tasapelit': cells[4].get_text().strip(),
                         'tappiot': cells[5].get_text().strip(),
                         'tehdyt_maalit': cells[6].get_text().strip(),
-                        'paastetyt_maalit': cells[7].get_text().strip(),
+                        'paassetyt_maalit': cells[7].get_text().strip(),
                     }
                     standings.append(standing_data)
             
@@ -96,30 +96,31 @@ class StatsProcessor:
     def _create_dummy_standings(self):
         """Luo testidatan jos haku epäonnistuu"""
         dummy_data = [
-            {'sijoitus': '1', 'joukkue': 'HJK', 'ottelut': '5', 'voitot': '4', 'tasapelit': '1', 'tappiot': '0', 'tehdyt_maalit': '12', 'paastetyt_maalit': '3'},
-            {'sijoitus': '2', 'joukkue': 'Ilves', 'ottelut': '5', 'voitot': '4', 'tasapelit': '0', 'tappiot': '1', 'tehdyt_maalit': '11', 'paastetyt_maalit': '5'},
-            {'sijoitus': '3', 'joukkue': 'KuPS', 'ottelut': '5', 'voitot': '3', 'tasapelit': '1', 'tappiot': '1', 'tehdyt_maalit': '10', 'paastetyt_maalit': '6'},
+            {'sijoitus': '1', 'joukkue': 'HJK', 'ottelut': '5', 'voitot': '4', 'tasapelit': '1', 'tappiot': '0', 'tehdyt_maalit': '12', 'paassetyt_maalit': '3'},
+            {'sijoitus': '2', 'joukkue': 'Ilves', 'ottelut': '5', 'voitot': '4', 'tasapelit': '0', 'tappiot': '1', 'tehdyt_maalit': '11', 'paassetyt_maalit': '5'},
+            {'sijoitus': '3', 'joukkue': 'KuPS', 'ottelut': '5', 'voitot': '3', 'tasapelit': '1', 'tappiot': '1', 'tehdyt_maalit': '10', 'paassetyt_maalit': '6'},
         ]
         logger.info(f"⚠ Käytetään testidataa: {len(dummy_data)} joukkuetta")
         return dummy_data
     
-    def run(self):
-        """Pääfunktio - suorittaa kaikki analyysit"""
-            def save_standings_report(self, standings):
+    def save_standings_report(self, standings):
         """Tallentaa sarjataulukon raporttiin"""
         try:
             report_path = get_output_path("Tilastot2026.md")
             with open(report_path, 'w', encoding='utf-8') as f:
                 f.write("# Veikkausliiga 2026 - Sarjataulukko\n\n")
-                f.write("| # | Joukkue | Ot | V | T | T | TM | PM | Pist |\n")
-                f.write("|---|---------|----|----|----|----|----|----|------|\n")
+                f.write("| # | Joukkue | Ot | V | T | T | TM | PM |\n")
+                f.write("|---|---------|----|----|----|----|----|----|-----|\n")
                 for row in standings:
-                    f.write(f"| {row['sijoitus']} | {row['joukkue']} | {row['ottelut']} | {row['voitot']} | {row['tasapelit']} | {row['tappiot']} | {row['tehdyt_maalit']} | {row['paastetyt_maalit']} | - |\n")
-            logger.info(f"✓ Report saved: {report_path}")
+                    f.write(f"| {row['sijoitus']} | {row['joukkue']} | {row['ottelut']} | {row['voitot']} | {row['tasapelit']} | {row['tappiot']} | {row['tehdyt_maalit']} | {row['paassetyt_maalit']} |\n")
+            logger.info(f"✓ Raportti tallennettu: {report_path}")
             return True
         except Exception as e:
-            logger.error(f"✗ Error saving report: {e}")
+            logger.error(f"✗ Virhe raportin tallenuksessa: {e}")
             return False
+    
+    def run(self):
+        """Pääfunktio - suorittaa kaikki analyysit"""
         logger.info("\n" + "="*60)
         logger.info("TILASTOTIETOJEN HAKU - Veikkausliiga 2026")
         logger.info("="*60)
@@ -128,6 +129,7 @@ class StatsProcessor:
         
         if standings:
             logger.info(f"✓ Prosessi valmis! {len(standings)} joukkuetta analysoitu")
+            self.save_standings_report(standings)
             return True
         else:
             logger.error("✗ Tietojen noutaminen epäonnistui")
