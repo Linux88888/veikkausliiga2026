@@ -89,7 +89,7 @@ def main():
         success = False
 
     try:
-        logger.info("\n[4/4] Haetaan ottelutiedot (Ottelut2026.md)...")
+        logger.info("\n[4/4] Haetaan ottelutiedot (Ottelut.md)...")
         if MatchFetcher:
             fetcher = MatchFetcher()
             if not fetcher.run():
