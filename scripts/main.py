@@ -26,6 +26,12 @@ except ImportError as e:
     print(f"Varoitus: {e}")
     AttendanceAnalyzer = None
 
+try:
+    from fetch_matches import MatchFetcher
+except ImportError as e:
+    print(f"Varoitus: {e}")
+    MatchFetcher = None
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -41,7 +47,7 @@ def main():
     success = True
 
     try:
-        logger.info("\n[1/3] Haetaan tilastotiedot (Tilastot2026.md)...")
+        logger.info("\n[1/4] Haetaan tilastotiedot (Tilastot2026.md)...")
         if StatsProcessor:
             processor = StatsProcessor()
             if not processor.run():
@@ -55,7 +61,7 @@ def main():
         success = False
 
     try:
-        logger.info("\n[2/3] Lasketaan otteluennusteet (Ennusteet2026.md)...")
+        logger.info("\n[2/4] Lasketaan otteluennusteet (Ennusteet2026.md)...")
         if MatchPredictor:
             predictor = MatchPredictor()
             if not predictor.predict():
@@ -69,7 +75,7 @@ def main():
         success = False
 
     try:
-        logger.info("\n[3/3] Analysoidaan yleisömäärät (Yleiso2026.md)...")
+        logger.info("\n[3/4] Analysoidaan yleisömäärät (Yleiso2026.md)...")
         if AttendanceAnalyzer:
             analyzer = AttendanceAnalyzer()
             if not analyzer.analyze():
@@ -80,6 +86,20 @@ def main():
             success = False
     except Exception as e:
         logger.error(f"❌ Virhe yleisöanalyysissä: {e}", exc_info=True)
+        success = False
+
+    try:
+        logger.info("\n[4/4] Haetaan ottelutiedot (Ottelut2026.md)...")
+        if MatchFetcher:
+            fetcher = MatchFetcher()
+            if not fetcher.run():
+                logger.error("Ottelutietojen haku epäonnistui")
+                success = False
+        else:
+            logger.error("MatchFetcher ei saatavilla")
+            success = False
+    except Exception as e:
+        logger.error(f"❌ Virhe ottelutietojen haussa: {e}", exc_info=True)
         success = False
 
     if success:
