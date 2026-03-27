@@ -51,6 +51,12 @@ try:
     print(f"✓ Data directory created: {DATA_DIR}")
 except Exception as e:
     print(f"✗ Error creating directories: {e}")
+    OUTPUT_DIR.mkdir(exist_ok=True)
+    DATA_DIR.mkdir(exist_ok=True)
+    print(f"✓ Output directory created: {OUTPUT_DIR}")
+    print(f"✓ Data directory created: {DATA_DIR}")
+except Exception as e:
+    print(f"✗ Error creating directories: {e}")
 
 # Analysointiparametrit
 POINT_MULTIPLIERS = {
