@@ -1,6 +1,6 @@
 # Veikkausliiga 2026 - Yleisömäärät
 
-*Analysoitu: 2026-03-27 12:42:27*
+*Analysoitu: 2026-03-27 12:58:16*
 
 ## Tilastot
 
