@@ -4,7 +4,12 @@ Sisältää joukkueet, URL-osoitteet ja asetukset
 """
 
 import json
+import logging
 from pathlib import Path
+
+# Logger setup
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Veikkausliiga 2026 joukkueet (päivitetty uusilla joukkueilla)
 TEAMS_2026 = [
@@ -43,8 +48,13 @@ OUTPUT_DIR = CONFIG_DIR / "output"
 DATA_DIR = CONFIG_DIR / "data"
 
 # Luo kansiot tarvittaessa
-OUTPUT_DIR.mkdir(exist_ok=True)
-DATA_DIR.mkdir(exist_ok=True)
+try:
+    OUTPUT_DIR.mkdir(exist_ok=True)
+    DATA_DIR.mkdir(exist_ok=True)
+    logger.info(f"✓ Output directory: {OUTPUT_DIR}")
+    logger.info(f"✓ Data directory: {DATA_DIR}")
+except Exception as e:
+    logger.error(f"✗ Error creating directories: {e}")
 
 # Analysointiparametrit
 POINT_MULTIPLIERS = {
