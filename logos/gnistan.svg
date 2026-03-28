@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+  <circle cx="25" cy="25" r="24" fill="#006633" stroke="#FFFFFF" stroke-width="2"/>
+  <text x="25" y="31" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF" text-anchor="middle">GNI</text>
+</svg>

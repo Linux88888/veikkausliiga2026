@@ -1,9 +1,24 @@
 """
 Veikkausliiga 2026 - Konfiguraatiotiedosto
 Sisältää joukkueet, URL-osoitteet ja asetukset
+
+Oman veikkauksen lisääminen:
+  Etsi PARTICIPANTS-lista tiedoston alaosasta ja lisää oma lohkosi:
+
+      {
+          "name": "Sinun Nimi",
+          "standings_prediction": [
+              "HJK",           # Veikkaat 1. sijaksi
+              "KuPS",          # Veikkaat 2. sijaksi
+              ...              # jatka 12 joukkueeseen asti
+          ],
+          "scorers_prediction": [
+              "Pelaaja, Nimi",  # Veikkaat 1. maalintekijäksi
+              ...               # jatka 5 pelaajaan asti
+          ],
+      },
 """
 
-import json
 import logging
 from pathlib import Path
 
@@ -26,6 +41,22 @@ TEAMS_2026 = [
     "IFK Mariehamn",
     "TPS"
 ]
+
+# Joukkueiden logot (suhteelliset polut output/-hakemistosta)
+TEAM_LOGOS = {
+    "HJK":           "../logos/hjk.svg",
+    "KuPS":          "../logos/kups.svg",
+    "SJK":           "../logos/sjk.svg",
+    "FC Inter":      "../logos/inter.svg",
+    "Ilves":         "../logos/ilves.svg",
+    "VPS":           "../logos/vps.svg",
+    "FF Jaro":       "../logos/jaro.svg",
+    "FC Lahti":      "../logos/lahti.svg",
+    "IFK Mariehamn": "../logos/mariehamn.svg",
+    "IF Gnistan":    "../logos/gnistan.svg",
+    "AC Oulu":       "../logos/oulu.svg",
+    "TPS":           "../logos/tps.svg",
+}
 
 # Seuratut pelaajat (päivitetty vuodelle 2026)
 WATCHED_PLAYERS = [
@@ -110,9 +141,16 @@ TOP_SCORERS_COUNT = 10
 # ---------------------------------------------------------------------------
 # Osallistujien veikkaukset
 # ---------------------------------------------------------------------------
-# Muokkaa tätä listaa lisäämällä omat veikkauksesi.
-# standings_prediction: joukkueet sijoitusjärjestyksessä (1. → 12.)
-# scorers_prediction:   pelaajat maalintekijäjärjestyksessä (1. → 5.)
+# ✏️  LISÄÄ OMA VEIKKAUKSESI tähän kopioimalla alla oleva malli ja täyttämällä
+#     oma nimesi sekä joukkue- ja maalintekijäjärjestyksesi.
+#
+#   standings_prediction: 12 joukkuetta sijoitusjärjestyksessä (1. → 12.)
+#   scorers_prediction:   5 pelaajaa maalintekijäjärjestyksessä (1. → 5.)
+#
+# Saatavilla olevat joukkueet (12 kpl):
+#   HJK, KuPS, FC Inter, SJK, FC Lahti, Ilves, FF Jaro, VPS,
+#   AC Oulu, IF Gnistan, IFK Mariehamn, TPS
+# ---------------------------------------------------------------------------
 PARTICIPANTS = [
     {
         "name": "Veikkaaja 1",
@@ -159,6 +197,31 @@ PARTICIPANTS = [
             "Coffey, Ashley",
         ],
     },
+    # ✏️  LISÄÄ OMA VEIKKAUKSESI ALLE — kopioi tämä malli:
+    # {
+    #     "name": "Sinun Nimi",
+    #     "standings_prediction": [
+    #         "HJK",           # 1. sija
+    #         "KuPS",          # 2. sija
+    #         "FC Inter",      # 3. sija
+    #         "SJK",           # 4. sija
+    #         "Ilves",         # 5. sija
+    #         "FC Lahti",      # 6. sija
+    #         "FF Jaro",       # 7. sija
+    #         "VPS",           # 8. sija
+    #         "IFK Mariehamn", # 9. sija
+    #         "IF Gnistan",    # 10. sija
+    #         "AC Oulu",       # 11. sija
+    #         "TPS",           # 12. sija
+    #     ],
+    #     "scorers_prediction": [
+    #         "Plange, Luke",         # 1. maalintekijä
+    #         "Karjalainen, Rasmus",  # 2. maalintekijä
+    #         "Odutayo, Colin",       # 3. maalintekijä
+    #         "Coffey, Ashley",       # 4. maalintekijä
+    #         "Moreno, Jaime",        # 5. maalintekijä
+    #     ],
+    # },
 ]
 
 def get_output_path(filename):

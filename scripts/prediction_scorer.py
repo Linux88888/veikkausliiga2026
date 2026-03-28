@@ -30,6 +30,8 @@ try:
         STANDINGS_SCORING,
         SCORER_SCORING,
         TOP_SCORERS_COUNT,
+        TEAMS_2026,
+        TEAM_LOGOS,
         get_output_path,
     )
     from fetch_stats import StatsProcessor
@@ -39,6 +41,8 @@ except ImportError as e:
     STANDINGS_SCORING = {0: 3, 1: 2, 2: 1}
     SCORER_SCORING = {"exact": 5, "in_list": 2}
     TOP_SCORERS_COUNT = 10
+    TEAMS_2026 = []
+    TEAM_LOGOS = {}
     StatsProcessor = None
 
     def get_output_path(filename):
@@ -173,97 +177,123 @@ class PredictionScorer:
         """Tallentaa pisteytysraportin Markdown-muodossa"""
         report_path = get_output_path("Veikkaukset2026.md")
 
-        # Käytetään ensimmäisen osallistujan ennustaman joukkuemäärää maksimipisteiden laskuun
-        # (tai todellista joukkuemäärää, jos se on suurempi) – tyypillisesti 12 joukkuetta
         n_teams = max(
             len(PARTICIPANTS[0].get("standings_prediction", [])) if PARTICIPANTS else 0,
             len(actual_standings),
         ) or 12
-        # Max pisteet sarjataulukosta: jokainen joukkue täsmäosumana
         max_standings = STANDINGS_SCORING.get(0, 3) * n_teams
-        # Max pisteet maalintekijöistä: jokainen täsmäosuma
         max_scorers = SCORER_SCORING.get("exact", 5) * TOP_SCORERS_COUNT
+
+        def team_cell(team):
+            """Palauttaa taulukkosolu joukkueen logolla ja nimellä."""
+            logo = TEAM_LOGOS.get(team, "")
+            if logo:
+                return f'<img src="{logo}" width="18" height="18"> {team}'
+            return team
+
+        def pct_bar(pts, max_pts, width=10):
+            """Luo yksinkertainen edistyspalkki."""
+            if max_pts == 0:
+                return "░" * width
+            filled = round(pts / max_pts * width)
+            return "█" * filled + "░" * (width - filled)
 
         try:
             with open(report_path, "w", encoding="utf-8") as f:
-                f.write("# Veikkausliiga 2026 — Veikkausten Pisteet\n\n")
+                # ---- Otsikko ----
+                f.write("# 🏆 Veikkausliiga 2026 — Veikkaukset\n\n")
                 f.write(f"*Päivitetty: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*\n\n")
 
                 if is_dummy:
                     f.write(
-                        "*⚠ Huom: Tilastot perustuvat esimerkkidataan — pisteet ovat simuloituja.*\n\n"
+                        "> ⚠️ **Huom:** Tilastot perustuvat esimerkkidataan — pisteet ovat simuloituja.\n\n"
                     )
 
-                # ---- Pisteytysjärjestelmän selitys ----
-                f.write("## Pisteytysjärjestelmä\n\n")
-                f.write("### Sarjataulukko\n\n")
-                f.write("| Ero sijoituksissa | Pisteet |\n")
-                f.write("|-------------------|---------|\n")
-                for diff, pts in sorted(STANDINGS_SCORING.items()):
-                    f.write(f"| {diff} sijoitusta | {pts} p |\n")
-                f.write(f"| ≥ 3 sijoitusta | 0 p |\n")
-                f.write(f"\n*Maksimi sarjataulukosta: {max_standings} pistettä*\n\n")
-
-                f.write("### Maalintekijät\n\n")
-                f.write("| Tilanne | Pisteet |\n")
-                f.write("|---------|----------|\n")
-                f.write(f"| Täsmäosuma (oikea sijoitus) | {SCORER_SCORING.get('exact', 5)} p |\n")
-                f.write(f"| Pelaaja top-{TOP_SCORERS_COUNT}-listalla | {SCORER_SCORING.get('in_list', 2)} p |\n")
-                f.write("| Ei top-listalla | 0 p |\n")
-                f.write(f"\n*Maksimi maalintekijöistä: {max_scorers} pistettä (top-{TOP_SCORERS_COUNT})*\n\n")
+                f.write("---\n\n")
 
                 # ---- Pistetaulukko (leaderboard) ----
-                f.write("## 🏆 Pistetaulukko\n\n")
-                f.write("| Sijoitus | Osallistuja | Sarjataulukko | Maalintekijät | Yhteensä |\n")
-                f.write("|:--------:|-------------|:-------------:|:-------------:|:--------:|\n")
+                f.write("## 🥇 Pistetaulukko\n\n")
+                f.write("| Sija | Osallistuja | Sarjataulukko | Maalintekijät | Yhteensä |\n")
+                f.write("|:----:|-------------|:-------------:|:-------------:|:--------:|\n")
                 for rank, r in enumerate(results, 1):
-                    medal = {1: "🥇", 2: "🥈", 3: "🥉"}.get(rank, str(rank))
+                    medal = {1: "🥇", 2: "🥈", 3: "🥉"}.get(rank, f"{rank}.")
+                    s_bar = pct_bar(r["standings_points"], max_standings)
+                    g_bar = pct_bar(r["scorer_points"], max_scorers)
                     f.write(
-                        f"| {medal} | {r['name']} "
-                        f"| {r['standings_points']} / {max_standings} "
-                        f"| {r['scorer_points']} / {max_scorers} "
-                        f"| **{r['total_points']}** |\n"
+                        f"| {medal} | **{r['name']}** "
+                        f"| {r['standings_points']}/{max_standings} {s_bar} "
+                        f"| {r['scorer_points']}/{max_scorers} {g_bar} "
+                        f"| 🎯 **{r['total_points']}** |\n"
                     )
                 f.write("\n")
 
+                # ---- Pisteytysjärjestelmä ----
+                f.write("<details>\n<summary>📋 Pisteytysjärjestelmä</summary>\n\n")
+                f.write("**Sarjataulukko** (maks. " + str(max_standings) + " p)\n\n")
+                f.write("| Ero sijoituksissa | Pisteet |\n")
+                f.write("|:-----------------:|:-------:|\n")
+                for diff, pts in sorted(STANDINGS_SCORING.items()):
+                    f.write(f"| {diff} sijoitusta | {pts} p |\n")
+                f.write(f"| ≥ 3 sijoitusta | 0 p |\n\n")
+
+                f.write(f"**Maalintekijät** (maks. {max_scorers} p, top-{TOP_SCORERS_COUNT} lista)\n\n")
+                f.write("| Tilanne | Pisteet |\n")
+                f.write("|:-------:|:-------:|\n")
+                f.write(f"| ✅ Täsmäosuma | {SCORER_SCORING.get('exact', 5)} p |\n")
+                f.write(f"| 🔸 Top-listalla | {SCORER_SCORING.get('in_list', 2)} p |\n")
+                f.write("| ❌ Ei listalla | 0 p |\n\n")
+                f.write("</details>\n\n")
+
+                f.write("---\n\n")
+
                 # ---- Toteutunut sarjataulukko ----
-                f.write("## Toteutunut sarjataulukko\n\n")
+                f.write("## 📊 Toteutunut sarjataulukko\n\n")
                 f.write("| # | Joukkue |\n")
-                f.write("|---|--------|\n")
+                f.write("|:-:|--------|\n")
                 for i, team in enumerate(actual_standings, 1):
-                    f.write(f"| {i} | {team} |\n")
+                    f.write(f"| {i} | {team_cell(team)} |\n")
                 f.write("\n")
 
                 # ---- Toteutuneet maalintekijät ----
-                f.write("## Toteutuneet maalintekijät (top)\n\n")
+                f.write("## ⚽ Toteutuneet maalintekijät (top)\n\n")
                 if actual_scorers:
                     f.write("| # | Pelaaja |\n")
-                    f.write("|---|--------|\n")
+                    f.write("|:-:|--------|\n")
                     for i, player in enumerate(actual_scorers, 1):
-                        f.write(f"| {i} | {player} |\n")
+                        medal_icon = {1: "🥇", 2: "🥈", 3: "🥉"}.get(i, "")
+                        f.write(f"| {i} | {medal_icon} {player} |\n")
                 else:
                     f.write("*Maalintekijätietoja ei vielä saatavilla.*\n")
-                f.write("\n")
+                f.write("\n---\n\n")
 
                 # ---- Yksittäiset pisteet per osallistuja ----
-                f.write("## Yksityiskohtaiset pisteet\n\n")
+                f.write("## 📝 Yksityiskohtaiset pisteet\n\n")
 
                 for r in results:
                     f.write(f"### {r['name']} — {r['total_points']} pistettä\n\n")
 
                     # Sarjataulukko-ennuste
-                    f.write(f"**Sarjataulukkoennuste** ({r['standings_points']} / {max_standings} p)\n\n")
+                    s_pct = round(r["standings_points"] / max_standings * 100) if max_standings else 0
+                    f.write(
+                        f"**Sarjataulukko:** {r['standings_points']}/{max_standings} p "
+                        f"({s_pct}%) {pct_bar(r['standings_points'], max_standings, 15)}\n\n"
+                    )
                     f.write("| Veikkaama sija | Joukkue | Toteutunut sija | Ero | Pisteet |\n")
                     f.write("|:--------------:|---------|:---------------:|:---:|:-------:|\n")
                     for d in r["standings_details"]:
+                        diff_icon = "✅" if d["ero"] == 0 else ("🟡" if d["ero"] <= 2 else "❌")
                         f.write(
-                            f"| {d['veikkausi']} | {d['joukkue']} "
-                            f"| {d['toteutunut']} | {d['ero']} | {d['pisteet']} |\n"
+                            f"| {d['veikkausi']} | {team_cell(d['joukkue'])} "
+                            f"| {d['toteutunut']} | {diff_icon} {d['ero']} | {d['pisteet']} |\n"
                         )
                     f.write("\n")
 
                     # Maalintekijä-ennuste
-                    f.write(f"**Maalintekijäennuste** ({r['scorer_points']} / {max_scorers} p)\n\n")
+                    g_pct = round(r["scorer_points"] / max_scorers * 100) if max_scorers else 0
+                    f.write(
+                        f"**Maalintekijät:** {r['scorer_points']}/{max_scorers} p "
+                        f"({g_pct}%) {pct_bar(r['scorer_points'], max_scorers, 15)}\n\n"
+                    )
                     f.write("| Veikkaama sija | Pelaaja | Toteutunut sija | Pisteet | Tila |\n")
                     f.write("|:--------------:|---------|:---------------:|:-------:|------|\n")
                     for d in r["scorer_details"]:
@@ -272,6 +302,41 @@ class PredictionScorer:
                             f"| {d['toteutunut']} | {d['pisteet']} | {d['tila']} |\n"
                         )
                     f.write("\n---\n\n")
+
+                # ---- Lisää oma veikkaus -ohje ----
+                f.write("## ✏️ Lisää oma veikkauksesi\n\n")
+                f.write(
+                    "Haluatko osallistua? Lisää oma veikkauksesi muokkaamalla `scripts/config.py`-tiedostoa.\n\n"
+                )
+                f.write("**1.** Avaa `scripts/config.py` omalla koodieditorillasi.\n\n")
+                f.write("**2.** Etsi `PARTICIPANTS`-lista ja lisää oma lohkosi:\n\n")
+                f.write("```python\n")
+                f.write("{\n")
+                f.write('    "name": "Sinun Nimi",\n')
+                f.write('    "standings_prediction": [\n')
+                f.write('        "HJK",           # Veikkaat 1. sijaksi\n')
+                f.write('        "KuPS",          # 2. sija\n')
+                f.write('        "FC Inter",      # 3. sija\n')
+                f.write('        "SJK",           # 4. sija\n')
+                f.write('        "Ilves",         # 5. sija\n')
+                f.write('        "FC Lahti",      # 6. sija\n')
+                f.write('        "FF Jaro",       # 7. sija\n')
+                f.write('        "VPS",           # 8. sija\n')
+                f.write('        "IFK Mariehamn", # 9. sija\n')
+                f.write('        "IF Gnistan",    # 10. sija\n')
+                f.write('        "AC Oulu",       # 11. sija\n')
+                f.write('        "TPS",           # 12. sija\n')
+                f.write('    ],\n')
+                f.write('    "scorers_prediction": [\n')
+                f.write('        "Plange, Luke",         # 1. maalintekijä\n')
+                f.write('        "Karjalainen, Rasmus",  # 2. maalintekijä\n')
+                f.write('        "Odutayo, Colin",       # 3. maalintekijä\n')
+                f.write('        "Coffey, Ashley",       # 4. maalintekijä\n')
+                f.write('        "Moreno, Jaime",        # 5. maalintekijä\n')
+                f.write('    ],\n')
+                f.write('},\n')
+                f.write("```\n\n")
+                f.write("**3.** Aja `python scripts/main.py` — pisteet päivittyvät automaattisesti! 🚀\n\n")
 
             logger.info(f"✓ Veikkausraportti tallennettu: {report_path}")
             return True
