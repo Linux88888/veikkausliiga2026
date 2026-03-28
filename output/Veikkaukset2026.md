@@ -1,6 +1,6 @@
 # Veikkausliiga 2026 — Veikkausten Pisteet
 
-*Päivitetty: 2026-03-28 10:58:13*
+*Päivitetty: 2026-03-28 11:27:43*
 
 *⚠ Huom: Tilastot perustuvat esimerkkidataan — pisteet ovat simuloituja.*
 
@@ -31,17 +31,26 @@
 
 | Sijoitus | Osallistuja | Sarjataulukko | Maalintekijät | Yhteensä |
 |:--------:|-------------|:-------------:|:-------------:|:--------:|
-| 🥇 | Veikkaaja 1 | 12 / 36 | 25 / 50 | **37** |
-| 🥈 | Veikkaaja 3 | 10 / 36 | 10 / 50 | **20** |
-| 🥉 | Veikkaaja 2 | 8 / 36 | 10 / 50 | **18** |
+| 🥇 | Veikkaaja 1 | 4 / 36 | 25 / 50 | **29** |
+| 🥈 | Veikkaaja 3 | 2 / 36 | 10 / 50 | **12** |
+| 🥉 | Veikkaaja 2 | 1 / 36 | 10 / 50 | **11** |
 
 ## Toteutunut sarjataulukko
 
 | # | Joukkue |
 |---|--------|
-| 1 | HJK |
-| 2 | Ilves |
-| 3 | KuPS |
+| 1 | AC Oulu |
+| 2 | FC Inter |
+| 3 | FC Lahti |
+| 4 | FF Jaro |
+| 5 | HJK |
+| 6 | IF Gnistan |
+| 7 | IFK Mariehamn |
+| 8 | Ilves |
+| 9 | KuPS |
+| 10 | SJK |
+| 11 | TPS |
+| 12 | VPS |
 
 ## Toteutuneet maalintekijät (top)
 
@@ -60,24 +69,24 @@
 
 ## Yksityiskohtaiset pisteet
 
-### Veikkaaja 1 — 37 pistettä
+### Veikkaaja 1 — 29 pistettä
 
-**Sarjataulukkoennuste** (12 / 36 p)
+**Sarjataulukkoennuste** (4 / 36 p)
 
 | Veikkaama sija | Joukkue | Toteutunut sija | Ero | Pisteet |
 |:--------------:|---------|:---------------:|:---:|:-------:|
-| 1 | HJK | 1 | 0 | 3 |
-| 2 | Ilves | 2 | 0 | 3 |
-| 3 | KuPS | 3 | 0 | 3 |
-| 4 | FC Inter | 3 | 1 | 2 |
-| 5 | SJK | 3 | 2 | 1 |
-| 6 | VPS | 3 | 3 | 0 |
-| 7 | FF Jaro | 3 | 4 | 0 |
+| 1 | HJK | 5 | 4 | 0 |
+| 2 | Ilves | 8 | 6 | 0 |
+| 3 | KuPS | 9 | 6 | 0 |
+| 4 | FC Inter | 2 | 2 | 1 |
+| 5 | SJK | 10 | 5 | 0 |
+| 6 | VPS | 12 | 6 | 0 |
+| 7 | FF Jaro | 4 | 3 | 0 |
 | 8 | FC Lahti | 3 | 5 | 0 |
-| 9 | IFK Mariehamn | 3 | 6 | 0 |
-| 10 | IF Gnistan | 3 | 7 | 0 |
-| 11 | AC Oulu | 3 | 8 | 0 |
-| 12 | TPS | 3 | 9 | 0 |
+| 9 | IFK Mariehamn | 7 | 2 | 1 |
+| 10 | IF Gnistan | 6 | 4 | 0 |
+| 11 | AC Oulu | 1 | 10 | 0 |
+| 12 | TPS | 11 | 1 | 2 |
 
 **Maalintekijäennuste** (25 / 50 p)
 
@@ -91,24 +100,24 @@
 
 ---
 
-### Veikkaaja 3 — 20 pistettä
+### Veikkaaja 3 — 12 pistettä
 
-**Sarjataulukkoennuste** (10 / 36 p)
+**Sarjataulukkoennuste** (2 / 36 p)
 
 | Veikkaama sija | Joukkue | Toteutunut sija | Ero | Pisteet |
 |:--------------:|---------|:---------------:|:---:|:-------:|
-| 1 | Ilves | 2 | 1 | 2 |
-| 2 | HJK | 1 | 1 | 2 |
-| 3 | SJK | 3 | 0 | 3 |
-| 4 | KuPS | 3 | 1 | 2 |
-| 5 | FC Inter | 3 | 2 | 1 |
-| 6 | VPS | 3 | 3 | 0 |
+| 1 | Ilves | 8 | 7 | 0 |
+| 2 | HJK | 5 | 3 | 0 |
+| 3 | SJK | 10 | 7 | 0 |
+| 4 | KuPS | 9 | 5 | 0 |
+| 5 | FC Inter | 2 | 3 | 0 |
+| 6 | VPS | 12 | 6 | 0 |
 | 7 | FC Lahti | 3 | 4 | 0 |
-| 8 | FF Jaro | 3 | 5 | 0 |
-| 9 | AC Oulu | 3 | 6 | 0 |
-| 10 | TPS | 3 | 7 | 0 |
-| 11 | IF Gnistan | 3 | 8 | 0 |
-| 12 | IFK Mariehamn | 3 | 9 | 0 |
+| 8 | FF Jaro | 4 | 4 | 0 |
+| 9 | AC Oulu | 1 | 8 | 0 |
+| 10 | TPS | 11 | 1 | 2 |
+| 11 | IF Gnistan | 6 | 5 | 0 |
+| 12 | IFK Mariehamn | 7 | 5 | 0 |
 
 **Maalintekijäennuste** (10 / 50 p)
 
@@ -122,24 +131,24 @@
 
 ---
 
-### Veikkaaja 2 — 18 pistettä
+### Veikkaaja 2 — 11 pistettä
 
-**Sarjataulukkoennuste** (8 / 36 p)
+**Sarjataulukkoennuste** (1 / 36 p)
 
 | Veikkaama sija | Joukkue | Toteutunut sija | Ero | Pisteet |
 |:--------------:|---------|:---------------:|:---:|:-------:|
-| 1 | KuPS | 3 | 2 | 1 |
-| 2 | HJK | 1 | 1 | 2 |
-| 3 | Ilves | 2 | 1 | 2 |
-| 4 | SJK | 3 | 1 | 2 |
-| 5 | FC Inter | 3 | 2 | 1 |
-| 6 | FF Jaro | 3 | 3 | 0 |
-| 7 | VPS | 3 | 4 | 0 |
-| 8 | TPS | 3 | 5 | 0 |
-| 9 | AC Oulu | 3 | 6 | 0 |
+| 1 | KuPS | 9 | 8 | 0 |
+| 2 | HJK | 5 | 3 | 0 |
+| 3 | Ilves | 8 | 5 | 0 |
+| 4 | SJK | 10 | 6 | 0 |
+| 5 | FC Inter | 2 | 3 | 0 |
+| 6 | FF Jaro | 4 | 2 | 1 |
+| 7 | VPS | 12 | 5 | 0 |
+| 8 | TPS | 11 | 3 | 0 |
+| 9 | AC Oulu | 1 | 8 | 0 |
 | 10 | FC Lahti | 3 | 7 | 0 |
-| 11 | IF Gnistan | 3 | 8 | 0 |
-| 12 | IFK Mariehamn | 3 | 9 | 0 |
+| 11 | IF Gnistan | 6 | 5 | 0 |
+| 12 | IFK Mariehamn | 7 | 5 | 0 |
 
 **Maalintekijäennuste** (10 / 50 p)
 
