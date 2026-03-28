@@ -197,6 +197,30 @@ PARTICIPANTS = [
             "Coffey, Ashley",
         ],
     },
+    {
+        "name": "dude island",
+        "standings_prediction": [
+            "HJK",           # 1. sija
+            "KuPS",          # 2. sija
+            "SJK",           # 3. sija
+            "Ilves",         # 4. sija
+            "FC Inter",      # 5. sija
+            "FC Lahti",      # 6. sija
+            "FF Jaro",       # 7. sija
+            "VPS",           # 8. sija
+            "AC Oulu",       # 9. sija
+            "IFK Mariehamn", # 10. sija
+            "IF Gnistan",    # 11. sija
+            "TPS",           # 12. sija
+        ],
+        "scorers_prediction": [
+            "Plange, Luke",         # 1. maalintekijä
+            "Karjalainen, Rasmus",  # 2. maalintekijä
+            "Odutayo, Colin",       # 3. maalintekijä
+            "Coffey, Ashley",       # 4. maalintekijä
+            "Moreno, Jaime",        # 5. maalintekijä
+        ],
+    },
     # ✏️  LISÄÄ OMA VEIKKAUKSESI ALLE — kopioi tämä malli:
     # {
     #     "name": "Sinun Nimi",
