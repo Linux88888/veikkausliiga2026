@@ -9,6 +9,40 @@ Veikkausliiga 2026 is an advanced football league management system designed to 
 - **Match Scheduling**: Schedule and manage fixtures for the league season.
 - **Statistics and Reports**: Generate detailed reports on matches, teams, and players.
 - **User Access Control**: Different access levels for administrators and regular users.
+- **Prediction System**: Track and score user predictions for standings and top scorers.
+
+## ✏️ Lisää oma veikkauksesi (Add Your Prediction)
+
+Haluatko osallistua? Muokkaa `scripts/config.py`-tiedoston `PARTICIPANTS`-listaa:
+
+```python
+{
+    "name": "Sinun Nimi",
+    "standings_prediction": [
+        "HJK",           # 1. sija
+        "KuPS",          # 2. sija
+        "FC Inter",      # 3. sija
+        "SJK",           # 4. sija
+        "Ilves",         # 5. sija
+        "FC Lahti",      # 6. sija
+        "FF Jaro",       # 7. sija
+        "VPS",           # 8. sija
+        "IFK Mariehamn", # 9. sija
+        "IF Gnistan",    # 10. sija
+        "AC Oulu",       # 11. sija
+        "TPS",           # 12. sija
+    ],
+    "scorers_prediction": [
+        "Plange, Luke",         # 1. maalintekijä
+        "Karjalainen, Rasmus",  # 2. maalintekijä
+        "Odutayo, Colin",       # 3. maalintekijä
+        "Coffey, Ashley",       # 4. maalintekijä
+        "Moreno, Jaime",        # 5. maalintekijä
+    ],
+},
+```
+
+Aja sen jälkeen `python scripts/main.py` — pisteet päivittyvät `output/Veikkaukset2026.md`-tiedostoon.
 
 ## Project Structure
 ```

@@ -1,20 +1,17 @@
-# Veikkausliiga 2026 - Sarjataulukko
+# 🏆 Veikkausliiga 2026 — Sarjataulukko
 
-*Päivitetty: 2026-03-28 11:27:48*
+*Päivitetty: 2026-03-28 12:26:44*
 
-*Lähde: https://www.veikkausliiga.com/tilastot/2026/veikkausliiga/joukkueet/*
+*⚠️ Lähde: Esimerkkidata — luvut eivät ole oikeita*
+
+---
 
 | # | Joukkue | Ot | V | T | H | TM | PM | ME | Pist |
-|---|---------|----|----|----|----|----|----|-----|------|
-| 1 | AC Oulu | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 2 | FC Inter | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 3 | FC Lahti | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 4 | FF Jaro | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 5 | HJK | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 6 | IF Gnistan | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 7 | IFK Mariehamn | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 8 | Ilves | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 9 | KuPS | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 10 | SJK | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 11 | TPS | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 12 | VPS | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+|:-:|---------|:--:|:-:|:-:|:-:|:--:|:--:|:--:|:----:|
+| 1 | <img src="../logos/hjk.svg" width="20" height="20"> HJK | 5 | 4 | 1 | 0 | 12 | 3 | +9 | **13** |
+| 2 | <img src="../logos/ilves.svg" width="20" height="20"> Ilves | 5 | 4 | 0 | 1 | 11 | 5 | +6 | **12** |
+| 3 | <img src="../logos/kups.svg" width="20" height="20"> KuPS | 5 | 3 | 1 | 1 | 10 | 6 | +4 | **10** |
+
+> **Ot** = Ottelut · **V** = Voitot · **T** = Tasapelit · **H** = Häviöt
+> **TM** = Tehdyt maalit · **PM** = Päästetyt maalit · **ME** = Maaliero
+

@@ -15,7 +15,8 @@ try:
     from config import (
         STANDINGS_URL, PLAYERS_URL, TEAMS_2026, WATCHED_PLAYERS,
         POINT_MULTIPLIERS, get_output_path, REQUEST_TIMEOUT,
-        MAX_RETRIES, RETRY_DELAY, PREDICTED_ORDER, TOP_SCORERS_COUNT
+        MAX_RETRIES, RETRY_DELAY, PREDICTED_ORDER, TOP_SCORERS_COUNT,
+        TEAM_LOGOS,
     )
 except ImportError:
     # Fallback konfiguraatio jos config.py ei löydy
@@ -27,6 +28,7 @@ except ImportError:
     RETRY_DELAY = 2
     PREDICTED_ORDER = ["HJK", "Ilves", "KuPS"]
     TOP_SCORERS_COUNT = 10
+    TEAM_LOGOS = {}
     def get_output_path(filename):
         return Path("output") / filename
 
@@ -196,16 +198,35 @@ class StatsProcessor:
             is_dummy = any(row.get('_is_dummy') for row in standings)
             report_path = get_output_path("Tilastot2026.md")
             with open(report_path, 'w', encoding='utf-8') as f:
-                f.write("# Veikkausliiga 2026 - Sarjataulukko\n\n")
+                # Otsikko
+                f.write("# 🏆 Veikkausliiga 2026 — Sarjataulukko\n\n")
                 f.write(f"*Päivitetty: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*\n\n")
                 if is_dummy:
-                    f.write(f"*⚠ Lähde: Esimerkkidata (veikkausliiga.com ei tavoitettavissa) — luvut eivät ole oikeita*\n\n")
+                    f.write("*⚠️ Lähde: Esimerkkidata — luvut eivät ole oikeita*\n\n")
                 else:
-                    f.write(f"*Lähde: {STANDINGS_URL}*\n\n")
+                    f.write(f"*Lähde: [{STANDINGS_URL}]({STANDINGS_URL})*\n\n")
+                f.write("---\n\n")
+
+                # Sarjataulukko logojen kanssa
                 f.write("| # | Joukkue | Ot | V | T | H | TM | PM | ME | Pist |\n")
-                f.write("|---|---------|----|----|----|----|----|----|-----|------|\n")
+                f.write("|:-:|---------|:--:|:-:|:-:|:-:|:--:|:--:|:--:|:----:|\n")
                 for row in standings:
-                    f.write(f"| {row['sijoitus']} | {row['joukkue']} | {row['ottelut']} | {row['voitot']} | {row['tasapelit']} | {row['tappiot']} | {row['tehdyt_maalit']} | {row['paassetyt_maalit']} | {row.get('maaliero', '0')} | {row.get('pisteet', '0')} |\n")
+                    team = row['joukkue']
+                    logo_path = TEAM_LOGOS.get(team, "")
+                    if logo_path:
+                        team_cell = f'<img src="{logo_path}" width="20" height="20"> {team}'
+                    else:
+                        team_cell = team
+                    f.write(
+                        f"| {row['sijoitus']} | {team_cell} "
+                        f"| {row['ottelut']} | {row['voitot']} | {row['tasapelit']} "
+                        f"| {row['tappiot']} | {row['tehdyt_maalit']} "
+                        f"| {row['paastetyt_maalit'] if 'paastetyt_maalit' in row else row.get('paassetyt_maalit', '0')} "
+                        f"| {row.get('maaliero', '0')} | **{row.get('pisteet', '0')}** |\n"
+                    )
+
+                f.write("\n> **Ot** = Ottelut · **V** = Voitot · **T** = Tasapelit · **H** = Häviöt\n")
+                f.write("> **TM** = Tehdyt maalit · **PM** = Päästetyt maalit · **ME** = Maaliero\n\n")
             logger.info(f"✓ Raportti tallennettu: {report_path}")
             return True
         except Exception as e:
