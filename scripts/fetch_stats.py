@@ -83,9 +83,13 @@ class StatsProcessor:
             if not table_rows:
                 return self._create_dummy_standings()
             
+            logged_first_row = False
             for row in table_rows[1:]:
                 cells = row.find_all('td')
                 if cells and len(cells) >= 8:
+                    if not logged_first_row:
+                        logger.info(f"Sarjataulukkorakenne: {len(cells)} saraketta, esimerkkisolu: {[c.get_text().strip()[:15] for c in cells]}")
+                        logged_first_row = True
                     standing_data = {
                         'sijoitus': cells[0].get_text().strip().rstrip('.'),
                         'joukkue': cells[1].get_text().strip(),
@@ -95,6 +99,8 @@ class StatsProcessor:
                         'tappiot': cells[5].get_text().strip(),
                         'tehdyt_maalit': cells[6].get_text().strip(),
                         'paassetyt_maalit': cells[7].get_text().strip(),
+                        'maaliero': cells[8].get_text().strip() if len(cells) > 8 else '0',
+                        'pisteet': cells[9].get_text().strip() if len(cells) > 9 else '0',
                     }
                     standings.append(standing_data)
             
@@ -110,9 +116,9 @@ class StatsProcessor:
     def _create_dummy_standings(self):
         """Luo testidatan jos haku epäonnistuu"""
         dummy_data = [
-            {'sijoitus': '1', 'joukkue': 'HJK', 'ottelut': '5', 'voitot': '4', 'tasapelit': '1', 'tappiot': '0', 'tehdyt_maalit': '12', 'paassetyt_maalit': '3', '_is_dummy': True},
-            {'sijoitus': '2', 'joukkue': 'Ilves', 'ottelut': '5', 'voitot': '4', 'tasapelit': '0', 'tappiot': '1', 'tehdyt_maalit': '11', 'paassetyt_maalit': '5', '_is_dummy': True},
-            {'sijoitus': '3', 'joukkue': 'KuPS', 'ottelut': '5', 'voitot': '3', 'tasapelit': '1', 'tappiot': '1', 'tehdyt_maalit': '10', 'paassetyt_maalit': '6', '_is_dummy': True},
+            {'sijoitus': '1', 'joukkue': 'HJK', 'ottelut': '5', 'voitot': '4', 'tasapelit': '1', 'tappiot': '0', 'tehdyt_maalit': '12', 'paassetyt_maalit': '3', 'maaliero': '+9', 'pisteet': '13', '_is_dummy': True},
+            {'sijoitus': '2', 'joukkue': 'Ilves', 'ottelut': '5', 'voitot': '4', 'tasapelit': '0', 'tappiot': '1', 'tehdyt_maalit': '11', 'paassetyt_maalit': '5', 'maaliero': '+6', 'pisteet': '12', '_is_dummy': True},
+            {'sijoitus': '3', 'joukkue': 'KuPS', 'ottelut': '5', 'voitot': '3', 'tasapelit': '1', 'tappiot': '1', 'tehdyt_maalit': '10', 'paassetyt_maalit': '6', 'maaliero': '+4', 'pisteet': '10', '_is_dummy': True},
         ]
         logger.warning(f"⚠ Käytetään esimerkkidataa (veikkausliiga.com ei tavoitettavissa): {len(dummy_data)} joukkuetta")
         return dummy_data
@@ -129,10 +135,10 @@ class StatsProcessor:
                     f.write(f"*⚠ Lähde: Esimerkkidata (veikkausliiga.com ei tavoitettavissa) — luvut eivät ole oikeita*\n\n")
                 else:
                     f.write(f"*Lähde: {STANDINGS_URL}*\n\n")
-                f.write("| # | Joukkue | Ot | V | T | T | TM | PM |\n")
-                f.write("|---|---------|----|----|----|----|----|----|-----|\n")
+                f.write("| # | Joukkue | Ot | V | T | H | TM | PM | ME | Pist |\n")
+                f.write("|---|---------|----|----|----|----|----|----|-----|------|\n")
                 for row in standings:
-                    f.write(f"| {row['sijoitus']} | {row['joukkue']} | {row['ottelut']} | {row['voitot']} | {row['tasapelit']} | {row['tappiot']} | {row['tehdyt_maalit']} | {row['paassetyt_maalit']} |\n")
+                    f.write(f"| {row['sijoitus']} | {row['joukkue']} | {row['ottelut']} | {row['voitot']} | {row['tasapelit']} | {row['tappiot']} | {row['tehdyt_maalit']} | {row['paassetyt_maalit']} | {row.get('maaliero', '0')} | {row.get('pisteet', '0')} |\n")
             logger.info(f"✓ Raportti tallennettu: {report_path}")
             return True
         except Exception as e:
