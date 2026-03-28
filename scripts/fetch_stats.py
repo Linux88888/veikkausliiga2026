@@ -14,17 +14,19 @@ from pathlib import Path
 try:
     from config import (
         STANDINGS_URL, PLAYERS_URL, TEAMS_2026, WATCHED_PLAYERS,
-        POINT_MULTIPLIERS, get_output_path, REQUEST_TIMEOUT, 
-        MAX_RETRIES, RETRY_DELAY, PREDICTED_ORDER
+        POINT_MULTIPLIERS, get_output_path, REQUEST_TIMEOUT,
+        MAX_RETRIES, RETRY_DELAY, PREDICTED_ORDER, TOP_SCORERS_COUNT
     )
 except ImportError:
     # Fallback konfiguraatio jos config.py ei löydy
     STANDINGS_URL = "https://www.veikkausliiga.com/tilastot/2026/veikkausliiga/joukkueet/"
+    PLAYERS_URL = "https://www.veikkausliiga.com/tilastot/2026/veikkausliiga/pelaajat/"
     POINT_MULTIPLIERS = {"goal": 2.0, "shot": 0.1, "assist": 0.5, "red_card": -1.0, "yellow_card": -0.2}
     REQUEST_TIMEOUT = 10
     MAX_RETRIES = 3
     RETRY_DELAY = 2
     PREDICTED_ORDER = ["HJK", "Ilves", "KuPS"]
+    TOP_SCORERS_COUNT = 10
     def get_output_path(filename):
         return Path("output") / filename
 
@@ -123,6 +125,71 @@ class StatsProcessor:
         logger.warning(f"⚠ Käytetään esimerkkidataa (veikkausliiga.com ei tavoitettavissa): {len(dummy_data)} joukkuetta")
         return dummy_data
     
+    def fetch_top_scorers(self, count=None):
+        """Hakee parhaat maalintekijät pelaajatilastoista.
+
+        Returns
+        -------
+        (players: list[str], is_dummy: bool)
+        """
+        if count is None:
+            count = TOP_SCORERS_COUNT
+        try:
+            response = self.fetch_with_retry(PLAYERS_URL)
+            if not response:
+                return self._create_dummy_scorers(count), True
+
+            soup = BeautifulSoup(response.text, 'html.parser')
+            scorers = []
+            table_rows = soup.find_all('tr')
+
+            logged_first_row = False
+            for row in table_rows[1:]:
+                cells = row.find_all('td')
+                if cells and len(cells) >= 3:
+                    if not logged_first_row:
+                        logger.info(f"Pelaajataulukkorakenne: {len(cells)} saraketta, esimerkkisolu: {[c.get_text().strip()[:15] for c in cells]}")
+                        logged_first_row = True
+                    # Yritetään löytää pelaajan nimi ja maalit eri sarakerakenteista
+                    # Tyypillinen rakenne: [sijoitus, pelaaja, joukkue, maalit, ...]
+                    player_name = cells[1].get_text().strip() if len(cells) > 1 else ''
+                    try:
+                        goals = int(cells[3].get_text().strip()) if len(cells) > 3 else 0
+                    except ValueError:
+                        goals = 0
+                    if player_name:
+                        scorers.append({'pelaaja': player_name, 'maalit': goals})
+
+            # Järjestetään maalimäärän mukaan laskevasti
+            scorers.sort(key=lambda x: x['maalit'], reverse=True)
+            top = [s['pelaaja'] for s in scorers[:count]]
+
+            if top:
+                logger.info(f"✓ Maalintekijät haettu: {len(top)} pelaajaa")
+                return top, False
+            else:
+                return self._create_dummy_scorers(count), True
+        except Exception as e:
+            logger.error(f"✗ Virhe maalintekijähaussa: {e}")
+            return self._create_dummy_scorers(count), True
+
+    def _create_dummy_scorers(self, count=10):
+        """Luo testidatan maalintekijöille jos haku epäonnistuu"""
+        dummy = [
+            "Plange, Luke",
+            "Karjalainen, Rasmus",
+            "Odutayo, Colin",
+            "Coffey, Ashley",
+            "Moreno, Jaime",
+            "Valakari, Simo",
+            "Hakanpää, Jere",
+            "Moren, Sebastian",
+            "Lod, Tim",
+            "Toivio, Toni",
+        ]
+        logger.warning(f"⚠ Käytetään esimerkkidataa maalintekijöille: {len(dummy[:count])} pelaajaa")
+        return dummy[:count]
+
     def save_standings_report(self, standings):
         """Tallentaa sarjataulukon raporttiin"""
         try:
