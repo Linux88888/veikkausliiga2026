@@ -21,6 +21,12 @@ except ImportError as e:
     MatchPredictor = None
 
 try:
+    from prediction_scorer import PredictionScorer
+except ImportError as e:
+    print(f"Varoitus: {e}")
+    PredictionScorer = None
+
+try:
     from attendance_analyzer import AttendanceAnalyzer
 except ImportError as e:
     print(f"Varoitus: {e}")
@@ -47,7 +53,7 @@ def main():
     success = True
 
     try:
-        logger.info("\n[1/4] Haetaan tilastotiedot (Tilastot2026.md)...")
+        logger.info("\n[1/5] Haetaan tilastotiedot (Tilastot2026.md)...")
         if StatsProcessor:
             processor = StatsProcessor()
             if not processor.run():
@@ -61,7 +67,7 @@ def main():
         success = False
 
     try:
-        logger.info("\n[2/4] Lasketaan otteluennusteet (Ennusteet2026.md)...")
+        logger.info("\n[2/5] Lasketaan otteluennusteet (Ennusteet2026.md)...")
         if MatchPredictor:
             predictor = MatchPredictor()
             if not predictor.predict():
@@ -75,7 +81,7 @@ def main():
         success = False
 
     try:
-        logger.info("\n[3/4] Analysoidaan yleisömäärät (Yleiso2026.md)...")
+        logger.info("\n[3/5] Analysoidaan yleisömäärät (Yleiso2026.md)...")
         if AttendanceAnalyzer:
             analyzer = AttendanceAnalyzer()
             if not analyzer.analyze():
@@ -89,7 +95,7 @@ def main():
         success = False
 
     try:
-        logger.info("\n[4/4] Haetaan ottelutiedot (Ottelut.md)...")
+        logger.info("\n[4/5] Haetaan ottelutiedot (Ottelut.md)...")
         if MatchFetcher:
             fetcher = MatchFetcher()
             if not fetcher.run():
@@ -100,6 +106,20 @@ def main():
             success = False
     except Exception as e:
         logger.error(f"❌ Virhe ottelutietojen haussa: {e}", exc_info=True)
+        success = False
+
+    try:
+        logger.info("\n[5/5] Lasketaan veikkausten pisteet (Veikkaukset2026.md)...")
+        if PredictionScorer:
+            scorer = PredictionScorer()
+            if not scorer.run():
+                logger.error("Veikkausten pisteytysjärjestelmä epäonnistui")
+                success = False
+        else:
+            logger.error("PredictionScorer ei saatavilla")
+            success = False
+    except Exception as e:
+        logger.error(f"❌ Virhe veikkausten pisteytysjärjestelmässä: {e}", exc_info=True)
         success = False
 
     if success:
