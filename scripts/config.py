@@ -221,6 +221,30 @@ PARTICIPANTS = [
             "Moreno, Jaime",        # 5. maalintekijä
         ],
     },
+    {
+        "name": "Dude Island Veikkaus",
+        "standings_prediction": [
+            "HJK",           # 1. sija (44 p)
+            "Ilves",         # 2. sija (40 p)
+            "KuPS",          # 3. sija (40 p)
+            "FC Inter",      # 4. sija (39 p)
+            "AC Oulu",       # 5. sija (31 p)
+            "SJK",           # 6. sija (31 p)
+            "IF Gnistan",    # 7. sija (30 p)
+            "VPS",           # 8. sija (27 p)
+            "FC Lahti",      # 9. sija (26 p)
+            "IFK Mariehamn", # 10. sija (24 p)
+            "FF Jaro",       # 11. sija (18 p)
+            "TPS",           # 12. sija (16 p)
+        ],
+        "scorers_prediction": [
+            "Vikström, Rudi",       # 1. maalintekijä
+            "Moreno, Jaime",        # 2. maalintekijä
+            "Borchers, Mads",       # 3. maalintekijä
+            "Lappalainen, Lassi",   # 4. maalintekijä
+            "Engvall, Gustav",      # 5. maalintekijä
+        ],
+    },
     # ✏️  LISÄÄ OMA VEIKKAUKSESI ALLE — kopioi tämä malli:
     # {
     #     "name": "Sinun Nimi",

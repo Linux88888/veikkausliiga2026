@@ -1,6 +1,6 @@
 # 🏆 Veikkausliiga 2026 — Veikkaukset
 
-*Päivitetty: 2026-03-28 14:57:49*
+*Päivitetty: 2026-03-28 15:00:52*
 
 > ⚠️ **Huom:** Tilastot perustuvat esimerkkidataan — pisteet ovat simuloituja.
 
@@ -14,6 +14,7 @@
 | 🥈 | **dude island** | 2/36 █░░░░░░░░░ | 25/50 █████░░░░░ | 🎯 **27** |
 | 🥉 | **Veikkaaja 3** | 2/36 █░░░░░░░░░ | 10/50 ██░░░░░░░░ | 🎯 **12** |
 | 4. | **Veikkaaja 2** | 1/36 ░░░░░░░░░░ | 10/50 ██░░░░░░░░ | 🎯 **11** |
+| 5. | **Dude Island Veikkaus** | 5/36 █░░░░░░░░░ | 2/50 ░░░░░░░░░░ | 🎯 **7** |
 
 <details>
 <summary>📋 Pisteytysjärjestelmä</summary>
@@ -196,6 +197,37 @@
 | 3 | Plange, Luke | 1 | 2 | 🔸 Top-listalla (sija 1) |
 | 4 | Moreno, Jaime | 5 | 2 | 🔸 Top-listalla (sija 5) |
 | 5 | Coffey, Ashley | 4 | 2 | 🔸 Top-listalla (sija 4) |
+
+---
+
+### Dude Island Veikkaus — 7 pistettä
+
+**Sarjataulukko:** 5/36 p (14%) ██░░░░░░░░░░░░░
+
+| Veikkaama sija | Joukkue | Toteutunut sija | Ero | Pisteet |
+|:--------------:|---------|:---------------:|:---:|:-------:|
+| 1 | <img src="../logos/hjk.svg" width="18" height="18"> HJK | 5 | ❌ 4 | 0 |
+| 2 | <img src="../logos/ilves.svg" width="18" height="18"> Ilves | 8 | ❌ 6 | 0 |
+| 3 | <img src="../logos/kups.svg" width="18" height="18"> KuPS | 9 | ❌ 6 | 0 |
+| 4 | <img src="../logos/inter.svg" width="18" height="18"> FC Inter | 2 | 🟡 2 | 1 |
+| 5 | <img src="../logos/oulu.svg" width="18" height="18"> AC Oulu | 1 | ❌ 4 | 0 |
+| 6 | <img src="../logos/sjk.svg" width="18" height="18"> SJK | 10 | ❌ 4 | 0 |
+| 7 | <img src="../logos/gnistan.svg" width="18" height="18"> IF Gnistan | 6 | 🟡 1 | 2 |
+| 8 | <img src="../logos/vps.svg" width="18" height="18"> VPS | 12 | ❌ 4 | 0 |
+| 9 | <img src="../logos/lahti.svg" width="18" height="18"> FC Lahti | 3 | ❌ 6 | 0 |
+| 10 | <img src="../logos/mariehamn.svg" width="18" height="18"> IFK Mariehamn | 7 | ❌ 3 | 0 |
+| 11 | <img src="../logos/jaro.svg" width="18" height="18"> FF Jaro | 4 | ❌ 7 | 0 |
+| 12 | <img src="../logos/tps.svg" width="18" height="18"> TPS | 11 | 🟡 1 | 2 |
+
+**Maalintekijät:** 2/50 p (4%) █░░░░░░░░░░░░░░
+
+| Veikkaama sija | Pelaaja | Toteutunut sija | Pisteet | Tila |
+|:--------------:|---------|:---------------:|:-------:|------|
+| 1 | Vikström, Rudi | - | 0 | Ei top-listalla |
+| 2 | Moreno, Jaime | 5 | 2 | 🔸 Top-listalla (sija 5) |
+| 3 | Borchers, Mads | - | 0 | Ei top-listalla |
+| 4 | Lappalainen, Lassi | - | 0 | Ei top-listalla |
+| 5 | Engvall, Gustav | - | 0 | Ei top-listalla |
 
 ---
 
