@@ -1,6 +1,6 @@
 # Veikkausliiga 2026 - Otteluennusteet
 
-*Analysoitu: 2026-03-28 13:29:08*
+*Analysoitu: 2026-03-28 14:20:59*
 
 *⚠ Lähde: Esimerkkidata — ennusteet perustuvat kiinteisiin testiarvoihin, eivät oikeisiin tilastoihin*
 
