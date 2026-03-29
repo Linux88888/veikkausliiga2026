@@ -3,6 +3,7 @@ Veikkausliiga 2026 - Ottelutiedot
 Hakee otteluohjelma ja tulokset suoraan veikkausliigan sivuilta
 """
 
+import re
 import requests
 from bs4 import BeautifulSoup
 import logging
@@ -68,9 +69,13 @@ class MatchFetcher:
                     logger.error("✗ Kaikki yritykset epäonnistuivat")
                     return None
 
+    @staticmethod
+    def _is_score(s):
+        """Palauttaa True vain oikean muotoiselle tulokselle, esim. '2-1' tai '0–0'."""
+        return bool(re.match(r'^\d+\s*[-–]\s*\d+$', s.strip()))
+
     def fetch_matches(self):
         """Hakee ottelutiedot veikkausliigan sivuilta"""
-        import re
         try:
             from config import TEAMS_2026
         except ImportError:
@@ -126,20 +131,33 @@ class MatchFetcher:
                 tulos = '-'
                 vieras = None
 
-                # Veikkausliigan ottelutaulukon rakenne:
+                # Veikkausliigan ottelutaulukon rakenne (tyypillinen):
                 # cells[0] = ottelu-ID (numero)
                 # cells[1] = päivä+päivämäärä (esim. "La 4.4.2026")
                 # cells[2] = kellonaika (esim. "13:00")
-                # cells[3] = linkki ottelusivu (sisältää päivämäärä+aika uudelleen)
-                # cells[4] = kotijoukkue
-                # cells[5] = tulos (esim. "2-1" tai "-")
-                # cells[6] = vierasjoukkue
+                # cells[3] = linkki ottelusivu
+                # cells[4] = kotijoukkue TAI "Koti - Vieras" yhdistettynä
+                # cells[5] = tulos (esim. "2-1") TAI "Seuranta" (seurantanappi)
+                # cells[6] = vierasjoukkue (tai tyhjä jos yhdistetty)
 
                 # Ensisijainen strategia: cells[4]=koti, cells[5]=tulos, cells[6]=vieras
-                if len(cells) >= 7:
-                    koti = cell_texts[4]
-                    tulos = cell_texts[5] if len(cells) > 5 else '-'
-                    vieras = cell_texts[6] if len(cells) > 6 else '-'
+                if len(cells) >= 5:
+                    raw_koti = cell_texts[4]
+                    raw_tulos = cell_texts[5] if len(cells) > 5 else ''
+                    raw_vieras = cell_texts[6] if len(cells) > 6 else ''
+
+                    # Käsittele yhdistetty "Koti - Vieras" -muoto cells[4]:ssa
+                    # (verkkosivusto saattaa yhdistää joukkueet yhteen soluun)
+                    if raw_koti and ' - ' in raw_koti and not self._is_score(raw_koti):
+                        parts = [p.strip() for p in raw_koti.split(' - ', 1)]
+                        koti = parts[0]
+                        vieras = parts[1] if len(parts) > 1 else raw_vieras
+                    else:
+                        koti = raw_koti
+                        vieras = raw_vieras
+
+                    # Hyväksy tulos vain jos se on oikean muotoinen (esim. "2-1")
+                    tulos = raw_tulos if self._is_score(raw_tulos) else '-'
 
                 # Varastrategia: etsi joukkuenimet kaikista soluista [3+]
                 # käytetään jos ensisijainen strategia tuotti päivämäärän tai kellonajan
@@ -154,11 +172,11 @@ class MatchFetcher:
                             team_cells.append(t)
                     # Odotettu rakenne: [kotijoukkue, tulos, vierasjoukkue]
                     # tai vain [kotijoukkue, vierasjoukkue] jos tulosta ei ole
-                    if len(team_cells) >= 3:
+                    if len(team_cells) >= 3 and self._is_score(team_cells[1]):
                         koti = team_cells[0]
                         tulos = team_cells[1]
                         vieras = team_cells[2]
-                    elif len(team_cells) == 2:
+                    elif len(team_cells) >= 2:
                         koti = team_cells[0]
                         tulos = '-'
                         vieras = team_cells[1]

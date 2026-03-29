@@ -118,11 +118,20 @@ class StatsProcessor:
             return self._create_dummy_standings()
     
     def _create_dummy_standings(self):
-        """Luo testidatan jos haku epäonnistuu"""
+        """Luo testidatan jos haku epäonnistuu — sisältää kaikki 12 joukkuetta"""
         dummy_data = [
-            {'sijoitus': '1', 'joukkue': 'HJK', 'ottelut': '5', 'voitot': '4', 'tasapelit': '1', 'tappiot': '0', 'tehdyt_maalit': '12', 'paassetyt_maalit': '3', 'maaliero': '+9', 'pisteet': '13', '_is_dummy': True},
-            {'sijoitus': '2', 'joukkue': 'Ilves', 'ottelut': '5', 'voitot': '4', 'tasapelit': '0', 'tappiot': '1', 'tehdyt_maalit': '11', 'paassetyt_maalit': '5', 'maaliero': '+6', 'pisteet': '12', '_is_dummy': True},
-            {'sijoitus': '3', 'joukkue': 'KuPS', 'ottelut': '5', 'voitot': '3', 'tasapelit': '1', 'tappiot': '1', 'tehdyt_maalit': '10', 'paassetyt_maalit': '6', 'maaliero': '+4', 'pisteet': '10', '_is_dummy': True},
+            {'sijoitus': '1',  'joukkue': 'HJK',           'ottelut': '0', 'voitot': '0', 'tasapelit': '0', 'tappiot': '0', 'tehdyt_maalit': '0', 'paassetyt_maalit': '0', 'maaliero': '0',  'pisteet': '0', '_is_dummy': True},
+            {'sijoitus': '2',  'joukkue': 'KuPS',          'ottelut': '0', 'voitot': '0', 'tasapelit': '0', 'tappiot': '0', 'tehdyt_maalit': '0', 'paassetyt_maalit': '0', 'maaliero': '0',  'pisteet': '0', '_is_dummy': True},
+            {'sijoitus': '3',  'joukkue': 'FC Inter',      'ottelut': '0', 'voitot': '0', 'tasapelit': '0', 'tappiot': '0', 'tehdyt_maalit': '0', 'paassetyt_maalit': '0', 'maaliero': '0',  'pisteet': '0', '_is_dummy': True},
+            {'sijoitus': '4',  'joukkue': 'SJK',           'ottelut': '0', 'voitot': '0', 'tasapelit': '0', 'tappiot': '0', 'tehdyt_maalit': '0', 'paassetyt_maalit': '0', 'maaliero': '0',  'pisteet': '0', '_is_dummy': True},
+            {'sijoitus': '5',  'joukkue': 'FC Lahti',      'ottelut': '0', 'voitot': '0', 'tasapelit': '0', 'tappiot': '0', 'tehdyt_maalit': '0', 'paassetyt_maalit': '0', 'maaliero': '0',  'pisteet': '0', '_is_dummy': True},
+            {'sijoitus': '6',  'joukkue': 'Ilves',         'ottelut': '0', 'voitot': '0', 'tasapelit': '0', 'tappiot': '0', 'tehdyt_maalit': '0', 'paassetyt_maalit': '0', 'maaliero': '0',  'pisteet': '0', '_is_dummy': True},
+            {'sijoitus': '7',  'joukkue': 'FF Jaro',       'ottelut': '0', 'voitot': '0', 'tasapelit': '0', 'tappiot': '0', 'tehdyt_maalit': '0', 'paassetyt_maalit': '0', 'maaliero': '0',  'pisteet': '0', '_is_dummy': True},
+            {'sijoitus': '8',  'joukkue': 'VPS',           'ottelut': '0', 'voitot': '0', 'tasapelit': '0', 'tappiot': '0', 'tehdyt_maalit': '0', 'paassetyt_maalit': '0', 'maaliero': '0',  'pisteet': '0', '_is_dummy': True},
+            {'sijoitus': '9',  'joukkue': 'AC Oulu',       'ottelut': '0', 'voitot': '0', 'tasapelit': '0', 'tappiot': '0', 'tehdyt_maalit': '0', 'paassetyt_maalit': '0', 'maaliero': '0',  'pisteet': '0', '_is_dummy': True},
+            {'sijoitus': '10', 'joukkue': 'IF Gnistan',    'ottelut': '0', 'voitot': '0', 'tasapelit': '0', 'tappiot': '0', 'tehdyt_maalit': '0', 'paassetyt_maalit': '0', 'maaliero': '0',  'pisteet': '0', '_is_dummy': True},
+            {'sijoitus': '11', 'joukkue': 'IFK Mariehamn', 'ottelut': '0', 'voitot': '0', 'tasapelit': '0', 'tappiot': '0', 'tehdyt_maalit': '0', 'paassetyt_maalit': '0', 'maaliero': '0',  'pisteet': '0', '_is_dummy': True},
+            {'sijoitus': '12', 'joukkue': 'TPS',           'ottelut': '0', 'voitot': '0', 'tasapelit': '0', 'tappiot': '0', 'tehdyt_maalit': '0', 'paassetyt_maalit': '0', 'maaliero': '0',  'pisteet': '0', '_is_dummy': True},
         ]
         logger.warning(f"⚠ Käytetään esimerkkidataa (veikkausliiga.com ei tavoitettavissa): {len(dummy_data)} joukkuetta")
         return dummy_data

@@ -80,15 +80,22 @@ class PredictionScorer:
         details = []
 
         for pred_i, team in enumerate(predicted, 1):
-            act_i = actual_pos.get(team, len(actual))
-            diff = abs(pred_i - act_i)
-            pts = self._standings_points_for_diff(diff)
+            act_i_val = actual_pos.get(team)
+            if act_i_val is None:
+                # Joukkuetta ei löydy sarjataulukosta — ei pisteitä
+                pts = 0
+                diff = None
+                act_display = "-"
+            else:
+                diff = abs(pred_i - act_i_val)
+                pts = self._standings_points_for_diff(diff)
+                act_display = act_i_val
             total += pts
             details.append(
                 {
                     "joukkue": team,
                     "veikkausi": pred_i,
-                    "toteutunut": act_i,
+                    "toteutunut": act_display,
                     "ero": diff,
                     "pisteet": pts,
                 }
@@ -281,10 +288,21 @@ class PredictionScorer:
                     f.write("| Veikkaama sija | Joukkue | Toteutunut sija | Ero | Pisteet |\n")
                     f.write("|:--------------:|---------|:---------------:|:---:|:-------:|\n")
                     for d in r["standings_details"]:
-                        diff_icon = "✅" if d["ero"] == 0 else ("🟡" if d["ero"] <= 2 else "❌")
+                        if d["ero"] is None:
+                            diff_icon = "❌"
+                            ero_display = "-"
+                        elif d["ero"] == 0:
+                            diff_icon = "✅"
+                            ero_display = d["ero"]
+                        elif d["ero"] <= 2:
+                            diff_icon = "🟡"
+                            ero_display = d["ero"]
+                        else:
+                            diff_icon = "❌"
+                            ero_display = d["ero"]
                         f.write(
                             f"| {d['veikkausi']} | {team_cell(d['joukkue'])} "
-                            f"| {d['toteutunut']} | {diff_icon} {d['ero']} | {d['pisteet']} |\n"
+                            f"| {d['toteutunut']} | {diff_icon} {ero_display} | {d['pisteet']} |\n"
                         )
                     f.write("\n")
 
