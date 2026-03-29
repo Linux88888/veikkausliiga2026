@@ -1,8 +1,8 @@
 # 🏅 Veikkausliiga — Kaikkien aikojen tilastot
 
-*Päivitetty: 2026-03-29 09:01:20*
+*Päivitetty: 2026-03-29 09:21:55*
 
-*Lähde: Historialliset tilastot*
+*Lähde: Transfermarkt / Veikkausliiga.com*
 
 ---
 
@@ -68,15 +68,15 @@
 | # | Pelaaja | Maalit | Joukkueet |
 |:-:|---------|:------:|-----------|
 | 1 | Valeri Popovitš | **166** | Haka, HJK ym. |
-| 2 | Mika Aaltonen | **152** | HJK, Haka ym. |
-| 3 | Mixu Paatelainen | **102** | Haka, TPS ym. |
-| 4 | Jonatan Johansson | **90** | TPS, Jazz ym. |
-| 5 | Shefki Kuqi | **85** | Mikkelin Palloilijat, HJK, FC Jokerit ym. |
-| 6 | Toni Lehtinen | **84** | Tampere United ym. |
-| 7 | Aki Hyryläinen | **80** | Haka ym. |
-| 8 | Pasi Rautiainen | **74** | HJK ym. |
-| 9 | Sami Ristilä | **71** | Haka, Tampere United ym. |
-| 10 | Jari Litmanen | **51** | Reipas, HJK, MyPa, FC Lahti ym. |
+| 2 | Rafael | **136** | HJK, Jazz, FC Lahti |
+| 3 | Saku Puhakainen | **114** | Kuusysi, TPS, MyPa |
+| 4 | Juho Mäkelä | **111** | HJK, VPS ym. |
+| 5 | Roope Riski | **95** | TPS, HJK ym. |
+| 6 | Luiz António | **94** | FC Jazz, Haka ym. |
+| 7 | Antti Pohja | **87** | FC Lahti, Tampere United ym. |
+| 8 | Timo Furuholm | **85** | FC Inter |
+| 9 | Jari Vanhala | **85** | HJK, FC Inter ym. |
+| 10 | Ismo Lius | **84** | RoPS, FC Hämeenlinna ym. |
 
 ## 📊 Ennätyksiä
 
