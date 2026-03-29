@@ -84,7 +84,7 @@ class PredictionScorer:
             if act_i_val is None:
                 # Joukkuetta ei löydy sarjataulukosta — ei pisteitä
                 pts = 0
-                diff = len(actual) + pred_i  # suuri arvo, ei merkitystä pisteissä
+                diff = None
                 act_display = "-"
             else:
                 diff = abs(pred_i - act_i_val)
@@ -288,15 +288,18 @@ class PredictionScorer:
                     f.write("| Veikkaama sija | Joukkue | Toteutunut sija | Ero | Pisteet |\n")
                     f.write("|:--------------:|---------|:---------------:|:---:|:-------:|\n")
                     for d in r["standings_details"]:
-                        if d["toteutunut"] == "-":
+                        if d["ero"] is None:
                             diff_icon = "❌"
+                            ero_display = "-"
                         elif d["ero"] == 0:
                             diff_icon = "✅"
+                            ero_display = d["ero"]
                         elif d["ero"] <= 2:
                             diff_icon = "🟡"
+                            ero_display = d["ero"]
                         else:
                             diff_icon = "❌"
-                        ero_display = "-" if d["toteutunut"] == "-" else d["ero"]
+                            ero_display = d["ero"]
                         f.write(
                             f"| {d['veikkausi']} | {team_cell(d['joukkue'])} "
                             f"| {d['toteutunut']} | {diff_icon} {ero_display} | {d['pisteet']} |\n"

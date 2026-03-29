@@ -3,6 +3,7 @@ Veikkausliiga 2026 - Ottelutiedot
 Hakee otteluohjelma ja tulokset suoraan veikkausliigan sivuilta
 """
 
+import re
 import requests
 from bs4 import BeautifulSoup
 import logging
@@ -71,12 +72,10 @@ class MatchFetcher:
     @staticmethod
     def _is_score(s):
         """Palauttaa True vain oikean muotoiselle tulokselle, esim. '2-1' tai '0–0'."""
-        import re
         return bool(re.match(r'^\d+\s*[-–]\s*\d+$', s.strip()))
 
     def fetch_matches(self):
         """Hakee ottelutiedot veikkausliigan sivuilta"""
-        import re
         try:
             from config import TEAMS_2026
         except ImportError:

@@ -72,6 +72,7 @@ class TestCalculateStandingsPoints(unittest.TestCase):
         self.assertEqual(pts, 6)
         self.assertEqual(details[2]["pisteet"], 0)
         self.assertEqual(details[2]["toteutunut"], "-")
+        self.assertIsNone(details[2]["ero"])
 
     def test_missing_team_no_false_exact_match(self):
         """Puuttuva joukkue ei saa täsmäosumaa vaikka indeksi osuisi aiemmalla bugilla"""
