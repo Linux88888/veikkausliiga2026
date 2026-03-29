@@ -65,18 +65,18 @@ def count_championships(champions):
         counts[team] = counts.get(team, 0) + 1
     return sorted(counts.items(), key=lambda x: x[1], reverse=True)
 
-# Kaikkien aikojen parhaat maalintekijät Veikkausliigassa (historialliset tiedot)
+# Kaikkien aikojen parhaat maalintekijät Veikkausliigassa (lähde: Transfermarkt / veikkausliiga.com)
 ALL_TIME_TOP_SCORERS = [
     {"pelaaja": "Valeri Popovitš",  "maalit": 166, "joukkueet": "Haka, HJK ym."},
-    {"pelaaja": "Mika Aaltonen",    "maalit": 152, "joukkueet": "HJK, Haka ym."},
-    {"pelaaja": "Mixu Paatelainen", "maalit": 102, "joukkueet": "Haka, TPS ym."},
-    {"pelaaja": "Jonatan Johansson","maalit":  90, "joukkueet": "TPS, Jazz ym."},
-    {"pelaaja": "Shefki Kuqi",      "maalit":  85, "joukkueet": "Mikkelin Palloilijat, HJK, FC Jokerit ym."},
-    {"pelaaja": "Toni Lehtinen",    "maalit":  84, "joukkueet": "Tampere United ym."},
-    {"pelaaja": "Aki Hyryläinen",   "maalit":  80, "joukkueet": "Haka ym."},
-    {"pelaaja": "Pasi Rautiainen",  "maalit":  74, "joukkueet": "HJK ym."},
-    {"pelaaja": "Sami Ristilä",     "maalit":  71, "joukkueet": "Haka, Tampere United ym."},
-    {"pelaaja": "Jari Litmanen",    "maalit":  51, "joukkueet": "Reipas, HJK, MyPa, FC Lahti ym."},
+    {"pelaaja": "Rafael",           "maalit": 136, "joukkueet": "HJK, Jazz, FC Lahti"},
+    {"pelaaja": "Saku Puhakainen",  "maalit": 114, "joukkueet": "Kuusysi, TPS, MyPa"},
+    {"pelaaja": "Juho Mäkelä",      "maalit": 111, "joukkueet": "HJK, VPS ym."},
+    {"pelaaja": "Roope Riski",      "maalit":  95, "joukkueet": "TPS, HJK ym."},
+    {"pelaaja": "Luiz António",     "maalit":  94, "joukkueet": "FC Jazz, Haka ym."},
+    {"pelaaja": "Antti Pohja",      "maalit":  87, "joukkueet": "FC Lahti, Tampere United ym."},
+    {"pelaaja": "Timo Furuholm",    "maalit":  85, "joukkueet": "FC Inter"},
+    {"pelaaja": "Jari Vanhala",     "maalit":  85, "joukkueet": "HJK, FC Inter ym."},
+    {"pelaaja": "Ismo Lius",        "maalit":  84, "joukkueet": "RoPS, FC Hämeenlinna ym."},
 ]
 
 # Ennätyksiä
@@ -100,7 +100,7 @@ class HistoricalStatsProcessor:
             with open(report_path, 'w', encoding='utf-8') as f:
                 f.write("# 🏅 Veikkausliiga — Kaikkien aikojen tilastot\n\n")
                 f.write(f"*Päivitetty: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*\n\n")
-                f.write("*Lähde: Historialliset tilastot*\n\n")
+                f.write("*Lähde: Transfermarkt / Veikkausliiga.com*\n\n")
                 f.write("---\n\n")
 
                 # Mestaruustaulukko

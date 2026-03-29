@@ -109,6 +109,17 @@ class TestAllTimeTopScorers(unittest.TestCase):
             self.assertIn("joukkueet", scorer)
             self.assertIsInstance(scorer["maalit"], int)
 
+    def test_rafael_included(self):
+        """Rafael on mukana listalla (kaikkien aikojen toiseksi paras maalintekijä)."""
+        names = [p["pelaaja"] for p in ALL_TIME_TOP_SCORERS]
+        self.assertIn("Rafael", names, "Rafael puuttuu kaikkien aikojen maalintekijälistalta")
+
+    def test_popovits_is_top_scorer(self):
+        """Valeri Popovitš on kaikkien aikojen paras maalintekijä (166 maalia)."""
+        top = ALL_TIME_TOP_SCORERS[0]
+        self.assertEqual(top["pelaaja"], "Valeri Popovitš")
+        self.assertEqual(top["maalit"], 166)
+
 
 if __name__ == "__main__":
     unittest.main()
