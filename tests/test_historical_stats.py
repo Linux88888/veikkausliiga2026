@@ -44,10 +44,10 @@ class TestVeikkausliigaChampions(unittest.TestCase):
     def test_hjk_championship_count(self):
         """HJK:lla on oikea mestaruusmäärä listalla (1990–2025)."""
         counts = dict(count_championships(VEIKKAUSLIIGA_CHAMPIONS))
-        # HJK voitti 1990, 1992, 1997, 2003, 2008, 2009, 2010, 2012, 2013, 2014,
-        # 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 = 18
-        self.assertEqual(counts.get("HJK"), 18,
-                         f"HJK:n mestaruusmäärä on väärä: {counts.get('HJK')}, odotetaan 18")
+        # HJK voitti 1990, 1992, 1997, 2002, 2003, 2009, 2010, 2011, 2012, 2013, 2014,
+        # 2017, 2018, 2020, 2021, 2022, 2023 = 17
+        self.assertEqual(counts.get("HJK"), 17,
+                         f"HJK:n mestaruusmäärä on väärä: {counts.get('HJK')}, odotetaan 17")
 
     def test_jazz_championship_count(self):
         """Jazz voitti mestaruuden kahdesti (1993 ja 1996)."""
