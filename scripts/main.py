@@ -33,6 +33,12 @@ except ImportError as e:
     AttendanceAnalyzer = None
 
 try:
+    from fetch_historical_stats import HistoricalStatsProcessor
+except ImportError as e:
+    print(f"Varoitus: {e}")
+    HistoricalStatsProcessor = None
+
+try:
     from fetch_matches import MatchFetcher
 except ImportError as e:
     print(f"Varoitus: {e}")
@@ -53,7 +59,7 @@ def main():
     success = True
 
     try:
-        logger.info("\n[1/5] Haetaan tilastotiedot (Tilastot2026.md)...")
+        logger.info("\n[1/6] Haetaan tilastotiedot (Tilastot2026.md ja Pelaajatilastot2026.md)...")
         if StatsProcessor:
             processor = StatsProcessor()
             if not processor.run():
@@ -67,7 +73,7 @@ def main():
         success = False
 
     try:
-        logger.info("\n[2/5] Lasketaan otteluennusteet (Ennusteet2026.md)...")
+        logger.info("\n[2/6] Lasketaan otteluennusteet (Ennusteet2026.md)...")
         if MatchPredictor:
             predictor = MatchPredictor()
             if not predictor.predict():
@@ -81,7 +87,7 @@ def main():
         success = False
 
     try:
-        logger.info("\n[3/5] Analysoidaan yleisömäärät (Yleiso2026.md)...")
+        logger.info("\n[3/6] Analysoidaan yleisömäärät (Yleiso2026.md)...")
         if AttendanceAnalyzer:
             analyzer = AttendanceAnalyzer()
             if not analyzer.analyze():
@@ -95,7 +101,21 @@ def main():
         success = False
 
     try:
-        logger.info("\n[4/5] Haetaan ottelutiedot (Ottelut.md)...")
+        logger.info("\n[4/6] Haetaan kaikkien aikojen tilastot (KaikkienAikojenTilastot.md)...")
+        if HistoricalStatsProcessor:
+            hist = HistoricalStatsProcessor()
+            if not hist.run():
+                logger.error("Kaikkien aikojen tilastojen generointi epäonnistui")
+                success = False
+        else:
+            logger.error("HistoricalStatsProcessor ei saatavilla")
+            success = False
+    except Exception as e:
+        logger.error(f"❌ Virhe kaikkien aikojen tilastoissa: {e}", exc_info=True)
+        success = False
+
+    try:
+        logger.info("\n[5/6] Haetaan ottelutiedot (Ottelut.md)...")
         if MatchFetcher:
             fetcher = MatchFetcher()
             if not fetcher.run():
@@ -109,7 +129,7 @@ def main():
         success = False
 
     try:
-        logger.info("\n[5/5] Lasketaan veikkausten pisteet (Veikkaukset2026.md)...")
+        logger.info("\n[6/6] Lasketaan veikkausten pisteet (Veikkaukset2026.md)...")
         if PredictionScorer:
             scorer = PredictionScorer()
             if not scorer.run():
