@@ -1,23 +1,25 @@
 # 🏅 Veikkausliiga — Kaikkien aikojen tilastot
 
-*Päivitetty: 2026-03-29 08:24:47*
+*Päivitetty: 2026-03-29 08:32:07*
 
 *Lähde: Historialliset tilastot*
 
 ---
 
-## 🏆 Mestaruudet joukkueittain
+## 🏆 Mestaruudet joukkueittain (1990–2025)
 
 | # | Joukkue | Mestaruudet |
 |:-:|---------|:-----------:|
-| 1 | <img src="../logos/hjk.svg" width="20" height="20"> HJK | **16** |
+| 1 | <img src="../logos/hjk.svg" width="20" height="20"> HJK | **18** |
 | 2 | Haka | **6** |
 | 3 | Tampere United | **4** |
 | 4 | <img src="../logos/sjk.svg" width="20" height="20"> SJK | **3** |
-| 5 | <img src="../logos/inter.svg" width="20" height="20"> FC Inter | **1** |
-| 6 | Jazz | **1** |
+| 5 | Jazz | **2** |
+| 6 | <img src="../logos/inter.svg" width="20" height="20"> FC Inter | **1** |
+| 7 | TPV | **1** |
+| 8 | Kuusysi | **1** |
 
-## 📅 Mestarit vuosittain
+## 📅 Mestarit vuosittain (1990–2025)
 
 | Vuosi | Mestari |
 |:-----:|---------|
@@ -52,6 +54,11 @@
 | 1997 | <img src="../logos/hjk.svg" width="16" height="16"> HJK |
 | 1996 | Jazz |
 | 1995 | Haka |
+| 1994 | TPV |
+| 1993 | Jazz |
+| 1992 | <img src="../logos/hjk.svg" width="16" height="16"> HJK |
+| 1991 | Kuusysi |
+| 1990 | <img src="../logos/hjk.svg" width="16" height="16"> HJK |
 
 ## ⚽ Kaikkien aikojen parhaat maalintekijät
 
@@ -72,7 +79,7 @@
 
 | Kategoria | Ennätys |
 |-----------|---------|
-| Eniten mestaruuksia (1995–2025) | HJK (16 mestaruutta listalla, yli 30 kaikkiaan) |
+| Eniten mestaruuksia (1990–2025) | HJK (18 mestaruutta 1990–2025, yli 30 kaikkiaan) |
 | Eniten maaleja kaudella | Mika Aaltonen — 28 maalia (1994) |
 | Korkein voitto | HJK 12–1 Atlantis (1966) |
 | Sarjan ennätysyleisö | Olympiastadion, Helsinki |

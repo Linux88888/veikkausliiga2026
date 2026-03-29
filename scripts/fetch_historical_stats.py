@@ -51,6 +51,11 @@ VEIKKAUSLIIGA_CHAMPIONS = [
     (1997, "HJK"),
     (1996, "Jazz"),
     (1995, "Haka"),
+    (1994, "TPV"),
+    (1993, "Jazz"),
+    (1992, "HJK"),
+    (1991, "Kuusysi"),
+    (1990, "HJK"),
 ]
 
 # Mestaruusmäärät joukkueittain (laskettuna yllä olevasta listasta)
@@ -76,7 +81,7 @@ ALL_TIME_TOP_SCORERS = [
 
 # Ennätyksiä
 RECORDS = [
-    {"kuvaus": "Eniten mestaruuksia (1995–2025)",  "arvo": "HJK (16 mestaruutta listalla, yli 30 kaikkiaan)"},
+    {"kuvaus": "Eniten mestaruuksia (1990–2025)",  "arvo": "HJK (18 mestaruutta 1990–2025, yli 30 kaikkiaan)"},
     {"kuvaus": "Eniten maaleja kaudella",            "arvo": "Mika Aaltonen — 28 maalia (1994)"},
     {"kuvaus": "Korkein voitto",                     "arvo": "HJK 12–1 Atlantis (1966)"},
     {"kuvaus": "Sarjan ennätysyleisö",               "arvo": "Olympiastadion, Helsinki"},
@@ -99,7 +104,7 @@ class HistoricalStatsProcessor:
                 f.write("---\n\n")
 
                 # Mestaruustaulukko
-                f.write("## 🏆 Mestaruudet joukkueittain\n\n")
+                f.write("## 🏆 Mestaruudet joukkueittain (1990–2025)\n\n")
                 f.write("| # | Joukkue | Mestaruudet |\n")
                 f.write("|:-:|---------|:-----------:|\n")
                 for i, (team, count) in enumerate(championship_counts, 1):
@@ -112,7 +117,7 @@ class HistoricalStatsProcessor:
                 f.write("\n")
 
                 # Mestarit vuosittain
-                f.write("## 📅 Mestarit vuosittain\n\n")
+                f.write("## 📅 Mestarit vuosittain (1990–2025)\n\n")
                 f.write("| Vuosi | Mestari |\n")
                 f.write("|:-----:|---------|\n")
                 for year, team in VEIKKAUSLIIGA_CHAMPIONS:
