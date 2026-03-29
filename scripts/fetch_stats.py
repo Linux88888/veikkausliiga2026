@@ -136,22 +136,20 @@ class StatsProcessor:
         logger.warning(f"⚠ Käytetään esimerkkidataa (veikkausliiga.com ei tavoitettavissa): {len(dummy_data)} joukkuetta")
         return dummy_data
     
-    def fetch_top_scorers(self, count=None):
-        """Hakee parhaat maalintekijät pelaajatilastoista.
+    def fetch_full_player_stats(self):
+        """Hakee täydelliset pelaajatilastot (maalit, syötöt, kortit, pelit).
 
         Returns
         -------
-        (players: list[str], is_dummy: bool)
+        (players: list[dict], is_dummy: bool)
         """
-        if count is None:
-            count = TOP_SCORERS_COUNT
         try:
             response = self.fetch_with_retry(PLAYERS_URL)
             if not response:
-                return self._create_dummy_scorers(count), True
+                return self._create_dummy_player_stats(), True
 
             soup = BeautifulSoup(response.text, 'html.parser')
-            scorers = []
+            players = []
             table_rows = soup.find_all('tr')
 
             logged_first_row = False
@@ -161,28 +159,69 @@ class StatsProcessor:
                     if not logged_first_row:
                         logger.info(f"Pelaajataulukkorakenne: {len(cells)} saraketta, esimerkkisolu: {[c.get_text().strip()[:15] for c in cells]}")
                         logged_first_row = True
-                    # Yritetään löytää pelaajan nimi ja maalit eri sarakerakenteista
-                    # Tyypillinen rakenne: [sijoitus, pelaaja, joukkue, maalit, ...]
+                    # Tyypillinen rakenne: [sijoitus, pelaaja, joukkue, ottelut, maalit, syötöt, keltaiset, punaiset]
+                    def safe_int(idx):
+                        try:
+                            return int(cells[idx].get_text().strip()) if len(cells) > idx else 0
+                        except ValueError:
+                            return 0
+
                     player_name = cells[1].get_text().strip() if len(cells) > 1 else ''
-                    try:
-                        goals = int(cells[3].get_text().strip()) if len(cells) > 3 else 0
-                    except ValueError:
-                        goals = 0
+                    team = cells[2].get_text().strip() if len(cells) > 2 else ''
                     if player_name:
-                        scorers.append({'pelaaja': player_name, 'maalit': goals})
+                        players.append({
+                            'sijoitus': cells[0].get_text().strip() if cells else '',
+                            'pelaaja': player_name,
+                            'joukkue': team,
+                            'ottelut': safe_int(3),
+                            'maalit': safe_int(4),
+                            'syotot': safe_int(5),
+                            'keltaiset': safe_int(6),
+                            'punaiset': safe_int(7),
+                        })
 
-            # Järjestetään maalimäärän mukaan laskevasti
-            scorers.sort(key=lambda x: x['maalit'], reverse=True)
-            top = [s['pelaaja'] for s in scorers[:count]]
-
-            if top:
-                logger.info(f"✓ Maalintekijät haettu: {len(top)} pelaajaa")
-                return top, False
+            if players:
+                logger.info(f"✓ Pelaajatilastot haettu: {len(players)} pelaajaa")
+                return players, False
             else:
-                return self._create_dummy_scorers(count), True
+                return self._create_dummy_player_stats(), True
         except Exception as e:
-            logger.error(f"✗ Virhe maalintekijähaussa: {e}")
-            return self._create_dummy_scorers(count), True
+            logger.error(f"✗ Virhe pelaajatilastojen haussa: {e}")
+            return self._create_dummy_player_stats(), True
+
+    def fetch_top_scorers(self, count=None):
+        """Hakee parhaat maalintekijät pelaajatilastoista.
+
+        Returns
+        -------
+        (players: list[str], is_dummy: bool)
+        """
+        if count is None:
+            count = TOP_SCORERS_COUNT
+        players, is_dummy = self.fetch_full_player_stats()
+        players_sorted = sorted(players, key=lambda x: x['maalit'], reverse=True)
+        top = [p['pelaaja'] for p in players_sorted[:count]]
+        if top:
+            logger.info(f"✓ Maalintekijät haettu: {len(top)} pelaajaa")
+            return top, is_dummy
+        return self._create_dummy_scorers(count), True
+
+    def _create_dummy_player_stats(self):
+        """Luo testidatan pelaajatilastoille jos haku epäonnistuu"""
+        dummy = [
+            {'sijoitus': '1',  'pelaaja': 'Plange, Luke',        'joukkue': 'HJK',      'ottelut': 0, 'maalit': 0, 'syotot': 0, 'keltaiset': 0, 'punaiset': 0},
+            {'sijoitus': '2',  'pelaaja': 'Karjalainen, Rasmus', 'joukkue': 'KuPS',     'ottelut': 0, 'maalit': 0, 'syotot': 0, 'keltaiset': 0, 'punaiset': 0},
+            {'sijoitus': '3',  'pelaaja': 'Odutayo, Colin',      'joukkue': 'SJK',      'ottelut': 0, 'maalit': 0, 'syotot': 0, 'keltaiset': 0, 'punaiset': 0},
+            {'sijoitus': '4',  'pelaaja': 'Coffey, Ashley',      'joukkue': 'FC Inter', 'ottelut': 0, 'maalit': 0, 'syotot': 0, 'keltaiset': 0, 'punaiset': 0},
+            {'sijoitus': '5',  'pelaaja': 'Moreno, Jaime',       'joukkue': 'Ilves',    'ottelut': 0, 'maalit': 0, 'syotot': 0, 'keltaiset': 0, 'punaiset': 0},
+            {'sijoitus': '6',  'pelaaja': 'Vikström, Rudi',      'joukkue': 'AC Oulu',  'ottelut': 0, 'maalit': 0, 'syotot': 0, 'keltaiset': 0, 'punaiset': 0},
+            {'sijoitus': '7',  'pelaaja': 'Borchers, Mads',      'joukkue': 'HJK',      'ottelut': 0, 'maalit': 0, 'syotot': 0, 'keltaiset': 0, 'punaiset': 0},
+            {'sijoitus': '8',  'pelaaja': 'Lappalainen, Lassi',  'joukkue': 'KuPS',     'ottelut': 0, 'maalit': 0, 'syotot': 0, 'keltaiset': 0, 'punaiset': 0},
+            {'sijoitus': '9',  'pelaaja': 'Engvall, Gustav',     'joukkue': 'Ilves',    'ottelut': 0, 'maalit': 0, 'syotot': 0, 'keltaiset': 0, 'punaiset': 0},
+            {'sijoitus': '10', 'pelaaja': 'Toivio, Toni',        'joukkue': 'HJK',      'ottelut': 0, 'maalit': 0, 'syotot': 0, 'keltaiset': 0, 'punaiset': 0},
+        ]
+        logger.warning(f"⚠ Käytetään esimerkkidataa pelaajatilastoille: {len(dummy)} pelaajaa")
+        return dummy
 
     def _create_dummy_scorers(self, count=10):
         """Luo testidatan maalintekijöille jos haku epäonnistuu"""
@@ -192,14 +231,67 @@ class StatsProcessor:
             "Odutayo, Colin",
             "Coffey, Ashley",
             "Moreno, Jaime",
-            "Valakari, Simo",
-            "Hakanpää, Jere",
-            "Moren, Sebastian",
-            "Lod, Tim",
+            "Vikström, Rudi",
+            "Borchers, Mads",
+            "Lappalainen, Lassi",
+            "Engvall, Gustav",
             "Toivio, Toni",
         ]
         logger.warning(f"⚠ Käytetään esimerkkidataa maalintekijöille: {len(dummy[:count])} pelaajaa")
         return dummy[:count]
+
+    def save_player_stats_report(self, players, is_dummy):
+        """Tallentaa pelaajatilastot Pelaajatilastot2026.md-tiedostoon"""
+        try:
+            report_path = get_output_path("Pelaajatilastot2026.md")
+            with open(report_path, 'w', encoding='utf-8') as f:
+                f.write("# ⚽ Veikkausliiga 2026 — Pelaajatilastot\n\n")
+                f.write(f"*Päivitetty: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*\n\n")
+                if is_dummy:
+                    f.write("*⚠️ Lähde: Esimerkkidata — luvut eivät ole oikeita*\n\n")
+                else:
+                    f.write(f"*Lähde: [{PLAYERS_URL}]({PLAYERS_URL})*\n\n")
+                f.write("---\n\n")
+
+                f.write("## Maalintekijätilasto\n\n")
+                f.write("| # | Pelaaja | Joukkue | Ot | M | S | K | P |\n")
+                f.write("|:-:|---------|---------|:--:|:-:|:-:|:-:|:-:|\n")
+                for p in players:
+                    logo_path = TEAM_LOGOS.get(p['joukkue'], "")
+                    if logo_path:
+                        team_cell = f'<img src="{logo_path}" width="16" height="16"> {p["joukkue"]}'
+                    else:
+                        team_cell = p['joukkue']
+                    f.write(
+                        f"| {p['sijoitus']} | {p['pelaaja']} | {team_cell} "
+                        f"| {p['ottelut']} | **{p['maalit']}** | {p['syotot']} "
+                        f"| {p['keltaiset']} | {p['punaiset']} |\n"
+                    )
+
+                f.write("\n> **Ot** = Ottelut · **M** = Maalit · **S** = Syötöt · "
+                        "**K** = Keltaiset kortit · **P** = Punaiset kortit\n\n")
+
+                # Seuratut pelaajat -osio
+                watched = [p for p in players if any(
+                    w.split(',')[0].strip().lower() in p['pelaaja'].lower()
+                    for w in WATCHED_PLAYERS
+                )]
+                if watched:
+                    f.write("## Seuratut pelaajat\n\n")
+                    f.write("| Pelaaja | Joukkue | Ot | M | S |\n")
+                    f.write("|---------|---------|:--:|:-:|:-:|\n")
+                    for p in watched:
+                        f.write(
+                            f"| {p['pelaaja']} | {p['joukkue']} "
+                            f"| {p['ottelut']} | {p['maalit']} | {p['syotot']} |\n"
+                        )
+                    f.write("\n")
+
+            logger.info(f"✓ Pelaajatilastot tallennettu: {report_path}")
+            return True
+        except Exception as e:
+            logger.error(f"✗ Virhe pelaajatilastojen tallenuksessa: {e}")
+            return False
 
     def save_standings_report(self, standings):
         """Tallentaa sarjataulukon raporttiin"""
@@ -247,16 +339,26 @@ class StatsProcessor:
         logger.info("\n" + "="*60)
         logger.info("TILASTOTIETOJEN HAKU - Veikkausliiga 2026")
         logger.info("="*60)
-        
+
+        success = True
+
         standings = self.fetch_standings()
-        
         if standings:
-            logger.info(f"✓ Prosessi valmis! {len(standings)} joukkuetta analysoitu")
+            logger.info(f"✓ Sarjataulukko: {len(standings)} joukkuetta analysoitu")
             self.save_standings_report(standings)
-            return True
         else:
-            logger.error("✗ Tietojen noutaminen epäonnistui")
-            return False
+            logger.error("✗ Sarjataulukon noutaminen epäonnistui")
+            success = False
+
+        players, is_dummy = self.fetch_full_player_stats()
+        if players:
+            logger.info(f"✓ Pelaajatilastot: {len(players)} pelaajaa analysoitu")
+            self.save_player_stats_report(players, is_dummy)
+        else:
+            logger.error("✗ Pelaajatilastojen noutaminen epäonnistui")
+            success = False
+
+        return success
 
 if __name__ == "__main__":
     processor = StatsProcessor()
