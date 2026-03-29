@@ -1,6 +1,6 @@
 # Veikkausliiga 2026 - Ottelut
 
-*Päivitetty: 2026-03-29 11:20:44*
+*Päivitetty: 2026-03-29 11:22:25*
 
 *Lähde: https://www.veikkausliiga.com/tilastot/2026/veikkausliiga/ottelut/?group=1*
 
