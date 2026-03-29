@@ -248,7 +248,7 @@ class StatsProcessor:
                 f.write("# ⚽ Veikkausliiga 2026 — Pelaajatilastot\n\n")
                 f.write(f"*Päivitetty: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*\n\n")
                 if is_dummy:
-                    f.write("*⚠️ Lähde: Esimerkkidata — luvut eivät ole oikeita*\n\n")
+                    f.write("*⚠️ Kausi alkaa 4.4.2026 — ensimmäiset tilastot saatavilla kauden alettua*\n\n")
                 else:
                     f.write(f"*Lähde: [{PLAYERS_URL}]({PLAYERS_URL})*\n\n")
                 f.write("---\n\n")
@@ -303,7 +303,7 @@ class StatsProcessor:
                 f.write("# 🏆 Veikkausliiga 2026 — Sarjataulukko\n\n")
                 f.write(f"*Päivitetty: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*\n\n")
                 if is_dummy:
-                    f.write("*⚠️ Lähde: Esimerkkidata — luvut eivät ole oikeita*\n\n")
+                    f.write("*⚠️ Kausi alkaa 4.4.2026 — ensimmäiset tilastot saatavilla kauden alettua*\n\n")
                 else:
                     f.write(f"*Lähde: [{STANDINGS_URL}]({STANDINGS_URL})*\n\n")
                 f.write("---\n\n")
