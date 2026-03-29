@@ -20,30 +20,30 @@ logger = logging.getLogger(__name__)
 # Historiallinen data — Veikkausliiga-mestarit
 # ---------------------------------------------------------------------------
 VEIKKAUSLIIGA_CHAMPIONS = [
-    (2025, "HJK"),
-    (2024, "HJK"),
+    (2025, "KuPS"),
+    (2024, "KuPS"),
     (2023, "HJK"),
     (2022, "HJK"),
     (2021, "HJK"),
     (2020, "HJK"),
-    (2019, "HJK"),
+    (2019, "KuPS"),
     (2018, "HJK"),
-    (2017, "SJK"),
-    (2016, "SJK"),
+    (2017, "HJK"),
+    (2016, "IFK Mariehamn"),
     (2015, "SJK"),
     (2014, "HJK"),
     (2013, "HJK"),
     (2012, "HJK"),
-    (2011, "FC Inter"),
+    (2011, "HJK"),
     (2010, "HJK"),
     (2009, "HJK"),
-    (2008, "HJK"),
+    (2008, "FC Inter"),
     (2007, "Tampere United"),
     (2006, "Tampere United"),
-    (2005, "Tampere United"),
+    (2005, "MyPa"),
     (2004, "Haka"),
     (2003, "HJK"),
-    (2002, "Haka"),
+    (2002, "HJK"),
     (2001, "Tampere United"),
     (2000, "Haka"),
     (1999, "Haka"),
@@ -67,22 +67,22 @@ def count_championships(champions):
 
 # Kaikkien aikojen parhaat maalintekijät Veikkausliigassa (historialliset tiedot)
 ALL_TIME_TOP_SCORERS = [
+    {"pelaaja": "Valeri Popovitš",  "maalit": 166, "joukkueet": "Haka, HJK ym."},
     {"pelaaja": "Mika Aaltonen",    "maalit": 152, "joukkueet": "HJK, Haka ym."},
-    {"pelaaja": "Jari Litmanen",    "maalit": 138, "joukkueet": "HJK, Reipas ym."},
     {"pelaaja": "Mixu Paatelainen", "maalit": 102, "joukkueet": "Haka, TPS ym."},
     {"pelaaja": "Jonatan Johansson","maalit":  90, "joukkueet": "TPS, Jazz ym."},
-    {"pelaaja": "Shefki Kuqi",      "maalit":  85, "joukkueet": "Jazz, FC Jokerit ym."},
+    {"pelaaja": "Shefki Kuqi",      "maalit":  85, "joukkueet": "Mikkelin Palloilijat, HJK, FC Jokerit ym."},
     {"pelaaja": "Toni Lehtinen",    "maalit":  84, "joukkueet": "Tampere United ym."},
     {"pelaaja": "Aki Hyryläinen",   "maalit":  80, "joukkueet": "Haka ym."},
-    {"pelaaja": "Valeri Popovitš",  "maalit":  76, "joukkueet": "HJK ym."},
-    {"pelaaja": "Pasi Rautiainen",  "maalit":  74, "joukkueet": "VPS ym."},
+    {"pelaaja": "Pasi Rautiainen",  "maalit":  74, "joukkueet": "HJK ym."},
     {"pelaaja": "Sami Ristilä",     "maalit":  71, "joukkueet": "Haka, Tampere United ym."},
+    {"pelaaja": "Jari Litmanen",    "maalit":  51, "joukkueet": "Reipas, HJK, MyPa, FC Lahti ym."},
 ]
 
 # Ennätyksiä
 RECORDS = [
-    {"kuvaus": "Eniten mestaruuksia (1990–2025)",  "arvo": "HJK (18 mestaruutta 1990–2025, yli 30 kaikkiaan)"},
-    {"kuvaus": "Eniten maaleja kaudella",            "arvo": "Mika Aaltonen — 28 maalia (1994)"},
+    {"kuvaus": "Eniten mestaruuksia (1990–2025)",  "arvo": "HJK (17 mestaruutta 1990–2025, yli 30 kaikkiaan)"},
+    {"kuvaus": "Eniten maaleja kaudella",            "arvo": "Valeri Popovitš / Kimmo Tarkkio — 23 maalia (1999)"},
     {"kuvaus": "Korkein voitto",                     "arvo": "HJK 12–1 Atlantis (1966)"},
     {"kuvaus": "Sarjan ennätysyleisö",               "arvo": "Olympiastadion, Helsinki"},
 ]
