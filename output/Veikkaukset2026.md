@@ -1,6 +1,6 @@
 # 🏆 Veikkausliiga 2026 — Veikkaukset
 
-*Päivitetty: 2026-03-29 12:46:58*
+*Päivitetty: 2026-04-01 10:22:51*
 
 > ⚠️ **Huom:** Tilastot perustuvat esimerkkidataan — pisteet ovat simuloituja.
 
@@ -8,13 +8,13 @@
 
 ## 🥇 Pistetaulukko
 
+*Veikkauksia jätetty: 1/3*
+
 | Sija | Osallistuja | Sarjataulukko | Maalintekijät | Yhteensä |
 |:----:|-------------|:-------------:|:-------------:|:--------:|
-| 🥇 | **Veikkaaja 1** | 4/36 █░░░░░░░░░ | 25/50 █████░░░░░ | 🎯 **29** |
-| 🥈 | **dude island** | 2/36 █░░░░░░░░░ | 25/50 █████░░░░░ | 🎯 **27** |
-| 🥉 | **Dude Island Veikkaus** | 5/36 █░░░░░░░░░ | 10/50 ██░░░░░░░░ | 🎯 **15** |
-| 4. | **Veikkaaja 3** | 2/36 █░░░░░░░░░ | 10/50 ██░░░░░░░░ | 🎯 **12** |
-| 5. | **Veikkaaja 2** | 1/36 ░░░░░░░░░░ | 10/50 ██░░░░░░░░ | 🎯 **11** |
+| 🥇 | **dude island** | 2/36 █░░░░░░░░░ | 25/50 █████░░░░░ | 🎯 **27** |
+| — | Veikkaaja 2 | *(ei veikkausta)* | *(ei veikkausta)* | — |
+| — | Veikkaaja 3 | *(ei veikkausta)* | *(ei veikkausta)* | — |
 
 <details>
 <summary>📋 Pisteytysjärjestelmä</summary>
@@ -76,37 +76,6 @@
 
 ## 📝 Yksityiskohtaiset pisteet
 
-### Veikkaaja 1 — 29 pistettä
-
-**Sarjataulukko:** 4/36 p (11%) ██░░░░░░░░░░░░░
-
-| Veikkaama sija | Joukkue | Toteutunut sija | Ero | Pisteet |
-|:--------------:|---------|:---------------:|:---:|:-------:|
-| 1 | <img src="../logos/hjk.svg" width="18" height="18"> HJK | 5 | ❌ 4 | 0 |
-| 2 | <img src="../logos/ilves.svg" width="18" height="18"> Ilves | 8 | ❌ 6 | 0 |
-| 3 | <img src="../logos/kups.svg" width="18" height="18"> KuPS | 9 | ❌ 6 | 0 |
-| 4 | <img src="../logos/inter.svg" width="18" height="18"> FC Inter | 2 | 🟡 2 | 1 |
-| 5 | <img src="../logos/sjk.svg" width="18" height="18"> SJK | 10 | ❌ 5 | 0 |
-| 6 | <img src="../logos/vps.svg" width="18" height="18"> VPS | 12 | ❌ 6 | 0 |
-| 7 | <img src="../logos/jaro.svg" width="18" height="18"> FF Jaro | 4 | ❌ 3 | 0 |
-| 8 | <img src="../logos/lahti.svg" width="18" height="18"> FC Lahti | 3 | ❌ 5 | 0 |
-| 9 | <img src="../logos/mariehamn.svg" width="18" height="18"> IFK Mariehamn | 7 | 🟡 2 | 1 |
-| 10 | <img src="../logos/gnistan.svg" width="18" height="18"> IF Gnistan | 6 | ❌ 4 | 0 |
-| 11 | <img src="../logos/oulu.svg" width="18" height="18"> AC Oulu | 1 | ❌ 10 | 0 |
-| 12 | <img src="../logos/tps.svg" width="18" height="18"> TPS | 11 | 🟡 1 | 2 |
-
-**Maalintekijät:** 25/50 p (50%) ████████░░░░░░░
-
-| Veikkaama sija | Pelaaja | Toteutunut sija | Pisteet | Tila |
-|:--------------:|---------|:---------------:|:-------:|------|
-| 1 | Plange, Luke | 1 | 5 | ✅ Täsmäosuma! (sija 1) |
-| 2 | Karjalainen, Rasmus | 2 | 5 | ✅ Täsmäosuma! (sija 2) |
-| 3 | Odutayo, Colin | 3 | 5 | ✅ Täsmäosuma! (sija 3) |
-| 4 | Coffey, Ashley | 4 | 5 | ✅ Täsmäosuma! (sija 4) |
-| 5 | Moreno, Jaime | 5 | 5 | ✅ Täsmäosuma! (sija 5) |
-
----
-
 ### dude island — 27 pistettä
 
 **Sarjataulukko:** 2/36 p (6%) █░░░░░░░░░░░░░░
@@ -138,96 +107,15 @@
 
 ---
 
-### Dude Island Veikkaus — 15 pistettä
+### Veikkaaja 2 — *(veikkaus ei vielä jätetty)*
 
-**Sarjataulukko:** 5/36 p (14%) ██░░░░░░░░░░░░░
-
-| Veikkaama sija | Joukkue | Toteutunut sija | Ero | Pisteet |
-|:--------------:|---------|:---------------:|:---:|:-------:|
-| 1 | <img src="../logos/hjk.svg" width="18" height="18"> HJK | 5 | ❌ 4 | 0 |
-| 2 | <img src="../logos/ilves.svg" width="18" height="18"> Ilves | 8 | ❌ 6 | 0 |
-| 3 | <img src="../logos/kups.svg" width="18" height="18"> KuPS | 9 | ❌ 6 | 0 |
-| 4 | <img src="../logos/inter.svg" width="18" height="18"> FC Inter | 2 | 🟡 2 | 1 |
-| 5 | <img src="../logos/oulu.svg" width="18" height="18"> AC Oulu | 1 | ❌ 4 | 0 |
-| 6 | <img src="../logos/sjk.svg" width="18" height="18"> SJK | 10 | ❌ 4 | 0 |
-| 7 | <img src="../logos/gnistan.svg" width="18" height="18"> IF Gnistan | 6 | 🟡 1 | 2 |
-| 8 | <img src="../logos/vps.svg" width="18" height="18"> VPS | 12 | ❌ 4 | 0 |
-| 9 | <img src="../logos/lahti.svg" width="18" height="18"> FC Lahti | 3 | ❌ 6 | 0 |
-| 10 | <img src="../logos/mariehamn.svg" width="18" height="18"> IFK Mariehamn | 7 | ❌ 3 | 0 |
-| 11 | <img src="../logos/jaro.svg" width="18" height="18"> FF Jaro | 4 | ❌ 7 | 0 |
-| 12 | <img src="../logos/tps.svg" width="18" height="18"> TPS | 11 | 🟡 1 | 2 |
-
-**Maalintekijät:** 10/50 p (20%) ███░░░░░░░░░░░░
-
-| Veikkaama sija | Pelaaja | Toteutunut sija | Pisteet | Tila |
-|:--------------:|---------|:---------------:|:-------:|------|
-| 1 | Vikström, Rudi | 6 | 2 | 🔸 Top-listalla (sija 6) |
-| 2 | Moreno, Jaime | 5 | 2 | 🔸 Top-listalla (sija 5) |
-| 3 | Borchers, Mads | 7 | 2 | 🔸 Top-listalla (sija 7) |
-| 4 | Lappalainen, Lassi | 8 | 2 | 🔸 Top-listalla (sija 8) |
-| 5 | Engvall, Gustav | 9 | 2 | 🔸 Top-listalla (sija 9) |
+*Tämä osallistuja ei ole vielä jättänyt veikkaustaan.*
 
 ---
 
-### Veikkaaja 3 — 12 pistettä
+### Veikkaaja 3 — *(veikkaus ei vielä jätetty)*
 
-**Sarjataulukko:** 2/36 p (6%) █░░░░░░░░░░░░░░
-
-| Veikkaama sija | Joukkue | Toteutunut sija | Ero | Pisteet |
-|:--------------:|---------|:---------------:|:---:|:-------:|
-| 1 | <img src="../logos/ilves.svg" width="18" height="18"> Ilves | 8 | ❌ 7 | 0 |
-| 2 | <img src="../logos/hjk.svg" width="18" height="18"> HJK | 5 | ❌ 3 | 0 |
-| 3 | <img src="../logos/sjk.svg" width="18" height="18"> SJK | 10 | ❌ 7 | 0 |
-| 4 | <img src="../logos/kups.svg" width="18" height="18"> KuPS | 9 | ❌ 5 | 0 |
-| 5 | <img src="../logos/inter.svg" width="18" height="18"> FC Inter | 2 | ❌ 3 | 0 |
-| 6 | <img src="../logos/vps.svg" width="18" height="18"> VPS | 12 | ❌ 6 | 0 |
-| 7 | <img src="../logos/lahti.svg" width="18" height="18"> FC Lahti | 3 | ❌ 4 | 0 |
-| 8 | <img src="../logos/jaro.svg" width="18" height="18"> FF Jaro | 4 | ❌ 4 | 0 |
-| 9 | <img src="../logos/oulu.svg" width="18" height="18"> AC Oulu | 1 | ❌ 8 | 0 |
-| 10 | <img src="../logos/tps.svg" width="18" height="18"> TPS | 11 | 🟡 1 | 2 |
-| 11 | <img src="../logos/gnistan.svg" width="18" height="18"> IF Gnistan | 6 | ❌ 5 | 0 |
-| 12 | <img src="../logos/mariehamn.svg" width="18" height="18"> IFK Mariehamn | 7 | ❌ 5 | 0 |
-
-**Maalintekijät:** 10/50 p (20%) ███░░░░░░░░░░░░
-
-| Veikkaama sija | Pelaaja | Toteutunut sija | Pisteet | Tila |
-|:--------------:|---------|:---------------:|:-------:|------|
-| 1 | Odutayo, Colin | 3 | 2 | 🔸 Top-listalla (sija 3) |
-| 2 | Plange, Luke | 1 | 2 | 🔸 Top-listalla (sija 1) |
-| 3 | Moreno, Jaime | 5 | 2 | 🔸 Top-listalla (sija 5) |
-| 4 | Karjalainen, Rasmus | 2 | 2 | 🔸 Top-listalla (sija 2) |
-| 5 | Coffey, Ashley | 4 | 2 | 🔸 Top-listalla (sija 4) |
-
----
-
-### Veikkaaja 2 — 11 pistettä
-
-**Sarjataulukko:** 1/36 p (3%) ░░░░░░░░░░░░░░░
-
-| Veikkaama sija | Joukkue | Toteutunut sija | Ero | Pisteet |
-|:--------------:|---------|:---------------:|:---:|:-------:|
-| 1 | <img src="../logos/kups.svg" width="18" height="18"> KuPS | 9 | ❌ 8 | 0 |
-| 2 | <img src="../logos/hjk.svg" width="18" height="18"> HJK | 5 | ❌ 3 | 0 |
-| 3 | <img src="../logos/ilves.svg" width="18" height="18"> Ilves | 8 | ❌ 5 | 0 |
-| 4 | <img src="../logos/sjk.svg" width="18" height="18"> SJK | 10 | ❌ 6 | 0 |
-| 5 | <img src="../logos/inter.svg" width="18" height="18"> FC Inter | 2 | ❌ 3 | 0 |
-| 6 | <img src="../logos/jaro.svg" width="18" height="18"> FF Jaro | 4 | 🟡 2 | 1 |
-| 7 | <img src="../logos/vps.svg" width="18" height="18"> VPS | 12 | ❌ 5 | 0 |
-| 8 | <img src="../logos/tps.svg" width="18" height="18"> TPS | 11 | ❌ 3 | 0 |
-| 9 | <img src="../logos/oulu.svg" width="18" height="18"> AC Oulu | 1 | ❌ 8 | 0 |
-| 10 | <img src="../logos/lahti.svg" width="18" height="18"> FC Lahti | 3 | ❌ 7 | 0 |
-| 11 | <img src="../logos/gnistan.svg" width="18" height="18"> IF Gnistan | 6 | ❌ 5 | 0 |
-| 12 | <img src="../logos/mariehamn.svg" width="18" height="18"> IFK Mariehamn | 7 | ❌ 5 | 0 |
-
-**Maalintekijät:** 10/50 p (20%) ███░░░░░░░░░░░░
-
-| Veikkaama sija | Pelaaja | Toteutunut sija | Pisteet | Tila |
-|:--------------:|---------|:---------------:|:-------:|------|
-| 1 | Karjalainen, Rasmus | 2 | 2 | 🔸 Top-listalla (sija 2) |
-| 2 | Odutayo, Colin | 3 | 2 | 🔸 Top-listalla (sija 3) |
-| 3 | Plange, Luke | 1 | 2 | 🔸 Top-listalla (sija 1) |
-| 4 | Moreno, Jaime | 5 | 2 | 🔸 Top-listalla (sija 5) |
-| 5 | Coffey, Ashley | 4 | 2 | 🔸 Top-listalla (sija 4) |
+*Tämä osallistuja ei ole vielä jättänyt veikkaustaan.*
 
 ---
 

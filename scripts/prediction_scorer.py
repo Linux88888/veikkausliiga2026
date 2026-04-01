@@ -173,7 +173,10 @@ class PredictionScorer:
                 }
             )
 
-        results.sort(key=lambda x: x["total_points"], reverse=True)
+        # Osallistujat joilla on veikkaus ensin, tyhjät veikkaukset loppuun
+        results.sort(
+            key=lambda x: (not (x["standings_details"] or x["scorer_details"]), -x["total_points"])
+        )
         return results
 
     # ------------------------------------------------------------------
@@ -219,19 +222,32 @@ class PredictionScorer:
                 f.write("---\n\n")
 
                 # ---- Pistetaulukko (leaderboard) ----
+                filled_count = sum(1 for p in PARTICIPANTS if p.get("standings_prediction", []))
                 f.write("## 🥇 Pistetaulukko\n\n")
+                f.write(f"*Veikkauksia jätetty: {filled_count}/{len(PARTICIPANTS)}*\n\n")
                 f.write("| Sija | Osallistuja | Sarjataulukko | Maalintekijät | Yhteensä |\n")
                 f.write("|:----:|-------------|:-------------:|:-------------:|:--------:|\n")
-                for rank, r in enumerate(results, 1):
-                    medal = {1: "🥇", 2: "🥈", 3: "🥉"}.get(rank, f"{rank}.")
-                    s_bar = pct_bar(r["standings_points"], max_standings)
-                    g_bar = pct_bar(r["scorer_points"], max_scorers)
-                    f.write(
-                        f"| {medal} | **{r['name']}** "
-                        f"| {r['standings_points']}/{max_standings} {s_bar} "
-                        f"| {r['scorer_points']}/{max_scorers} {g_bar} "
-                        f"| 🎯 **{r['total_points']}** |\n"
-                    )
+                filled_rank = 0
+                for r in results:
+                    is_empty = not r["standings_details"] and not r["scorer_details"]
+                    if is_empty:
+                        f.write(
+                            f"| — | {r['name']} "
+                            f"| *(ei veikkausta)* "
+                            f"| *(ei veikkausta)* "
+                            f"| — |\n"
+                        )
+                    else:
+                        filled_rank += 1
+                        medal = {1: "🥇", 2: "🥈", 3: "🥉"}.get(filled_rank, f"{filled_rank}.")
+                        s_bar = pct_bar(r["standings_points"], max_standings)
+                        g_bar = pct_bar(r["scorer_points"], max_scorers)
+                        f.write(
+                            f"| {medal} | **{r['name']}** "
+                            f"| {r['standings_points']}/{max_standings} {s_bar} "
+                            f"| {r['scorer_points']}/{max_scorers} {g_bar} "
+                            f"| 🎯 **{r['total_points']}** |\n"
+                        )
                 f.write("\n")
 
                 # ---- Pisteytysjärjestelmä ----
@@ -277,6 +293,15 @@ class PredictionScorer:
                 f.write("## 📝 Yksityiskohtaiset pisteet\n\n")
 
                 for r in results:
+                    has_standings = bool(r["standings_details"])
+                    has_scorers = bool(r["scorer_details"])
+
+                    if not has_standings and not has_scorers:
+                        f.write(f"### {r['name']} — *(veikkaus ei vielä jätetty)*\n\n")
+                        f.write("*Tämä osallistuja ei ole vielä jättänyt veikkaustaan.*\n\n")
+                        f.write("---\n\n")
+                        continue
+
                     f.write(f"### {r['name']} — {r['total_points']} pistettä\n\n")
 
                     # Sarjataulukko-ennuste
@@ -285,25 +310,26 @@ class PredictionScorer:
                         f"**Sarjataulukko:** {r['standings_points']}/{max_standings} p "
                         f"({s_pct}%) {pct_bar(r['standings_points'], max_standings, 15)}\n\n"
                     )
-                    f.write("| Veikkaama sija | Joukkue | Toteutunut sija | Ero | Pisteet |\n")
-                    f.write("|:--------------:|---------|:---------------:|:---:|:-------:|\n")
-                    for d in r["standings_details"]:
-                        if d["ero"] is None:
-                            diff_icon = "❌"
-                            ero_display = "-"
-                        elif d["ero"] == 0:
-                            diff_icon = "✅"
-                            ero_display = d["ero"]
-                        elif d["ero"] <= 2:
-                            diff_icon = "🟡"
-                            ero_display = d["ero"]
-                        else:
-                            diff_icon = "❌"
-                            ero_display = d["ero"]
-                        f.write(
-                            f"| {d['veikkausi']} | {team_cell(d['joukkue'])} "
-                            f"| {d['toteutunut']} | {diff_icon} {ero_display} | {d['pisteet']} |\n"
-                        )
+                    if has_standings:
+                        f.write("| Veikkaama sija | Joukkue | Toteutunut sija | Ero | Pisteet |\n")
+                        f.write("|:--------------:|---------|:---------------:|:---:|:-------:|\n")
+                        for d in r["standings_details"]:
+                            if d["ero"] is None:
+                                diff_icon = "❌"
+                                ero_display = "-"
+                            elif d["ero"] == 0:
+                                diff_icon = "✅"
+                                ero_display = d["ero"]
+                            elif d["ero"] <= 2:
+                                diff_icon = "🟡"
+                                ero_display = d["ero"]
+                            else:
+                                diff_icon = "❌"
+                                ero_display = d["ero"]
+                            f.write(
+                                f"| {d['veikkausi']} | {team_cell(d['joukkue'])} "
+                                f"| {d['toteutunut']} | {diff_icon} {ero_display} | {d['pisteet']} |\n"
+                            )
                     f.write("\n")
 
                     # Maalintekijä-ennuste
@@ -312,13 +338,14 @@ class PredictionScorer:
                         f"**Maalintekijät:** {r['scorer_points']}/{max_scorers} p "
                         f"({g_pct}%) {pct_bar(r['scorer_points'], max_scorers, 15)}\n\n"
                     )
-                    f.write("| Veikkaama sija | Pelaaja | Toteutunut sija | Pisteet | Tila |\n")
-                    f.write("|:--------------:|---------|:---------------:|:-------:|------|\n")
-                    for d in r["scorer_details"]:
-                        f.write(
-                            f"| {d['veikkausi']} | {d['pelaaja']} "
-                            f"| {d['toteutunut']} | {d['pisteet']} | {d['tila']} |\n"
-                        )
+                    if has_scorers:
+                        f.write("| Veikkaama sija | Pelaaja | Toteutunut sija | Pisteet | Tila |\n")
+                        f.write("|:--------------:|---------|:---------------:|:-------:|------|\n")
+                        for d in r["scorer_details"]:
+                            f.write(
+                                f"| {d['veikkausi']} | {d['pelaaja']} "
+                                f"| {d['toteutunut']} | {d['pisteet']} | {d['tila']} |\n"
+                            )
                     f.write("\n---\n\n")
 
                 # ---- Lisää oma veikkaus -ohje ----

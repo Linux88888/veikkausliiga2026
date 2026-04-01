@@ -153,51 +153,6 @@ TOP_SCORERS_COUNT = 10
 # ---------------------------------------------------------------------------
 PARTICIPANTS = [
     {
-        "name": "Veikkaaja 1",
-        "standings_prediction": [
-            "HJK", "Ilves", "KuPS", "FC Inter", "SJK",
-            "VPS", "FF Jaro", "FC Lahti", "IFK Mariehamn",
-            "IF Gnistan", "AC Oulu", "TPS",
-        ],
-        "scorers_prediction": [
-            "Plange, Luke",
-            "Karjalainen, Rasmus",
-            "Odutayo, Colin",
-            "Coffey, Ashley",
-            "Moreno, Jaime",
-        ],
-    },
-    {
-        "name": "Veikkaaja 2",
-        "standings_prediction": [
-            "KuPS", "HJK", "Ilves", "SJK", "FC Inter",
-            "FF Jaro", "VPS", "TPS", "AC Oulu",
-            "FC Lahti", "IF Gnistan", "IFK Mariehamn",
-        ],
-        "scorers_prediction": [
-            "Karjalainen, Rasmus",
-            "Odutayo, Colin",
-            "Plange, Luke",
-            "Moreno, Jaime",
-            "Coffey, Ashley",
-        ],
-    },
-    {
-        "name": "Veikkaaja 3",
-        "standings_prediction": [
-            "Ilves", "HJK", "SJK", "KuPS", "FC Inter",
-            "VPS", "FC Lahti", "FF Jaro", "AC Oulu",
-            "TPS", "IF Gnistan", "IFK Mariehamn",
-        ],
-        "scorers_prediction": [
-            "Odutayo, Colin",
-            "Plange, Luke",
-            "Moreno, Jaime",
-            "Karjalainen, Rasmus",
-            "Coffey, Ashley",
-        ],
-    },
-    {
         "name": "dude island",
         "standings_prediction": [
             "HJK",           # 1. sija
@@ -221,55 +176,18 @@ PARTICIPANTS = [
             "Moreno, Jaime",        # 5. maalintekijä
         ],
     },
+    # ✏️  Veikkaaja 2: lisää veikkauksesi alle
     {
-        "name": "Dude Island Veikkaus",
-        "standings_prediction": [
-            "HJK",           # 1. sija (44 p)
-            "Ilves",         # 2. sija (40 p)
-            "KuPS",          # 3. sija (40 p)
-            "FC Inter",      # 4. sija (39 p)
-            "AC Oulu",       # 5. sija (31 p)
-            "SJK",           # 6. sija (31 p)
-            "IF Gnistan",    # 7. sija (30 p)
-            "VPS",           # 8. sija (27 p)
-            "FC Lahti",      # 9. sija (26 p)
-            "IFK Mariehamn", # 10. sija (24 p)
-            "FF Jaro",       # 11. sija (18 p)
-            "TPS",           # 12. sija (16 p)
-        ],
-        "scorers_prediction": [
-            "Vikström, Rudi",       # 1. maalintekijä
-            "Moreno, Jaime",        # 2. maalintekijä
-            "Borchers, Mads",       # 3. maalintekijä
-            "Lappalainen, Lassi",   # 4. maalintekijä
-            "Engvall, Gustav",      # 5. maalintekijä
-        ],
+        "name": "Veikkaaja 2",
+        "standings_prediction": [],
+        "scorers_prediction": [],
     },
-    # ✏️  LISÄÄ OMA VEIKKAUKSESI ALLE — kopioi tämä malli:
-    # {
-    #     "name": "Sinun Nimi",
-    #     "standings_prediction": [
-    #         "HJK",           # 1. sija
-    #         "KuPS",          # 2. sija
-    #         "FC Inter",      # 3. sija
-    #         "SJK",           # 4. sija
-    #         "Ilves",         # 5. sija
-    #         "FC Lahti",      # 6. sija
-    #         "FF Jaro",       # 7. sija
-    #         "VPS",           # 8. sija
-    #         "IFK Mariehamn", # 9. sija
-    #         "IF Gnistan",    # 10. sija
-    #         "AC Oulu",       # 11. sija
-    #         "TPS",           # 12. sija
-    #     ],
-    #     "scorers_prediction": [
-    #         "Plange, Luke",         # 1. maalintekijä
-    #         "Karjalainen, Rasmus",  # 2. maalintekijä
-    #         "Odutayo, Colin",       # 3. maalintekijä
-    #         "Coffey, Ashley",       # 4. maalintekijä
-    #         "Moreno, Jaime",        # 5. maalintekijä
-    #     ],
-    # },
+    # ✏️  Veikkaaja 3: lisää veikkauksesi alle
+    {
+        "name": "Veikkaaja 3",
+        "standings_prediction": [],
+        "scorers_prediction": [],
+    },
 ]
 
 def get_output_path(filename):
