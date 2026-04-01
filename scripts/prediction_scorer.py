@@ -34,19 +34,23 @@ try:
         TEAM_LOGOS,
         get_output_path,
     )
-    from fetch_stats import StatsProcessor
 except ImportError as e:
-    print(f"Varoitus: {e}")
+    print(f"Varoitus (config): {e}")
     PARTICIPANTS = []
     STANDINGS_SCORING = {0: 3, 1: 2, 2: 1}
     SCORER_SCORING = {"exact": 5, "in_list": 2}
     TOP_SCORERS_COUNT = 10
     TEAMS_2026 = []
     TEAM_LOGOS = {}
-    StatsProcessor = None
 
     def get_output_path(filename):
         return Path("output") / filename
+
+try:
+    from fetch_stats import StatsProcessor
+except ImportError as e:
+    print(f"Varoitus (fetch_stats): {e}")
+    StatsProcessor = None
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
