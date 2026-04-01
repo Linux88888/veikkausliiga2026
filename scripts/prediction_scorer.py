@@ -222,7 +222,7 @@ class PredictionScorer:
                 f.write("---\n\n")
 
                 # ---- Pistetaulukko (leaderboard) ----
-                filled_count = sum(1 for p in PARTICIPANTS if p.get("standings_prediction"))
+                filled_count = sum(1 for p in PARTICIPANTS if p.get("standings_prediction", []))
                 f.write("## 🥇 Pistetaulukko\n\n")
                 f.write(f"*Veikkauksia jätetty: {filled_count}/{len(PARTICIPANTS)}*\n\n")
                 f.write("| Sija | Osallistuja | Sarjataulukko | Maalintekijät | Yhteensä |\n")
