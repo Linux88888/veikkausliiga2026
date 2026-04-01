@@ -1,6 +1,6 @@
 # Veikkausliiga 2026 - Otteluennusteet
 
-*Analysoitu: 2026-04-01 15:16:53*
+*Analysoitu: 2026-04-01 16:18:11*
 
 *Ennusteet perustuvat joukkueiden historialliseen menestykseen ja vahvuusluokituksiin — eivät pelaaja- tai loukkaantumistietoihin.*
 
@@ -165,6 +165,12 @@
 
 | Koti | Vieras | Koti-% | Tasapeli-% | Vieras-% | Yli 2.5 % |
 |------|--------|:------:|:----------:|:--------:|:---------:|
+| HJK ⭐ | FC Inter | 71% | 24% | 5% | 66% |
+
+### To 18.6.2026
+
+| Koti | Vieras | Koti-% | Tasapeli-% | Vieras-% | Yli 2.5 % |
+|------|--------|:------:|:----------:|:--------:|:---------:|
 | AC Oulu ⭐ | IFK Mariehamn | 54% | 28% | 18% | 58% |
 
 ### Ti 23.6.2026
@@ -306,4 +312,4 @@
 | AC Oulu | SJK ⭐ | 34% | 24% | 42% | 61% |
 
 ---
-*Yhteensä 47 ennustetta*
+*Yhteensä 48 ennustetta*

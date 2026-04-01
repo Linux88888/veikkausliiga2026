@@ -1,6 +1,6 @@
 # ⚽ Veikkausliiga 2026 — Pelaajatilastot
 
-*Päivitetty: 2026-04-01 15:16:53*
+*Päivitetty: 2026-04-01 16:18:11*
 
 *⚠️ Kausi alkaa 4.4.2026 — ensimmäiset tilastot saatavilla kauden alettua*
 
