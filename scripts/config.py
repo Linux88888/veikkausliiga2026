@@ -67,8 +67,11 @@ WATCHED_PLAYERS = [
     "Odutayo, Colin"
 ]
 
+# Kauden vuosi – päivitä tämä uudelle kaudelle
+VEIKKAUSLIIGA_YEAR = 2026
+
 # URL-osoitteet
-VEIKKAUSLIIGA_BASE_URL = "https://www.veikkausliiga.com/tilastot/2026"
+VEIKKAUSLIIGA_BASE_URL = f"https://www.veikkausliiga.com/tilastot/{VEIKKAUSLIIGA_YEAR}"
 STANDINGS_URL = f"{VEIKKAUSLIIGA_BASE_URL}/veikkausliiga/joukkueet/"
 PLAYERS_URL = f"{VEIKKAUSLIIGA_BASE_URL}/veikkausliiga/pelaajat/"
 MATCHES_URL = f"{VEIKKAUSLIIGA_BASE_URL}/veikkausliiga/ottelut/?group=1"
