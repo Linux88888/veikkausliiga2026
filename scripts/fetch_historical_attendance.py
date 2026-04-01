@@ -38,6 +38,37 @@ FIRST_SEASON = 1990
 LAST_SEASON = 2025
 TOP_N = 50
 
+# Markkinoinnilliset havainnot raportissa (muokkaa ilman koodimuutoksia)
+MARKETING_INSIGHTS = [
+    (
+        "**Huippuvuodet 1995–2006**",
+        "Sarjan suosio oli korkeimmillaan 1990-luvun puolivälissä ja 2000-luvun alussa. "
+        "Yksittäiset suurottelut (esim. HJK–MYPA 1996: 23 382 katsojaa) nostivat kauden "
+        "huippulukemat merkittävästi.",
+    ),
+    (
+        "**Lasku 2007–2014**",
+        "Sarjan keskiyleisö laski useana peräkkäisenä vuotena. "
+        "Kaupallinen kehitys ja stadionikapasiteettirajoitukset hillitsivät kasvua.",
+    ),
+    (
+        "**HIFK-nousu 2015–2019**",
+        "HIFK:n nousu liigaan toi HJK–HIFK-Helsingin derbyn, joka nosti otteluyleisöjä "
+        "merkittävästi. Tämä osoittaa, että paikallisderbyillä on suuri vaikutus katsojamääriin.",
+    ),
+    (
+        "**🦠 Korona 2020–2021**",
+        "Pandemia romahdutti yleisömäärät. Vuonna 2020 otteluita pelattiin ensin ilman yleisöä, "
+        "sitten rajatulla kapasiteetilla. Vuosi 2021 näki osittaisen palautumisen.",
+    ),
+    (
+        "**Toipuminen 2022–2025**",
+        "Yleisömäärät ovat toipuneet, mutta eivät ole vielä saavuttaneet 2015–2019-huipputasoa. "
+        "Tämä tarjoaa kasvupotentiaalia markkinoinnille: Uudet kanta-asiakaskampanjat, "
+        "stadionkehitys ja medianäkyvyyden lisääminen ovat avainasemassa.",
+    ),
+]
+
 
 class HistoricalAttendanceFetcher:
     """Hakee ja tallentaa Veikkausliigan kaikkien aikojen yleisömäärätilastot."""
@@ -231,6 +262,93 @@ class HistoricalAttendanceFetcher:
 
         return all_matches
 
+    # ------------------------------------------------------------------
+    # Analytics helpers
+    # ------------------------------------------------------------------
+
+    COVID_YEARS = {2020, 2021}
+
+    def compute_yearly_stats(self, all_matches):
+        """Laskee vuosikohtaiset yleisötilastot.
+
+        Palauttaa sanakirjan {year: stats_dict} jossa stats_dict sisältää:
+          matches, total, average, max_att, min_att, covid
+        """
+        from collections import defaultdict
+
+        year_buckets = defaultdict(list)
+        for m in all_matches:
+            year_buckets[m["year"]].append(m["attendance"])
+
+        stats = {}
+        for year in range(FIRST_SEASON, LAST_SEASON + 1):
+            attendances = year_buckets.get(year, [])
+            if not attendances:
+                continue
+            total = sum(attendances)
+            avg = total // len(attendances)
+            stats[year] = {
+                "matches": len(attendances),
+                "total": total,
+                "average": avg,
+                "max_att": max(attendances),
+                "min_att": min(attendances),
+                "covid": year in self.COVID_YEARS,
+            }
+        return stats
+
+    def compute_trends(self, yearly_stats):
+        """Laskee trendiluvut vuosikohtaisista tilastoista.
+
+        Lisää jokaiselle vuodelle yoy_change (%-muutos edellisestä vuodesta)
+        sekä palauttaa kokonaistrendikuvauksen.
+        """
+        years = sorted(yearly_stats.keys())
+        prev_avg = None
+        for year in years:
+            if prev_avg is not None and prev_avg > 0:
+                yearly_stats[year]["yoy_change"] = (
+                    (yearly_stats[year]["average"] - prev_avg) / prev_avg * 100
+                )
+            else:
+                yearly_stats[year]["yoy_change"] = None
+            prev_avg = yearly_stats[year]["average"]
+
+        # Era averages
+        pre_covid = [s for y, s in yearly_stats.items() if y < 2020]
+        covid_era = [s for y, s in yearly_stats.items() if y in self.COVID_YEARS]
+        post_covid = [s for y, s in yearly_stats.items() if y > 2021]
+
+        def era_avg(era_list):
+            if not era_list:
+                return 0
+            total = sum(s["total"] for s in era_list)
+            matches = sum(s["matches"] for s in era_list)
+            return total // matches if matches else 0
+
+        trends = {
+            "pre_covid_avg": era_avg(pre_covid),
+            "covid_avg": era_avg(covid_era),
+            "post_covid_avg": era_avg(post_covid),
+            "best_year": max(yearly_stats.items(), key=lambda x: x[1]["average"]),
+            "worst_year": min(yearly_stats.items(), key=lambda x: x[1]["average"]),
+            "best_total_year": max(yearly_stats.items(), key=lambda x: x[1]["total"]),
+        }
+
+        # Post-COVID recovery ratio vs pre-COVID
+        if trends["pre_covid_avg"] > 0:
+            trends["recovery_pct"] = (
+                trends["post_covid_avg"] / trends["pre_covid_avg"] * 100
+            )
+        else:
+            trends["recovery_pct"] = 0.0
+
+        return trends
+
+    # ------------------------------------------------------------------
+    # Report
+    # ------------------------------------------------------------------
+
     def save_top50_report(self, all_matches):
         """Tallentaa top 50 -raportin YleisöHistoria.md-tiedostoon."""
         report_path = get_output_path("YleisöHistoria.md")
@@ -240,6 +358,8 @@ class HistoricalAttendanceFetcher:
             return False
 
         top50 = sorted(all_matches, key=lambda x: x["attendance"], reverse=True)[:TOP_N]
+        yearly_stats = self.compute_yearly_stats(all_matches)
+        trends = self.compute_trends(yearly_stats)
 
         with open(report_path, "w", encoding="utf-8") as f:
             f.write("# 👥 Veikkausliiga — Top 50 kaikkien aikojen yleisömäärät\n\n")
@@ -271,15 +391,97 @@ class HistoricalAttendanceFetcher:
                 )
             f.write("\n")
 
+            # --- UUSI: Vuosikohtainen keskiarvo-taulukko ---
+            f.write("## 📈 Vuosikohtainen keskiarvokehitys\n\n")
+            f.write(
+                "| Kausi | Otteluja | Katsojia yht. | Keskiarvo | "
+                "Muutos ed. vuoteen | Huomio |\n"
+            )
+            f.write(
+                "|:-----:|---------:|--------------:|----------:|"
+                "-------------------:|--------|\n"
+            )
+            for year in range(FIRST_SEASON, LAST_SEASON + 1):
+                s = yearly_stats.get(year)
+                if not s:
+                    continue
+                yoy = s["yoy_change"]
+                if yoy is None:
+                    yoy_str = "—"
+                elif yoy >= 0:
+                    yoy_str = f"+{yoy:.1f} %"
+                else:
+                    yoy_str = f"{yoy:.1f} %"
+                note = "🦠 **Korona**" if s["covid"] else ""
+                f.write(
+                    f"| {year} | {s['matches']} | {s['total']:,} | "
+                    f"**{s['average']:,}** | {yoy_str} | {note} |\n"
+                )
+            f.write("\n")
+
+            # --- UUSI: Trendianalyysi ---
+            f.write("## 🔍 Trendianalyysi ja markkinoinnillinen näkymä\n\n")
+
+            best_yr, best_s = trends["best_year"]
+            worst_yr, worst_s = trends["worst_year"]
+            best_total_yr, best_total_s = trends["best_total_year"]
+
+            f.write("### Aikakausivertailu\n\n")
+            f.write("| Aikakausi | Vuodet | Keskiarvo/ottelu |\n")
+            f.write("|-----------|--------|------------------:|\n")
+            f.write(f"| Ennen koronaa | 1990–2019 | **{trends['pre_covid_avg']:,}** |\n")
+            f.write(f"| 🦠 Koronavuodet | 2020–2021 | **{trends['covid_avg']:,}** |\n")
+            f.write(f"| Koronan jälkeen | 2022–2025 | **{trends['post_covid_avg']:,}** |\n")
+            f.write("\n")
+
+            f.write("### Koronaromahdus ja toipuminen\n\n")
+            drop_pct = 0.0
+            if trends["pre_covid_avg"] > 0:
+                drop_pct = (
+                    (trends["covid_avg"] - trends["pre_covid_avg"])
+                    / trends["pre_covid_avg"] * 100
+                )
+            f.write(
+                f"Korona pudotti keskimääräisen otteluyleisön **{drop_pct:.1f} %** "
+                f"(ennen koronaa: {trends['pre_covid_avg']:,} → koronavuosina: "
+                f"{trends['covid_avg']:,} katsojaa/ottelu).\n\n"
+            )
+            f.write(
+                f"Toipumisaste koronan jälkeen (2022–2025) verrattuna ennen-koronaa-tasoon: "
+                f"**{trends['recovery_pct']:.1f} %**.\n\n"
+            )
+
+            f.write("### Parhaat ja heikoimmat vuodet\n\n")
+            f.write("| Tilasto | Vuosi | Arvo |\n")
+            f.write("|---------|:-----:|-----:|\n")
+            f.write(
+                f"| 🥇 Korkein keskiarvo/ottelu | {best_yr} | "
+                f"**{best_s['average']:,}** |\n"
+            )
+            f.write(
+                f"| 📉 Matalin keskiarvo/ottelu | {worst_yr} | "
+                f"**{worst_s['average']:,}** |\n"
+            )
+            f.write(
+                f"| 🏟️ Eniten katsojia yhteensä | {best_total_yr} | "
+                f"**{best_total_s['total']:,}** |\n"
+            )
+            f.write("\n")
+
+            f.write("### Markkinoinnilliset havainnot\n\n")
+            for title, body in MARKETING_INSIGHTS:
+                f.write(f"- {title}: {body}\n")
+            f.write("\n")
+
             # Yhteenveto
             total_matches = len(all_matches)
             total_attendance = sum(m["attendance"] for m in all_matches)
             avg_attendance = total_attendance // total_matches if total_matches else 0
             max_att = top50[0]["attendance"] if top50 else 0
 
-            f.write("## 📊 Yhteenveto (1990–2025)\n\n")
-            f.write(f"| Tilasto | Arvo |\n")
-            f.write(f"|---------|------|\n")
+            f.write(f"## 📊 Yhteenveto ({FIRST_SEASON}–{LAST_SEASON})\n\n")
+            f.write("| Tilasto | Arvo |\n")
+            f.write("|---------|------|\n")
             f.write(f"| Otteluja yhteensä | **{total_matches:,}** |\n")
             f.write(f"| Katsojia yhteensä | **{total_attendance:,}** |\n")
             f.write(f"| Keskiarvo per ottelu | **{avg_attendance:,}** |\n")
