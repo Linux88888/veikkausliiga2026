@@ -65,7 +65,7 @@ def main():
     success = True
 
     try:
-        logger.info("\n[1/6] Haetaan tilastotiedot (Tilastot2026.md ja Pelaajatilastot2026.md)...")
+        logger.info("\n[1/7] Haetaan tilastotiedot (Tilastot2026.md ja Pelaajatilastot2026.md)...")
         if StatsProcessor:
             processor = StatsProcessor()
             if not processor.run():
@@ -79,7 +79,7 @@ def main():
         success = False
 
     try:
-        logger.info("\n[2/6] Lasketaan otteluennusteet (Ennusteet2026.md)...")
+        logger.info("\n[2/7] Lasketaan otteluennusteet (Ennusteet2026.md)...")
         if MatchPredictor:
             predictor = MatchPredictor()
             if not predictor.predict():
@@ -93,7 +93,7 @@ def main():
         success = False
 
     try:
-        logger.info("\n[3/6] Analysoidaan yleisömäärät (Yleiso2026.md)...")
+        logger.info("\n[3/7] Analysoidaan yleisömäärät (Yleiso2026.md)...")
         if AttendanceAnalyzer:
             analyzer = AttendanceAnalyzer()
             if not analyzer.analyze():
@@ -107,7 +107,7 @@ def main():
         success = False
 
     try:
-        logger.info("\n[4/6] Haetaan kaikkien aikojen tilastot (KaikkienAikojenTilastot.md)...")
+        logger.info("\n[4/7] Haetaan kaikkien aikojen tilastot (KaikkienAikojenTilastot.md)...")
         if HistoricalStatsProcessor:
             hist = HistoricalStatsProcessor()
             if not hist.run():
