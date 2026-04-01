@@ -228,6 +228,7 @@ class MatchFetcher:
             report_path = get_output_path("Ottelut.md")
             played = [m for m in matches if m['tulos'] and m['tulos'] != '-']
             upcoming = [m for m in matches if not m['tulos'] or m['tulos'] == '-']
+            total = len(matches)
 
             with open(report_path, 'w', encoding='utf-8') as f:
                 f.write("# Veikkausliiga 2026 - Ottelut\n\n")
@@ -236,6 +237,13 @@ class MatchFetcher:
                     f.write(f"*⚠ Lähde: Esimerkkidata (veikkausliiga.com ei tavoitettavissa) — tulokset eivät ole oikeita*\n\n")
                 else:
                     f.write(f"*Lähde: {MATCHES_URL}*\n\n")
+
+                # Otteluiden tilastot
+                f.write("## 📊 Tilastot\n\n")
+                played_pct = f"{len(played) / total * 100:.0f}%" if total > 0 else "0%"
+                f.write(f"| Pelattu | Tulossa | Yhteensä | Edistyminen |\n")
+                f.write(f"|:-------:|:-------:|:--------:|:-----------:|\n")
+                f.write(f"| **{len(played)}** | **{len(upcoming)}** | **{total}** | {played_pct} |\n\n")
 
                 if played:
                     f.write("## Pelatut ottelut\n\n")
@@ -253,7 +261,7 @@ class MatchFetcher:
                         f.write(f"| {m['pvm']} | {m['koti']} | {m['vieras']} |\n")
                     f.write("\n")
 
-                f.write(f"---\n*Yhteensä {len(matches)} ottelua "
+                f.write(f"---\n*Yhteensä {total} ottelua "
                         f"({len(played)} pelattu, {len(upcoming)} tulossa)*\n")
 
             logger.info(f"✓ Raportti tallennettu: {report_path}")
