@@ -1,6 +1,6 @@
 # 👥 Veikkausliiga — Top 50 kaikkien aikojen yleisömäärät
 
-*Päivitetty: 2026-04-01 13:31:31*
+*Päivitetty: 2026-04-01 14:33:30*
 
 *Lähde: veikkausliiga.com (kaudet 1990–2025)*
 
@@ -101,6 +101,79 @@
 | 2023 | 3.9.2023 | HJK – KuPS | 2 — 2 | **10,121** |
 | 2024 | 22.5.2024 | HJK – IF Gnistan | 1 — 0 | **8,064** |
 | 2025 | 31.5.2025 | HJK – KuPS | 0 — 0 | **8,133** |
+
+## 📈 Vuosikohtainen keskiarvokehitys
+
+| Kausi | Otteluja | Katsojia yht. | Keskiarvo | Muutos ed. vuoteen | Huomio |
+|:-----:|---------:|--------------:|----------:|-------------------:|--------|
+| 1990 | 132 | 301,603 | **2,284** | — |  |
+| 1991 | 198 | 376,850 | **1,903** | -16.7 % |  |
+| 1992 | 198 | 393,990 | **1,989** | +4.5 % |  |
+| 1993 | 132 | 330,377 | **2,502** | +25.8 % |  |
+| 1994 | 182 | 343,146 | **1,885** | -24.7 % |  |
+| 1995 | 182 | 392,234 | **2,155** | +14.3 % |  |
+| 1996 | 132 | 315,995 | **2,393** | +11.0 % |  |
+| 1997 | 135 | 274,075 | **2,030** | -15.2 % |  |
+| 1998 | 135 | 284,758 | **2,109** | +3.9 % |  |
+| 1999 | 131 | 264,824 | **2,021** | -4.2 % |  |
+| 2000 | 198 | 425,719 | **2,150** | +6.4 % |  |
+| 2001 | 198 | 443,093 | **2,237** | +4.0 % |  |
+| 2002 | 132 | 276,310 | **2,093** | -6.4 % |  |
+| 2003 | 182 | 428,132 | **2,352** | +12.4 % |  |
+| 2004 | 182 | 476,005 | **2,615** | +11.2 % |  |
+| 2005 | 182 | 490,546 | **2,695** | +3.1 % |  |
+| 2006 | 156 | 452,081 | **2,897** | +7.5 % |  |
+| 2007 | 182 | 541,612 | **2,975** | +2.7 % |  |
+| 2008 | 182 | 478,917 | **2,631** | -11.6 % |  |
+| 2009 | 182 | 434,480 | **2,387** | -9.3 % |  |
+| 2010 | 182 | 403,879 | **2,219** | -7.0 % |  |
+| 2011 | 198 | 427,506 | **2,159** | -2.7 % |  |
+| 2012 | 198 | 402,690 | **2,033** | -5.8 % |  |
+| 2013 | 198 | 452,833 | **2,287** | +12.5 % |  |
+| 2014 | 198 | 405,037 | **2,045** | -10.6 % |  |
+| 2015 | 198 | 509,707 | **2,574** | +25.9 % |  |
+| 2016 | 198 | 505,123 | **2,551** | -0.9 % |  |
+| 2017 | 198 | 490,333 | **2,476** | -2.9 % |  |
+| 2018 | 198 | 457,035 | **2,308** | -6.8 % |  |
+| 2019 | 132 | 349,779 | **2,649** | +14.8 % |  |
+| 2020 | 131 | 208,756 | **1,593** | -39.9 % | 🦠 **Korona** |
+| 2021 | 117 | 166,353 | **1,421** | -10.8 % | 🦠 **Korona** |
+| 2022 | 132 | 256,937 | **1,946** | +36.9 % |  |
+| 2023 | 132 | 361,089 | **2,735** | +40.5 % |  |
+| 2024 | 132 | 388,040 | **2,939** | +7.5 % |  |
+| 2025 | 132 | 416,410 | **3,154** | +7.3 % |  |
+
+## 🔍 Trendianalyysi ja markkinoinnillinen näkymä
+
+### Aikakausivertailu
+
+| Aikakausi | Vuodet | Keskiarvo/ottelu |
+|-----------|--------|------------------:|
+| Ennen koronaa | 1990–2019 | **2,318** |
+| 🦠 Koronavuodet | 2020–2021 | **1,512** |
+| Koronan jälkeen | 2022–2025 | **2,694** |
+
+### Koronaromahdus ja toipuminen
+
+Korona pudotti keskimääräisen otteluyleisön **-34.8 %** (ennen koronaa: 2,318 → koronavuosina: 1,512 katsojaa/ottelu).
+
+Toipumisaste koronan jälkeen (2022–2025) verrattuna ennen-koronaa-tasoon: **116.2 %**.
+
+### Parhaat ja heikoimmat vuodet
+
+| Tilasto | Vuosi | Arvo |
+|---------|:-----:|-----:|
+| 🥇 Korkein keskiarvo/ottelu | 2025 | **3,154** |
+| 📉 Matalin keskiarvo/ottelu | 2021 | **1,421** |
+| 🏟️ Eniten katsojia yhteensä | 2007 | **541,612** |
+
+### Markkinoinnilliset havainnot
+
+- **Huippuvuodet 1995–2006**: Sarjan suosio oli korkeimmillaan 1990-luvun puolivälissä ja 2000-luvun alussa. Yksittäiset suurottelut (esim. HJK–MYPA 1996: 23 382 katsojaa) nostivat kauden huippulukemat merkittävästi.
+- **Lasku 2007–2014**: Sarjan keskiyleisö laski useana peräkkäisenä vuotena. Kaupallinen kehitys ja stadionikapasiteettirajoitukset hillitsivät kasvua.
+- **HIFK-nousu 2015–2019**: HIFK:n nousu liigaan toi HJK–HIFK-Helsingin derbyn, joka nosti otteluyleisöjä merkittävästi. Tämä osoittaa, että paikallisderbyillä on suuri vaikutus katsojamääriin.
+- **🦠 Korona 2020–2021**: Pandemia romahdutti yleisömäärät. Vuonna 2020 otteluita pelattiin ensin ilman yleisöä, sitten rajatulla kapasiteetilla. Vuosi 2021 näki osittaisen palautumisen.
+- **Toipuminen 2022–2025**: Yleisömäärät ovat toipuneet, mutta eivät ole vielä saavuttaneet 2015–2019-huipputasoa. Tämä tarjoaa kasvupotentiaalia markkinoinnille: Uudet kanta-asiakaskampanjat, stadionkehitys ja medianäkyvyyden lisääminen ovat avainasemassa.
 
 ## 📊 Yhteenveto (1990–2025)
 
