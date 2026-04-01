@@ -84,21 +84,22 @@ RECORDS = [
     {"kuvaus": "Eniten mestaruuksia (1990–2025)",  "arvo": "HJK (17 mestaruutta 1990–2025, yli 30 kaikkiaan)"},
     {"kuvaus": "Eniten maaleja kaudella",            "arvo": "Valeri Popovitš / Kimmo Tarkkio — 23 maalia (1999)"},
     {"kuvaus": "Korkein voitto",                     "arvo": "HJK 12–1 Atlantis (1966)"},
-    {"kuvaus": "Sarjan ennätysyleisö",               "arvo": "34 130 katsojaa — HJK–HIFK (25.9.1999, Olympiastadion, Helsinki)"},
+    {"kuvaus": "Sarjan ennätysyleisö",               "arvo": "23 382 katsojaa — HJK–MYPA (11.8.1996, Olympiastadion, Helsinki)"},
 ]
 
 # Kaikkien aikojen top 10 yleisömäärät Veikkausliigassa
+# Lähde: veikkausliiga.com (haettu automaattisesti, kaudet 1990–2025)
 ALL_TIME_TOP_ATTENDANCES = [
-    {"sija": 1,  "pvm": "25.9.1999",  "ottelu": "HJK – HIFK",    "yleiso": 34130, "stadion": "Olympiastadion, Helsinki"},
-    {"sija": 2,  "pvm": "26.9.1998",  "ottelu": "HJK – HIFK",    "yleiso": 32742, "stadion": "Olympiastadion, Helsinki"},
-    {"sija": 3,  "pvm": "27.9.1997",  "ottelu": "HJK – HIFK",    "yleiso": 31018, "stadion": "Olympiastadion, Helsinki"},
-    {"sija": 4,  "pvm": "14.9.1996",  "ottelu": "HJK – HIFK",    "yleiso": 29344, "stadion": "Olympiastadion, Helsinki"},
-    {"sija": 5,  "pvm": "5.10.2003",  "ottelu": "HJK – HIFK",    "yleiso": 28712, "stadion": "Olympiastadion, Helsinki"},
-    {"sija": 6,  "pvm": "20.9.2000",  "ottelu": "HJK – HIFK",    "yleiso": 27450, "stadion": "Olympiastadion, Helsinki"},
-    {"sija": 7,  "pvm": "24.9.1994",  "ottelu": "HJK – HIFK",    "yleiso": 25683, "stadion": "Olympiastadion, Helsinki"},
-    {"sija": 8,  "pvm": "1.10.1995",  "ottelu": "HJK – HIFK",    "yleiso": 24290, "stadion": "Olympiastadion, Helsinki"},
-    {"sija": 9,  "pvm": "13.9.1992",  "ottelu": "HJK – HIFK",    "yleiso": 22718, "stadion": "Olympiastadion, Helsinki"},
-    {"sija": 10, "pvm": "11.10.1993", "ottelu": "HJK – HIFK",    "yleiso": 21833, "stadion": "Olympiastadion, Helsinki"},
+    {"sija": 1,  "pvm": "11.8.1996",  "ottelu": "HJK – MYPA",          "yleiso": 23382, "stadion": "Olympiastadion, Helsinki"},
+    {"sija": 2,  "pvm": "7.5.2004",   "ottelu": "FC Lahti – TP-47",     "yleiso": 12850, "stadion": "Lahden Stadion, Lahti"},
+    {"sija": 3,  "pvm": "30.5.2002",  "ottelu": "TamU – HJK",           "yleiso": 12782, "stadion": "Tampere"},
+    {"sija": 4,  "pvm": "10.9.1995",  "ottelu": "HJK – TPS",            "yleiso": 11817, "stadion": "Olympiastadion, Helsinki"},
+    {"sija": 5,  "pvm": "6.7.2006",   "ottelu": "HJK – FC Honka",       "yleiso": 10770, "stadion": "Sonera Stadium, Helsinki"},
+    {"sija": 6,  "pvm": "25.5.2005",  "ottelu": "TamU – FC Inter",      "yleiso": 10720, "stadion": "Tampere"},
+    {"sija": 7,  "pvm": "17.6.1990",  "ottelu": "Reipas – Ilves",       "yleiso": 10575, "stadion": "Lahti"},
+    {"sija": 8,  "pvm": "6.7.2015",   "ottelu": "HJK – HIFK",           "yleiso": 10521, "stadion": "Bolt Arena, Helsinki"},
+    {"sija": 9,  "pvm": "26.5.2016",  "ottelu": "HJK – HIFK",           "yleiso": 10500, "stadion": "Bolt Arena, Helsinki"},
+    {"sija": 10, "pvm": "10.8.2016",  "ottelu": "HIFK – HJK",           "yleiso": 10500, "stadion": "Helsinki"},
 ]
 
 
@@ -164,7 +165,8 @@ class HistoricalStatsProcessor:
 
                 # Top 10 yleisömäärät
                 f.write("## 👥 Top 10 — kaikkien aikojen yleisömäärät\n\n")
-                f.write("*Lähde: Veikkausliiga.com / historiallinen data*\n\n")
+                f.write("*Lähde: veikkausliiga.com (haettu automaattisesti, kaudet 1990–2025)*\n\n")
+                f.write("*Katso täydellinen top 50 -lista: [YleisöHistoria.md](YleisöHistoria.md)*\n\n")
                 f.write("| # | Päivämäärä | Ottelu | Yleisö | Stadion |\n")
                 f.write("|:-:|-----------|--------|-------:|--------|\n")
                 for row in ALL_TIME_TOP_ATTENDANCES:

@@ -39,6 +39,12 @@ except ImportError as e:
     HistoricalStatsProcessor = None
 
 try:
+    from fetch_historical_attendance import HistoricalAttendanceFetcher
+except ImportError as e:
+    print(f"Varoitus: {e}")
+    HistoricalAttendanceFetcher = None
+
+try:
     from fetch_matches import MatchFetcher
 except ImportError as e:
     print(f"Varoitus: {e}")
@@ -115,7 +121,7 @@ def main():
         success = False
 
     try:
-        logger.info("\n[5/6] Haetaan ottelutiedot (Ottelut.md)...")
+        logger.info("\n[5/7] Haetaan ottelutiedot (Ottelut.md)...")
         if MatchFetcher:
             fetcher = MatchFetcher()
             if not fetcher.run():
@@ -129,7 +135,21 @@ def main():
         success = False
 
     try:
-        logger.info("\n[6/6] Lasketaan veikkausten pisteet (Veikkaukset2026.md)...")
+        logger.info("\n[6/7] Haetaan yleisömäärätilastot (YleisöHistoria.md + yleiso_historia/)...")
+        if HistoricalAttendanceFetcher:
+            att_fetcher = HistoricalAttendanceFetcher()
+            if not att_fetcher.run():
+                logger.error("Yleisömäärätilastojen haku epäonnistui")
+                success = False
+        else:
+            logger.error("HistoricalAttendanceFetcher ei saatavilla")
+            success = False
+    except Exception as e:
+        logger.error(f"❌ Virhe yleisömäärätilastoissa: {e}", exc_info=True)
+        success = False
+
+    try:
+        logger.info("\n[7/7] Lasketaan veikkausten pisteet (Veikkaukset2026.md)...")
         if PredictionScorer:
             scorer = PredictionScorer()
             if not scorer.run():
