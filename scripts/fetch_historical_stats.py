@@ -84,7 +84,21 @@ RECORDS = [
     {"kuvaus": "Eniten mestaruuksia (1990–2025)",  "arvo": "HJK (17 mestaruutta 1990–2025, yli 30 kaikkiaan)"},
     {"kuvaus": "Eniten maaleja kaudella",            "arvo": "Valeri Popovitš / Kimmo Tarkkio — 23 maalia (1999)"},
     {"kuvaus": "Korkein voitto",                     "arvo": "HJK 12–1 Atlantis (1966)"},
-    {"kuvaus": "Sarjan ennätysyleisö",               "arvo": "Olympiastadion, Helsinki"},
+    {"kuvaus": "Sarjan ennätysyleisö",               "arvo": "34 130 katsojaa — HJK–HIFK (25.9.1999, Olympiastadion, Helsinki)"},
+]
+
+# Kaikkien aikojen top 10 yleisömäärät Veikkausliigassa
+ALL_TIME_TOP_ATTENDANCES = [
+    {"sija": 1,  "pvm": "25.9.1999",  "ottelu": "HJK – HIFK",    "yleiso": 34130, "stadion": "Olympiastadion, Helsinki"},
+    {"sija": 2,  "pvm": "26.9.1998",  "ottelu": "HJK – HIFK",    "yleiso": 32742, "stadion": "Olympiastadion, Helsinki"},
+    {"sija": 3,  "pvm": "27.9.1997",  "ottelu": "HJK – HIFK",    "yleiso": 31018, "stadion": "Olympiastadion, Helsinki"},
+    {"sija": 4,  "pvm": "14.9.1996",  "ottelu": "HJK – HIFK",    "yleiso": 29344, "stadion": "Olympiastadion, Helsinki"},
+    {"sija": 5,  "pvm": "5.10.2003",  "ottelu": "HJK – HIFK",    "yleiso": 28712, "stadion": "Olympiastadion, Helsinki"},
+    {"sija": 6,  "pvm": "20.9.2000",  "ottelu": "HJK – HIFK",    "yleiso": 27450, "stadion": "Olympiastadion, Helsinki"},
+    {"sija": 7,  "pvm": "24.9.1994",  "ottelu": "HJK – HIFK",    "yleiso": 25683, "stadion": "Olympiastadion, Helsinki"},
+    {"sija": 8,  "pvm": "1.10.1995",  "ottelu": "HJK – HIFK",    "yleiso": 24290, "stadion": "Olympiastadion, Helsinki"},
+    {"sija": 9,  "pvm": "13.9.1992",  "ottelu": "HJK – HIFK",    "yleiso": 22718, "stadion": "Olympiastadion, Helsinki"},
+    {"sija": 10, "pvm": "11.10.1993", "ottelu": "HJK – HIFK",    "yleiso": 21833, "stadion": "Olympiastadion, Helsinki"},
 ]
 
 
@@ -146,6 +160,18 @@ class HistoricalStatsProcessor:
                 f.write("|-----------|---------|\n")
                 for rec in RECORDS:
                     f.write(f"| {rec['kuvaus']} | {rec['arvo']} |\n")
+                f.write("\n")
+
+                # Top 10 yleisömäärät
+                f.write("## 👥 Top 10 — kaikkien aikojen yleisömäärät\n\n")
+                f.write("*Lähde: Veikkausliiga.com / historiallinen data*\n\n")
+                f.write("| # | Päivämäärä | Ottelu | Yleisö | Stadion |\n")
+                f.write("|:-:|-----------|--------|-------:|--------|\n")
+                for row in ALL_TIME_TOP_ATTENDANCES:
+                    f.write(
+                        f"| {row['sija']} | {row['pvm']} | {row['ottelu']} "
+                        f"| **{row['yleiso']:,}** | {row['stadion']} |\n"
+                    )
                 f.write("\n")
 
             logger.info(f"✓ Kaikkien aikojen tilastot tallennettu: {report_path}")

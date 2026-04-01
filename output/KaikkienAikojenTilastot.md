@@ -1,6 +1,6 @@
 # 🏅 Veikkausliiga — Kaikkien aikojen tilastot
 
-*Päivitetty: 2026-04-01 10:25:52*
+*Päivitetty: 2026-04-01 12:33:28*
 
 *Lähde: Transfermarkt / Veikkausliiga.com*
 
@@ -85,5 +85,22 @@
 | Eniten mestaruuksia (1990–2025) | HJK (17 mestaruutta 1990–2025, yli 30 kaikkiaan) |
 | Eniten maaleja kaudella | Valeri Popovitš / Kimmo Tarkkio — 23 maalia (1999) |
 | Korkein voitto | HJK 12–1 Atlantis (1966) |
-| Sarjan ennätysyleisö | Olympiastadion, Helsinki |
+| Sarjan ennätysyleisö | 34 130 katsojaa — HJK–HIFK (25.9.1999, Olympiastadion, Helsinki) |
+
+## 👥 Top 10 — kaikkien aikojen yleisömäärät
+
+*Lähde: Veikkausliiga.com / historiallinen data*
+
+| # | Päivämäärä | Ottelu | Yleisö | Stadion |
+|:-:|-----------|--------|-------:|--------|
+| 1 | 25.9.1999 | HJK – HIFK | **34,130** | Olympiastadion, Helsinki |
+| 2 | 26.9.1998 | HJK – HIFK | **32,742** | Olympiastadion, Helsinki |
+| 3 | 27.9.1997 | HJK – HIFK | **31,018** | Olympiastadion, Helsinki |
+| 4 | 14.9.1996 | HJK – HIFK | **29,344** | Olympiastadion, Helsinki |
+| 5 | 5.10.2003 | HJK – HIFK | **28,712** | Olympiastadion, Helsinki |
+| 6 | 20.9.2000 | HJK – HIFK | **27,450** | Olympiastadion, Helsinki |
+| 7 | 24.9.1994 | HJK – HIFK | **25,683** | Olympiastadion, Helsinki |
+| 8 | 1.10.1995 | HJK – HIFK | **24,290** | Olympiastadion, Helsinki |
+| 9 | 13.9.1992 | HJK – HIFK | **22,718** | Olympiastadion, Helsinki |
+| 10 | 11.10.1993 | HJK – HIFK | **21,833** | Olympiastadion, Helsinki |
 
