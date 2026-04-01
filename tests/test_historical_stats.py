@@ -11,6 +11,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 from fetch_historical_stats import (
     VEIKKAUSLIIGA_CHAMPIONS,
     ALL_TIME_TOP_SCORERS,
+    ALL_TIME_TOP_ATTENDANCES,
     RECORDS,
     count_championships,
 )
@@ -119,6 +120,58 @@ class TestAllTimeTopScorers(unittest.TestCase):
         top = ALL_TIME_TOP_SCORERS[0]
         self.assertEqual(top["pelaaja"], "Valeri Popovitš")
         self.assertEqual(top["maalit"], 166)
+
+
+class TestAllTimeTopAttendances(unittest.TestCase):
+    """Testaa kaikkien aikojen yleisömäärälistan oikeellisuuden."""
+
+    def test_ten_entries(self):
+        """Listassa on täsmälleen 10 merkintää."""
+        self.assertEqual(len(ALL_TIME_TOP_ATTENDANCES), 10,
+                         f"Yleisömäärälistassa pitää olla 10 merkintää, löytyi {len(ALL_TIME_TOP_ATTENDANCES)}")
+
+    def test_required_fields(self):
+        """Jokaisella merkinnällä on vaaditut kentät oikeilla tyypeillä."""
+        for entry in ALL_TIME_TOP_ATTENDANCES:
+            self.assertIn("sija", entry)
+            self.assertIn("pvm", entry)
+            self.assertIn("ottelu", entry)
+            self.assertIn("yleiso", entry)
+            self.assertIn("stadion", entry)
+            self.assertIsInstance(entry["yleiso"], int,
+                                  f"Yleisömäärän pitää olla kokonaisluku, saatiin {type(entry['yleiso'])}")
+
+    def test_unique_attendances(self):
+        """Jokainen yleisömäärä on uniikki — ei sama luku useammassa ennätyksessä."""
+        counts = [entry["yleiso"] for entry in ALL_TIME_TOP_ATTENDANCES]
+        self.assertEqual(
+            len(counts), len(set(counts)),
+            f"Yleisömäärissä on duplikaatteja: {counts}"
+        )
+
+    def test_attendances_strictly_descending(self):
+        """Yleisömäärät ovat aidosti laskevassa järjestyksessä (1. suurin, 10. pienin)."""
+        counts = [entry["yleiso"] for entry in ALL_TIME_TOP_ATTENDANCES]
+        for i in range(len(counts) - 1):
+            self.assertGreater(
+                counts[i], counts[i + 1],
+                f"Sija {i+1} yleisömäärä ({counts[i]}) ei ole suurempi kuin sija {i+2} ({counts[i+1]})"
+            )
+
+    def test_top_attendance_is_hjk_hifk_1999(self):
+        """Kaikkien aikojen yleisöennätys on HJK–HIFK 25.9.1999 (34 130 katsojaa)."""
+        top = ALL_TIME_TOP_ATTENDANCES[0]
+        self.assertEqual(top["yleiso"], 34130,
+                         f"Yleisöennätyksen pitää olla 34130, saatiin {top['yleiso']}")
+        self.assertEqual(top["sija"], 1)
+
+    def test_rankings_match_order(self):
+        """Sija-kenttä vastaa listan järjestystä (1–10)."""
+        for i, entry in enumerate(ALL_TIME_TOP_ATTENDANCES, 1):
+            self.assertEqual(
+                entry["sija"], i,
+                f"Listan kohta {i}: sija-kenttä on {entry['sija']}, pitäisi olla {i}"
+            )
 
 
 if __name__ == "__main__":
