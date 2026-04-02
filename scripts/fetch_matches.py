@@ -104,6 +104,7 @@ class MatchFetcher:
             match_rows = soup.find_all('tr')
 
         logged_rows = 0
+        last_date = None
         for row in match_rows:
             cells = row.find_all('td')
             if not cells:
@@ -116,13 +117,23 @@ class MatchFetcher:
                 logger.info(f"Rivi {logged_rows+1}: {len(cells)} saraketta: {cell_texts[:8]}")
                 logged_rows += 1
 
-            # Tarkista onko tämä ottelurivi (cells[1]=päivä, cells[2]=aika)
-            if not (len(cells) >= 4
-                    and self._is_date_with_weekday(cell_texts[1])
-                    and self._is_time(cell_texts[2])):
+            # Tarkista onko tämä ottelurivi (cells[2]=aika, cells[1]=päivä tai tyhjä)
+            # Sivusto ryhmittelee saman päivän ottelut: vain ensimmäisellä on päivämäärä,
+            # muilla cells[1] on tyhjä — käytetään viimeksi nähtyä päivämäärää.
+            if not (len(cells) >= 4 and self._is_time(cell_texts[2])):
                 continue
 
-            pvm = cell_texts[1]
+            if self._is_date_with_weekday(cell_texts[1]):
+                last_date = cell_texts[1]
+            elif cell_texts[1] == '' and last_date:
+                pass  # käytetään last_date-arvoa
+            else:
+                continue
+
+            if not last_date:
+                continue
+
+            pvm = last_date
             koti = None
             tulos = '-'
             vieras = None
