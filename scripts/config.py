@@ -60,11 +60,11 @@ TEAM_LOGOS = {
 
 # Seuratut pelaajat (päivitetty vuodelle 2026)
 WATCHED_PLAYERS = [
-    "Coffey, Ashley Mark",
-    "Moreno Ciorciari, Jaime Jose",
     "Karjalainen, Rasmus",
-    "Plange, Luke Elliot",
-    "Odutayo, Colin"
+    "Lappalainen, Lassi",
+    "Engvall, Gustav",
+    "Borchers, Mads",
+    "Vikström, Rudi",
 ]
 
 # Kauden vuosi – päivitä tämä uudelle kaudelle
@@ -104,20 +104,20 @@ REQUEST_TIMEOUT = 10
 MAX_RETRIES = 3
 RETRY_DELAY = 2
 
-# Veikattu sarjajärjestys
+# Veikattu sarjajärjestys (vedonlyöjien vihjeiden perusteella 2026)
 PREDICTED_ORDER = [
     "HJK",
-    "Ilves",
     "KuPS",
-    "FC Inter",
     "SJK",
-    "VPS",
-    "FF Jaro",
+    "FC Inter",
+    "Ilves",
+    "TPS",
     "FC Lahti",
-    "IFK Mariehamn",
-    "IF Gnistan",
+    "FF Jaro",
     "AC Oulu",
-    "TPS"
+    "IFK Mariehamn",
+    "VPS",
+    "IF Gnistan"
 ]
 
 # ---------------------------------------------------------------------------
@@ -172,11 +172,11 @@ PARTICIPANTS = [
             "TPS",           # 12. sija
         ],
         "scorers_prediction": [
-            "Plange, Luke",         # 1. maalintekijä
-            "Karjalainen, Rasmus",  # 2. maalintekijä
-            "Odutayo, Colin",       # 3. maalintekijä
-            "Coffey, Ashley",       # 4. maalintekijä
-            "Moreno, Jaime",        # 5. maalintekijä
+            "Karjalainen, Rasmus",  # 1. maalintekijä
+            "Lappalainen, Lassi",   # 2. maalintekijä
+            "Engvall, Gustav",      # 3. maalintekijä
+            "Borchers, Mads",       # 4. maalintekijä
+            "Vikström, Rudi",       # 5. maalintekijä
         ],
     },
     # ✏️  Veikkaaja 2: lisää veikkauksesi alle
