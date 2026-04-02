@@ -1,6 +1,6 @@
 # Veikkausliiga 2026 - Yleisömäärät
 
-*Analysoitu: 2026-04-01 16:56:00*
+*Analysoitu: 2026-04-02 12:29:39*
 
 *⚠ Kausi ei ole vielä alkanut — luvut perustuvat historiallisiin keskiarvoihin (2023–2025 arvio), eivät todellisiin katsojalukuihin.*
 
