@@ -181,9 +181,28 @@ PARTICIPANTS = [
     },
     # ✏️  Veikkaaja 2: lisää veikkauksesi alle
     {
-        "name": "Veikkaaja 2",
-        "standings_prediction": [],
-        "scorers_prediction": [],
+        "name": "VV",
+        "standings_prediction": [
+            "HJK",           # 1. sija
+            "KuPS",          # 2. sija
+            "FC Inter",      # 3. sija
+            "SJK",           # 4. sija
+            "Ilves",         # 5. sija
+            "FC Lahti",      # 6. sija
+            "FF Jaro",       # 7. sija
+            "AC Oulu",       # 8. sija
+            "VPS",           # 9. sija
+            "IF Gnistan",    # 10. sija
+            "IFK Mariehamn", # 11. sija
+            "TPS",           # 12. sija
+        ],
+        "scorers_prediction": [
+            "Barbosa, Neemias",     # 1. maalintekijä
+            "Karjalainen, Rasmus",  # 2. maalintekijä
+            "Paananen, Kasper",     # 3. maalintekijä
+            "Engvall, Gustav",      # 4. maalintekijä
+            "Pukki, Teemu",         # 5. maalintekijä
+        ],
     },
     # ✏️  Veikkaaja 3: lisää veikkauksesi alle
     {
