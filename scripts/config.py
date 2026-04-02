@@ -74,7 +74,7 @@ VEIKKAUSLIIGA_YEAR = 2026
 VEIKKAUSLIIGA_BASE_URL = f"https://www.veikkausliiga.com/tilastot/{VEIKKAUSLIIGA_YEAR}"
 STANDINGS_URL = f"{VEIKKAUSLIIGA_BASE_URL}/veikkausliiga/joukkueet/"
 PLAYERS_URL = f"{VEIKKAUSLIIGA_BASE_URL}/veikkausliiga/pelaajat/"
-MATCHES_URL = f"{VEIKKAUSLIIGA_BASE_URL}/veikkausliiga/ottelut/?group=1"
+MATCHES_URL = f"{VEIKKAUSLIIGA_BASE_URL}/veikkausliiga/ottelut/"
 
 # Konfiguraation tallennuspaikka
 CONFIG_DIR = Path(__file__).parent.parent
