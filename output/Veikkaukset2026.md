@@ -1,6 +1,6 @@
 # 🏆 Veikkausliiga 2026 — Veikkaukset
 
-*Päivitetty: 2026-04-02 14:40:07*
+*Päivitetty: 2026-04-02 18:38:50*
 
 > ⚠️ **Huom:** Tilastot perustuvat esimerkkidataan — pisteet ovat simuloituja.
 
@@ -8,13 +8,13 @@
 
 ## 🥇 Pistetaulukko
 
-*Veikkauksia jätetty: 2/3*
+*Veikkauksia jätetty: 3/3*
 
 | Sija | Osallistuja | Sarjataulukko | Maalintekijät | Yhteensä |
 |:----:|-------------|:-------------:|:-------------:|:--------:|
 | 🥇 | **dude island** | 25/36 ███████░░░ | 25/50 █████░░░░░ | 🎯 **50** |
 | 🥈 | **VV** | 23/36 ██████░░░░ | 4/50 █░░░░░░░░░ | 🎯 **27** |
-| — | Veikkaaja 3 | *(ei veikkausta)* | *(ei veikkausta)* | — |
+| 🥉 | **Ville Viikinki** | 9/36 ██░░░░░░░░ | 2/50 ░░░░░░░░░░ | 🎯 **11** |
 
 <details>
 <summary>📋 Pisteytysjärjestelmä</summary>
@@ -138,9 +138,34 @@
 
 ---
 
-### Veikkaaja 3 — *(veikkaus ei vielä jätetty)*
+### Ville Viikinki — 11 pistettä
 
-*Tämä osallistuja ei ole vielä jättänyt veikkaustaan.*
+**Sarjataulukko:** 9/36 p (25%) ████░░░░░░░░░░░
+
+| Veikkaama sija | Joukkue | Toteutunut sija | Ero | Pisteet |
+|:--------------:|---------|:---------------:|:---:|:-------:|
+| 1 | <img src="../logos/inter.svg" width="18" height="18"> FC Inter | 4 | ❌ 3 | 0 |
+| 2 | <img src="../logos/hjk.svg" width="18" height="18"> HJK | 1 | 🟡 1 | 2 |
+| 3 | <img src="../logos/oulu.svg" width="18" height="18"> AC Oulu | 9 | ❌ 6 | 0 |
+| 4 | <img src="../logos/ilves.svg" width="18" height="18"> Ilves | 5 | 🟡 1 | 2 |
+| 5 | <img src="../logos/gnistan.svg" width="18" height="18"> IF Gnistan | 12 | ❌ 7 | 0 |
+| 6 | <img src="../logos/kups.svg" width="18" height="18"> KuPS | 2 | ❌ 4 | 0 |
+| 7 | <img src="../logos/sjk.svg" width="18" height="18"> SJK | 3 | ❌ 4 | 0 |
+| 8 | <img src="../logos/jaro.svg" width="18" height="18"> FF Jaro | 8 | ✅ 0 | 3 |
+| 9 | <img src="../logos/vps.svg" width="18" height="18"> VPS | 11 | 🟡 2 | 1 |
+| 10 | <img src="../logos/lahti.svg" width="18" height="18"> FC Lahti | 7 | ❌ 3 | 0 |
+| 11 | <img src="../logos/tps.svg" width="18" height="18"> TPS | 6 | ❌ 5 | 0 |
+| 12 | <img src="../logos/mariehamn.svg" width="18" height="18"> IFK Mariehamn | 10 | 🟡 2 | 1 |
+
+**Maalintekijät:** 2/50 p (4%) █░░░░░░░░░░░░░░
+
+| Veikkaama sija | Pelaaja | Toteutunut sija | Pisteet | Tila |
+|:--------------:|---------|:---------------:|:-------:|------|
+| 1 | Paananen, Kasper | - | 0 | Ei top-listalla |
+| 2 | Karjalainen, Rasmus | 1 | 2 | 🔸 Top-listalla (sija 1) |
+| 3 | Pukki, Teemu | - | 0 | Ei top-listalla |
+| 4 | Korkkö, Antto | - | 0 | Ei top-listalla |
+| 5 | Huovila, Jiri | - | 0 | Ei top-listalla |
 
 ---
 

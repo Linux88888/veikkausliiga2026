@@ -206,9 +206,28 @@ PARTICIPANTS = [
     },
     # ✏️  Veikkaaja 3: lisää veikkauksesi alle
     {
-        "name": "Veikkaaja 3",
-        "standings_prediction": [],
-        "scorers_prediction": [],
+        "name": "Ville Viikinki",
+        "standings_prediction": [
+            "FC Inter",      # 1. sija
+            "HJK",           # 2. sija
+            "AC Oulu",       # 3. sija
+            "Ilves",         # 4. sija
+            "IF Gnistan",    # 5. sija
+            "KuPS",          # 6. sija
+            "SJK",           # 7. sija
+            "FF Jaro",       # 8. sija
+            "VPS",           # 9. sija
+            "FC Lahti",      # 10. sija
+            "TPS",           # 11. sija
+            "IFK Mariehamn", # 12. sija
+        ],
+        "scorers_prediction": [
+            "Paananen, Kasper",     # 1. maalintekijä
+            "Karjalainen, Rasmus",  # 2. maalintekijä
+            "Pukki, Teemu",         # 3. maalintekijä
+            "Korkkö, Antto",        # 4. maalintekijä
+            "Huovila, Jiri",        # 5. maalintekijä
+        ],
     },
 ]
 
