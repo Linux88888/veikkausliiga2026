@@ -25,6 +25,9 @@ except ImportError:
     def get_output_path(filename):
         return Path("output") / filename
 
+# Kuinka monta ryhmää enintään haetaan (ryhmät 1, 2, …, MAX_GROUPS)
+MAX_GROUPS = 10
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -74,129 +77,141 @@ class MatchFetcher:
         """Palauttaa True vain oikean muotoiselle tulokselle, esim. '2-1' tai '0–0'."""
         return bool(re.match(r'^\d+\s*[-–]\s*\d+$', s.strip()))
 
-    def fetch_matches(self):
-        """Hakee ottelutiedot veikkausliigan sivuilta"""
-        try:
-            from config import TEAMS_2026
-        except ImportError:
-            TEAMS_2026 = ["HJK", "KuPS", "FC Inter", "SJK", "FC Lahti", "Ilves",
-                          "FF Jaro", "VPS", "AC Oulu", "IF Gnistan", "IFK Mariehamn", "TPS"]
-        try:
-            response = self.fetch_with_retry(MATCHES_URL)
-            if not response:
-                return self._create_dummy_matches()
+    @staticmethod
+    def _is_time(s):
+        """Palauttaa True jos merkkijono on kellonaika (esim. '13:00')."""
+        return bool(re.match(r'^\d{1,2}:\d{2}$', s.strip()))
 
-            soup = BeautifulSoup(response.text, 'html.parser')
-            matches = []
+    @staticmethod
+    def _is_date_with_weekday(s):
+        """Palauttaa True jos merkkijono on päivämäärä viikonpäivällä (esim. 'La 4.4.2026')."""
+        return bool(re.match(r'^[A-Za-zÄÖÅäöå]{2,3}\s+\d+\.\d+\.\d{4}$', s.strip()))
 
-            # Yritetään löytää ottelutaulukko sivulta eri tavoilla
-            # Tapa 1: Etsi taulukon rivit data-attribuuteilla
-            match_rows = (
-                soup.find_all('tr', attrs={'data-match-id': True}) or
-                soup.find_all('tr', class_=lambda c: c and 'match' in c.lower()) or
-                soup.find_all('tr', class_=lambda c: c and 'ottelu' in c.lower())
-            )
+    def _parse_matches_from_html(self, html):
+        """Parsii ottelut HTML-sisällöstä ja palauttaa ottelulistauksen."""
+        soup = BeautifulSoup(html, 'html.parser')
+        matches = []
 
-            # Tapa 2: Etsi yleiset taulukkorivit
-            if not match_rows:
-                match_rows = soup.find_all('tr')
+        # Tapa 1: Etsi taulukon rivit data-attribuuteilla
+        match_rows = (
+            soup.find_all('tr', attrs={'data-match-id': True}) or
+            soup.find_all('tr', class_=lambda c: c and 'match' in c.lower()) or
+            soup.find_all('tr', class_=lambda c: c and 'ottelu' in c.lower())
+        )
 
-            # Apufunktiot solun tyypin tunnistamiseen
-            def is_time(s):
-                return bool(re.match(r'^\d{1,2}:\d{2}$', s.strip()))
+        # Tapa 2: Etsi yleiset taulukkorivit
+        if not match_rows:
+            match_rows = soup.find_all('tr')
 
-            def is_date_with_weekday(s):
-                # Esim. "La 4.4.2026", "Pe 10.4.2026"
-                return bool(re.match(r'^[A-Za-zÄÖÅäöå]{2,3}\s+\d+\.\d+\.\d{4}$', s.strip()))
+        logged_rows = 0
+        for row in match_rows:
+            cells = row.find_all('td')
+            if not cells:
+                continue
 
-            logged_rows = 0
-            for row in match_rows:
-                cells = row.find_all('td')
-                if not cells:
-                    continue
+            cell_texts = [c.get_text().strip() for c in cells]
 
-                cell_texts = [c.get_text().strip() for c in cells]
+            # Kirjaa ensimmäisten rivien rakenne debuggausta varten
+            if logged_rows < 3 and len(cells) >= 4:
+                logger.info(f"Rivi {logged_rows+1}: {len(cells)} saraketta: {cell_texts[:8]}")
+                logged_rows += 1
 
-                # Kirjaa ensimmäisten rivien rakenne debuggausta varten
-                if logged_rows < 3 and len(cells) >= 4:
-                    logger.info(f"Rivi {logged_rows+1}: {len(cells)} saraketta: {cell_texts[:8]}")
-                    logged_rows += 1
+            # Tarkista onko tämä ottelurivi (cells[1]=päivä, cells[2]=aika)
+            if not (len(cells) >= 4
+                    and self._is_date_with_weekday(cell_texts[1])
+                    and self._is_time(cell_texts[2])):
+                continue
 
-                # Tarkista onko tämä ottelurivi (cells[1]=päivä, cells[2]=aika)
-                if not (len(cells) >= 4 and is_date_with_weekday(cell_texts[1]) and is_time(cell_texts[2])):
-                    continue
+            pvm = cell_texts[1]
+            koti = None
+            tulos = '-'
+            vieras = None
 
-                pvm = cell_texts[1]
-                koti = None
-                tulos = '-'
-                vieras = None
+            # Veikkausliigan ottelutaulukon rakenne (tyypillinen):
+            # cells[0] = ottelu-ID (numero)
+            # cells[1] = päivä+päivämäärä (esim. "La 4.4.2026")
+            # cells[2] = kellonaika (esim. "13:00")
+            # cells[3] = linkki ottelusivu
+            # cells[4] = kotijoukkue TAI "Koti - Vieras" yhdistettynä
+            # cells[5] = tulos (esim. "2-1") TAI "Seuranta" (seurantanappi)
+            # cells[6] = vierasjoukkue (tai tyhjä jos yhdistetty)
 
-                # Veikkausliigan ottelutaulukon rakenne (tyypillinen):
-                # cells[0] = ottelu-ID (numero)
-                # cells[1] = päivä+päivämäärä (esim. "La 4.4.2026")
-                # cells[2] = kellonaika (esim. "13:00")
-                # cells[3] = linkki ottelusivu
-                # cells[4] = kotijoukkue TAI "Koti - Vieras" yhdistettynä
-                # cells[5] = tulos (esim. "2-1") TAI "Seuranta" (seurantanappi)
-                # cells[6] = vierasjoukkue (tai tyhjä jos yhdistetty)
+            # Ensisijainen strategia: cells[4]=koti, cells[5]=tulos, cells[6]=vieras
+            if len(cells) >= 5:
+                raw_koti = cell_texts[4]
+                raw_tulos = cell_texts[5] if len(cells) > 5 else ''
+                raw_vieras = cell_texts[6] if len(cells) > 6 else ''
 
-                # Ensisijainen strategia: cells[4]=koti, cells[5]=tulos, cells[6]=vieras
-                if len(cells) >= 5:
-                    raw_koti = cell_texts[4]
-                    raw_tulos = cell_texts[5] if len(cells) > 5 else ''
-                    raw_vieras = cell_texts[6] if len(cells) > 6 else ''
+                # Käsittele yhdistetty "Koti - Vieras" -muoto cells[4]:ssa
+                if raw_koti and ' - ' in raw_koti and not self._is_score(raw_koti):
+                    parts = [p.strip() for p in raw_koti.split(' - ', 1)]
+                    koti = parts[0]
+                    vieras = parts[1] if len(parts) > 1 else raw_vieras
+                else:
+                    koti = raw_koti
+                    vieras = raw_vieras
 
-                    # Käsittele yhdistetty "Koti - Vieras" -muoto cells[4]:ssa
-                    # (verkkosivusto saattaa yhdistää joukkueet yhteen soluun)
-                    if raw_koti and ' - ' in raw_koti and not self._is_score(raw_koti):
-                        parts = [p.strip() for p in raw_koti.split(' - ', 1)]
-                        koti = parts[0]
-                        vieras = parts[1] if len(parts) > 1 else raw_vieras
-                    else:
-                        koti = raw_koti
-                        vieras = raw_vieras
+                # Hyväksy tulos vain jos se on oikean muotoinen (esim. "2-1")
+                tulos = raw_tulos if self._is_score(raw_tulos) else '-'
 
-                    # Hyväksy tulos vain jos se on oikean muotoinen (esim. "2-1")
-                    tulos = raw_tulos if self._is_score(raw_tulos) else '-'
-
-                # Varastrategia: etsi joukkuenimet kaikista soluista [3+]
-                # käytetään jos ensisijainen strategia tuotti päivämäärän tai kellonajan
-                if not koti or not vieras or is_time(koti) or is_date_with_weekday(koti):
-                    team_cells = []
-                    for i in range(3, len(cell_texts)):
-                        t = cell_texts[i].strip()
-                        # Suodata pois tyhjät, kellonajat, päivämäärät, numerot ja monirivinen teksti
-                        if (t and not is_time(t) and not is_date_with_weekday(t)
-                                and not t.isdigit() and '\n' not in t
-                                and not re.search(r'\d+\.\d+\.\d{4}', t)):
-                            team_cells.append(t)
-                    # Odotettu rakenne: [kotijoukkue, tulos, vierasjoukkue]
-                    # tai vain [kotijoukkue, vierasjoukkue] jos tulosta ei ole
-                    if len(team_cells) >= 3 and self._is_score(team_cells[1]):
-                        koti = team_cells[0]
-                        tulos = team_cells[1]
-                        vieras = team_cells[2]
-                    elif len(team_cells) >= 2:
-                        koti = team_cells[0]
-                        tulos = '-'
-                        vieras = team_cells[1]
-
-                if not koti or not vieras:
-                    continue
-                if not tulos:
+            # Varastrategia: etsi joukkuenimet kaikista soluista [3+]
+            if not koti or not vieras or self._is_time(koti) or self._is_date_with_weekday(koti):
+                team_cells = []
+                for i in range(3, len(cell_texts)):
+                    t = cell_texts[i].strip()
+                    if (t and not self._is_time(t) and not self._is_date_with_weekday(t)
+                            and not t.isdigit() and '\n' not in t
+                            and not re.search(r'\d+\.\d+\.\d{4}', t)):
+                        team_cells.append(t)
+                if len(team_cells) >= 3 and self._is_score(team_cells[1]):
+                    koti = team_cells[0]
+                    tulos = team_cells[1]
+                    vieras = team_cells[2]
+                elif len(team_cells) >= 2:
+                    koti = team_cells[0]
                     tulos = '-'
+                    vieras = team_cells[1]
 
-                match_data = {
-                    'pvm': pvm,
-                    'koti': koti,
-                    'tulos': tulos,
-                    'vieras': vieras,
-                }
-                matches.append(match_data)
+            if not koti or not vieras:
+                continue
+            if not tulos:
+                tulos = '-'
 
-            if matches:
-                logger.info(f"✓ Ottelutiedot haettu: {len(matches)} ottelua")
-                return matches
+            matches.append({
+                'pvm': pvm,
+                'koti': koti,
+                'tulos': tulos,
+                'vieras': vieras,
+            })
+
+        return matches
+
+    def fetch_matches(self):
+        """Hakee ottelutiedot kaikista ryhmistä veikkausliigan sivuilta"""
+        try:
+            # Poista mahdollinen vanha ?group=-parametri perus-URL:sta
+            base_url = MATCHES_URL.split('?')[0].rstrip('/')
+            all_matches = []
+
+            for group_num in range(1, MAX_GROUPS + 1):
+                group_url = f"{base_url}?group={group_num}"
+                logger.info(f"Haetaan ryhmä {group_num}: {group_url}")
+                response = self.fetch_with_retry(group_url)
+                if not response:
+                    logger.warning(f"⚠ Ryhmä {group_num}: vastaus puuttuu, lopetetaan")
+                    break
+
+                group_matches = self._parse_matches_from_html(response.text)
+                if not group_matches:
+                    logger.info(f"✓ Ryhmä {group_num}: ei otteluita, lopetetaan")
+                    break
+
+                logger.info(f"✓ Ryhmä {group_num}: {len(group_matches)} ottelua")
+                all_matches.extend(group_matches)
+
+            if all_matches:
+                logger.info(f"✓ Ottelutiedot haettu: {len(all_matches)} ottelua yhteensä")
+                return all_matches
             else:
                 logger.warning("⚠ Ottelutietoja ei löydy sivun rakenteesta, käytetään esimerkkidataa")
                 return self._create_dummy_matches()
