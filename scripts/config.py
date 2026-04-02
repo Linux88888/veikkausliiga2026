@@ -225,8 +225,8 @@ PARTICIPANTS = [
             "Paananen, Kasper",     # 1. maalintekijä
             "Karjalainen, Rasmus",  # 2. maalintekijä
             "Pukki, Teemu",         # 3. maalintekijä
-            "Korkkö, Antto",        # 4. maalintekijä
-            "Huovila, Jiri",        # 5. maalintekijä
+            "Körkkö, Julius",       # 4. maalintekijä
+            "Huovila, Vilho",       # 5. maalintekijä
         ],
     },
 ]

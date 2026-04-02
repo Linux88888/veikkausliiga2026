@@ -1,6 +1,6 @@
 # 🏆 Veikkausliiga 2026 — Veikkaukset
 
-*Päivitetty: 2026-04-02 18:45:30*
+*Päivitetty: 2026-04-02 18:59:22*
 
 > ⚠️ **Huom:** Tilastot perustuvat esimerkkidataan — pisteet ovat simuloituja.
 
@@ -164,8 +164,8 @@
 | 1 | Paananen, Kasper | - | 0 | Ei top-listalla |
 | 2 | Karjalainen, Rasmus | 1 | 2 | 🔸 Top-listalla (sija 1) |
 | 3 | Pukki, Teemu | - | 0 | Ei top-listalla |
-| 4 | Korkkö, Antto | - | 0 | Ei top-listalla |
-| 5 | Huovila, Jiri | - | 0 | Ei top-listalla |
+| 4 | Körkkö, Julius | - | 0 | Ei top-listalla |
+| 5 | Huovila, Vilho | - | 0 | Ei top-listalla |
 
 ---
 
