@@ -1,6 +1,6 @@
 # 🏆 Veikkausliiga 2026 — Veikkaukset
 
-*Päivitetty: 2026-04-02 12:29:43*
+*Päivitetty: 2026-04-02 12:34:22*
 
 > ⚠️ **Huom:** Tilastot perustuvat esimerkkidataan — pisteet ovat simuloituja.
 

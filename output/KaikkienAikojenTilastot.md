@@ -1,6 +1,6 @@
 # 🏅 Veikkausliiga — Kaikkien aikojen tilastot
 
-*Päivitetty: 2026-04-02 12:29:39*
+*Päivitetty: 2026-04-02 12:34:20*
 
 *Lähde: Transfermarkt / Veikkausliiga.com*
 
