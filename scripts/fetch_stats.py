@@ -207,13 +207,14 @@ class StatsProcessor:
 
         Returns
         -------
-        (players: list[str], is_dummy: bool)
+        (players: list[dict], is_dummy: bool)
+            Kukin dict sisältää: 'pelaaja', 'joukkue', 'ottelut', 'maalit', 'syotot', 'sijoitus'
         """
         if count is None:
             count = TOP_SCORERS_COUNT
         players, is_dummy = self.fetch_full_player_stats()
         players_sorted = sorted(players, key=lambda x: x['maalit'], reverse=True)
-        top = [p['pelaaja'] for p in players_sorted[:count]]
+        top = players_sorted[:count]
         if top:
             logger.info(f"✓ Maalintekijät haettu: {len(top)} pelaajaa")
             return top, is_dummy
@@ -239,16 +240,16 @@ class StatsProcessor:
     def _create_dummy_scorers(self, count=10):
         """Luo testidatan maalintekijöille jos haku epäonnistuu"""
         dummy = [
-            "Karjalainen, Rasmus",
-            "Lappalainen, Lassi",
-            "Engvall, Gustav",
-            "Borchers, Mads",
-            "Vikström, Rudi",
-            "Toivio, Toni",
-            "Havenaar, Mike",
-            "Pennanen, Timi",
-            "Lindström, Joni",
-            "Oduya, Wisdom",
+            {'sijoitus': '1',  'pelaaja': 'Karjalainen, Rasmus', 'joukkue': 'KuPS',     'ottelut': 0, 'maalit': 0, 'syotot': 0},
+            {'sijoitus': '2',  'pelaaja': 'Lappalainen, Lassi',  'joukkue': 'KuPS',     'ottelut': 0, 'maalit': 0, 'syotot': 0},
+            {'sijoitus': '3',  'pelaaja': 'Engvall, Gustav',     'joukkue': 'Ilves',    'ottelut': 0, 'maalit': 0, 'syotot': 0},
+            {'sijoitus': '4',  'pelaaja': 'Borchers, Mads',      'joukkue': 'HJK',      'ottelut': 0, 'maalit': 0, 'syotot': 0},
+            {'sijoitus': '5',  'pelaaja': 'Vikström, Rudi',      'joukkue': 'AC Oulu',  'ottelut': 0, 'maalit': 0, 'syotot': 0},
+            {'sijoitus': '6',  'pelaaja': 'Toivio, Toni',        'joukkue': 'HJK',      'ottelut': 0, 'maalit': 0, 'syotot': 0},
+            {'sijoitus': '7',  'pelaaja': 'Havenaar, Mike',      'joukkue': 'SJK',      'ottelut': 0, 'maalit': 0, 'syotot': 0},
+            {'sijoitus': '8',  'pelaaja': 'Pennanen, Timi',      'joukkue': 'FC Inter', 'ottelut': 0, 'maalit': 0, 'syotot': 0},
+            {'sijoitus': '9',  'pelaaja': 'Lindström, Joni',     'joukkue': 'TPS',      'ottelut': 0, 'maalit': 0, 'syotot': 0},
+            {'sijoitus': '10', 'pelaaja': 'Oduya, Wisdom',       'joukkue': 'FC Lahti', 'ottelut': 0, 'maalit': 0, 'syotot': 0},
         ]
         logger.warning(f"⚠ Käytetään esimerkkidataa maalintekijöille: {len(dummy[:count])} pelaajaa")
         return dummy[:count]
