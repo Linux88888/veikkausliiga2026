@@ -1,6 +1,6 @@
 # 🏆 Veikkausliiga 2026 — Veikkaukset
 
-*Päivitetty: 2026-04-04 15:34:25*
+*Päivitetty: 2026-04-04 15:43:24*
 
 ---
 
@@ -10,9 +10,9 @@
 
 | Sija | Osallistuja | Sarjataulukko | Maalintekijät | Yhteensä |
 |:----:|-------------|:-------------:|:-------------:|:--------:|
-| 🥇 | **dude island** | 10/36 ███░░░░░░░ | 5/50 █░░░░░░░░░ | 🎯 **15** |
-| 🥈 | **VV** | 11/36 ███░░░░░░░ | 0/50 ░░░░░░░░░░ | 🎯 **11** |
-| 🥉 | **Ville Viikinki** | 11/36 ███░░░░░░░ | 0/50 ░░░░░░░░░░ | 🎯 **11** |
+| 🥇 | **Ville Viikinki** | 11/36 ███░░░░░░░ | 5/50 █░░░░░░░░░ | 🎯 **16** |
+| 🥈 | **VV** | 11/36 ███░░░░░░░ | 2/50 ░░░░░░░░░░ | 🎯 **13** |
+| 🥉 | **dude island** | 10/36 ███░░░░░░░ | 2/50 ░░░░░░░░░░ | 🎯 **12** |
 
 <details>
 <summary>📋 Pisteytysjärjestelmä</summary>
@@ -59,84 +59,22 @@
 
 | # | Pelaaja |
 |:-:|--------|
-| 1 | 🥇 Arsalo, Markus |
-| 2 | 🥈 Barros Pimentel Lima, Paulo Jorge |
-| 3 | 🥉 Bogicevic, Mihailo |
-| 4 |  Borchers, Mads |
-| 5 |  Chukwudi, Samuel Johansen |
-| 6 |  Daoussi, Yassin |
-| 7 |  Ahiabu |
-| 8 |  Haukioja, Martti |
-| 9 |  Huuhtanen, Eetu |
-| 10 |  Hämäläinen, Juuso |
+| 1 | 🥇 Ezeh, David |
+| 2 | 🥈 Mero, Toivo |
+| 3 | 🥉 Pukki, Teemu |
+| 4 |  Abdihakim Ali, Jabir |
+| 5 |  Arsalo, Markus |
+| 6 |  Barros Pimentel Lima, Paulo Jorge |
+| 7 |  Bogicevic, Mihailo |
+| 8 |  Borchers, Mads |
+| 9 |  Boström, Aapo |
+| 10 |  Botue, Kouame Jean Ficre |
 
 ---
 
 ## 📝 Yksityiskohtaiset pisteet
 
-### dude island — 15 pistettä
-
-**Sarjataulukko:** 10/36 p (28%) ████░░░░░░░░░░░
-
-| Veikkaama sija | Joukkue | Toteutunut sija | Ero | Pisteet |
-|:--------------:|---------|:---------------:|:---:|:-------:|
-| 1 | <img src="../logos/hjk.svg" width="18" height="18"> HJK | 1 | ✅ 0 | 3 |
-| 2 | <img src="../logos/kups.svg" width="18" height="18"> KuPS | 10 | ❌ 8 | 0 |
-| 3 | <img src="../logos/sjk.svg" width="18" height="18"> SJK | 12 | ❌ 9 | 0 |
-| 4 | <img src="../logos/ilves.svg" width="18" height="18"> Ilves | 9 | ❌ 5 | 0 |
-| 5 | <img src="../logos/inter.svg" width="18" height="18"> FC Inter | 2 | ❌ 3 | 0 |
-| 6 | <img src="../logos/lahti.svg" width="18" height="18"> FC Lahti | 5 | 🟡 1 | 2 |
-| 7 | <img src="../logos/jaro.svg" width="18" height="18"> FF Jaro | 6 | 🟡 1 | 2 |
-| 8 | <img src="../logos/vps.svg" width="18" height="18"> VPS | 3 | ❌ 5 | 0 |
-| 9 | <img src="../logos/oulu.svg" width="18" height="18"> AC Oulu | 4 | ❌ 5 | 0 |
-| 10 | <img src="../logos/mariehamn.svg" width="18" height="18"> IFK Mariehamn | 8 | 🟡 2 | 1 |
-| 11 | <img src="../logos/gnistan.svg" width="18" height="18"> IF Gnistan | 7 | ❌ 4 | 0 |
-| 12 | <img src="../logos/tps.svg" width="18" height="18"> TPS | 11 | 🟡 1 | 2 |
-
-**Maalintekijät:** 5/50 p (10%) ██░░░░░░░░░░░░░
-
-| Veikkaama sija | Pelaaja | Toteutunut sija | Pisteet | Tila |
-|:--------------:|---------|:---------------:|:-------:|------|
-| 1 | Karjalainen, Rasmus | - | 0 | Ei top-listalla |
-| 2 | Lappalainen, Lassi | - | 0 | Ei top-listalla |
-| 3 | Engvall, Gustav | - | 0 | Ei top-listalla |
-| 4 | Borchers, Mads | 4 | 5 | ✅ Täsmäosuma! (sija 4) |
-| 5 | Vikström, Rudi | - | 0 | Ei top-listalla |
-
----
-
-### VV — 11 pistettä
-
-**Sarjataulukko:** 11/36 p (31%) █████░░░░░░░░░░
-
-| Veikkaama sija | Joukkue | Toteutunut sija | Ero | Pisteet |
-|:--------------:|---------|:---------------:|:---:|:-------:|
-| 1 | <img src="../logos/hjk.svg" width="18" height="18"> HJK | 1 | ✅ 0 | 3 |
-| 2 | <img src="../logos/kups.svg" width="18" height="18"> KuPS | 10 | ❌ 8 | 0 |
-| 3 | <img src="../logos/inter.svg" width="18" height="18"> FC Inter | 2 | 🟡 1 | 2 |
-| 4 | <img src="../logos/sjk.svg" width="18" height="18"> SJK | 12 | ❌ 8 | 0 |
-| 5 | <img src="../logos/ilves.svg" width="18" height="18"> Ilves | 9 | ❌ 4 | 0 |
-| 6 | <img src="../logos/lahti.svg" width="18" height="18"> FC Lahti | 5 | 🟡 1 | 2 |
-| 7 | <img src="../logos/jaro.svg" width="18" height="18"> FF Jaro | 6 | 🟡 1 | 2 |
-| 8 | <img src="../logos/oulu.svg" width="18" height="18"> AC Oulu | 4 | ❌ 4 | 0 |
-| 9 | <img src="../logos/vps.svg" width="18" height="18"> VPS | 3 | ❌ 6 | 0 |
-| 10 | <img src="../logos/gnistan.svg" width="18" height="18"> IF Gnistan | 7 | ❌ 3 | 0 |
-| 11 | <img src="../logos/mariehamn.svg" width="18" height="18"> IFK Mariehamn | 8 | ❌ 3 | 0 |
-| 12 | <img src="../logos/tps.svg" width="18" height="18"> TPS | 11 | 🟡 1 | 2 |
-
-**Maalintekijät:** 0/50 p (0%) ░░░░░░░░░░░░░░░
-
-| Veikkaama sija | Pelaaja | Toteutunut sija | Pisteet | Tila |
-|:--------------:|---------|:---------------:|:-------:|------|
-| 1 | Barbosa, Neemias | - | 0 | Ei top-listalla |
-| 2 | Karjalainen, Rasmus | - | 0 | Ei top-listalla |
-| 3 | Paananen, Kasper | - | 0 | Ei top-listalla |
-| 4 | Engvall, Gustav | - | 0 | Ei top-listalla |
-| 5 | Pukki, Teemu | - | 0 | Ei top-listalla |
-
----
-
-### Ville Viikinki — 11 pistettä
+### Ville Viikinki — 16 pistettä
 
 **Sarjataulukko:** 11/36 p (31%) █████░░░░░░░░░░
 
@@ -155,15 +93,77 @@
 | 11 | <img src="../logos/tps.svg" width="18" height="18"> TPS | 11 | ✅ 0 | 3 |
 | 12 | <img src="../logos/mariehamn.svg" width="18" height="18"> IFK Mariehamn | 8 | ❌ 4 | 0 |
 
-**Maalintekijät:** 0/50 p (0%) ░░░░░░░░░░░░░░░
+**Maalintekijät:** 5/50 p (10%) ██░░░░░░░░░░░░░
 
 | Veikkaama sija | Pelaaja | Toteutunut sija | Pisteet | Tila |
 |:--------------:|---------|:---------------:|:-------:|------|
 | 1 | Paananen, Kasper | - | 0 | Ei top-listalla |
 | 2 | Karjalainen, Rasmus | - | 0 | Ei top-listalla |
-| 3 | Pukki, Teemu | - | 0 | Ei top-listalla |
+| 3 | Pukki, Teemu | 3 | 5 | ✅ Täsmäosuma! (sija 3) |
 | 4 | Körkkö, Julius | - | 0 | Ei top-listalla |
 | 5 | Huovila, Vilho | - | 0 | Ei top-listalla |
+
+---
+
+### VV — 13 pistettä
+
+**Sarjataulukko:** 11/36 p (31%) █████░░░░░░░░░░
+
+| Veikkaama sija | Joukkue | Toteutunut sija | Ero | Pisteet |
+|:--------------:|---------|:---------------:|:---:|:-------:|
+| 1 | <img src="../logos/hjk.svg" width="18" height="18"> HJK | 1 | ✅ 0 | 3 |
+| 2 | <img src="../logos/kups.svg" width="18" height="18"> KuPS | 10 | ❌ 8 | 0 |
+| 3 | <img src="../logos/inter.svg" width="18" height="18"> FC Inter | 2 | 🟡 1 | 2 |
+| 4 | <img src="../logos/sjk.svg" width="18" height="18"> SJK | 12 | ❌ 8 | 0 |
+| 5 | <img src="../logos/ilves.svg" width="18" height="18"> Ilves | 9 | ❌ 4 | 0 |
+| 6 | <img src="../logos/lahti.svg" width="18" height="18"> FC Lahti | 5 | 🟡 1 | 2 |
+| 7 | <img src="../logos/jaro.svg" width="18" height="18"> FF Jaro | 6 | 🟡 1 | 2 |
+| 8 | <img src="../logos/oulu.svg" width="18" height="18"> AC Oulu | 4 | ❌ 4 | 0 |
+| 9 | <img src="../logos/vps.svg" width="18" height="18"> VPS | 3 | ❌ 6 | 0 |
+| 10 | <img src="../logos/gnistan.svg" width="18" height="18"> IF Gnistan | 7 | ❌ 3 | 0 |
+| 11 | <img src="../logos/mariehamn.svg" width="18" height="18"> IFK Mariehamn | 8 | ❌ 3 | 0 |
+| 12 | <img src="../logos/tps.svg" width="18" height="18"> TPS | 11 | 🟡 1 | 2 |
+
+**Maalintekijät:** 2/50 p (4%) █░░░░░░░░░░░░░░
+
+| Veikkaama sija | Pelaaja | Toteutunut sija | Pisteet | Tila |
+|:--------------:|---------|:---------------:|:-------:|------|
+| 1 | Barbosa, Neemias | - | 0 | Ei top-listalla |
+| 2 | Karjalainen, Rasmus | - | 0 | Ei top-listalla |
+| 3 | Paananen, Kasper | - | 0 | Ei top-listalla |
+| 4 | Engvall, Gustav | - | 0 | Ei top-listalla |
+| 5 | Pukki, Teemu | 3 | 2 | 🔸 Top-listalla (sija 3) |
+
+---
+
+### dude island — 12 pistettä
+
+**Sarjataulukko:** 10/36 p (28%) ████░░░░░░░░░░░
+
+| Veikkaama sija | Joukkue | Toteutunut sija | Ero | Pisteet |
+|:--------------:|---------|:---------------:|:---:|:-------:|
+| 1 | <img src="../logos/hjk.svg" width="18" height="18"> HJK | 1 | ✅ 0 | 3 |
+| 2 | <img src="../logos/kups.svg" width="18" height="18"> KuPS | 10 | ❌ 8 | 0 |
+| 3 | <img src="../logos/sjk.svg" width="18" height="18"> SJK | 12 | ❌ 9 | 0 |
+| 4 | <img src="../logos/ilves.svg" width="18" height="18"> Ilves | 9 | ❌ 5 | 0 |
+| 5 | <img src="../logos/inter.svg" width="18" height="18"> FC Inter | 2 | ❌ 3 | 0 |
+| 6 | <img src="../logos/lahti.svg" width="18" height="18"> FC Lahti | 5 | 🟡 1 | 2 |
+| 7 | <img src="../logos/jaro.svg" width="18" height="18"> FF Jaro | 6 | 🟡 1 | 2 |
+| 8 | <img src="../logos/vps.svg" width="18" height="18"> VPS | 3 | ❌ 5 | 0 |
+| 9 | <img src="../logos/oulu.svg" width="18" height="18"> AC Oulu | 4 | ❌ 5 | 0 |
+| 10 | <img src="../logos/mariehamn.svg" width="18" height="18"> IFK Mariehamn | 8 | 🟡 2 | 1 |
+| 11 | <img src="../logos/gnistan.svg" width="18" height="18"> IF Gnistan | 7 | ❌ 4 | 0 |
+| 12 | <img src="../logos/tps.svg" width="18" height="18"> TPS | 11 | 🟡 1 | 2 |
+
+**Maalintekijät:** 2/50 p (4%) █░░░░░░░░░░░░░░
+
+| Veikkaama sija | Pelaaja | Toteutunut sija | Pisteet | Tila |
+|:--------------:|---------|:---------------:|:-------:|------|
+| 1 | Karjalainen, Rasmus | - | 0 | Ei top-listalla |
+| 2 | Lappalainen, Lassi | - | 0 | Ei top-listalla |
+| 3 | Engvall, Gustav | - | 0 | Ei top-listalla |
+| 4 | Borchers, Mads | 8 | 2 | 🔸 Top-listalla (sija 8) |
+| 5 | Vikström, Rudi | - | 0 | Ei top-listalla |
 
 ---
 
