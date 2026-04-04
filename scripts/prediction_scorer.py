@@ -129,12 +129,9 @@ class PredictionScorer:
             if act_i is None:
                 pts = 0
                 status = "Ei top-listalla"
-            elif act_i == pred_i:
-                pts = SCORER_SCORING.get("exact", 5)
-                status = f"✅ Täsmäosuma! (sija {act_i})"
             else:
                 pts = SCORER_SCORING.get("in_list", 2)
-                status = f"🔸 Top-listalla (sija {act_i})"
+                status = f"✅ Top-5 listalla (sija {act_i})"
 
             total += pts
             details.append(
@@ -266,8 +263,7 @@ class PredictionScorer:
                 f.write(f"**Maalintekijät** (maks. {max_scorers} p, top-{TOP_SCORERS_COUNT} lista)\n\n")
                 f.write("| Tilanne | Pisteet |\n")
                 f.write("|:-------:|:-------:|\n")
-                f.write(f"| ✅ Täsmäosuma | {SCORER_SCORING.get('exact', 5)} p |\n")
-                f.write(f"| 🔸 Top-listalla | {SCORER_SCORING.get('in_list', 2)} p |\n")
+                f.write(f"| ✅ Top-5 listalla | {SCORER_SCORING.get('in_list', 2)} p |\n")
                 f.write("| ❌ Ei listalla | 0 p |\n\n")
                 f.write("</details>\n\n")
 

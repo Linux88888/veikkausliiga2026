@@ -134,8 +134,7 @@ STANDINGS_SCORING = {
 
 # Maalintekijäennuste
 SCORER_SCORING = {
-    "exact": 5,    # Täsmälleen oikea sijoitus
-    "in_list": 2,  # Pelaaja top-listalla mutta väärässä sijoituksessa
+    "in_list": 2,  # Pelaaja top-5 listalla (sijoituksella ei merkitystä)
 }
 
 # Kuinka monen parhaan maalintekijän lista otetaan huomioon
