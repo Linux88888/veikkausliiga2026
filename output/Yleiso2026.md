@@ -1,25 +1,25 @@
 # Veikkausliiga 2026 - Yleisömäärät
 
-*Analysoitu: 2026-04-04 12:24:38*
+*Analysoitu: 2026-04-04 15:28:50*
 
-*⚠ Kausi ei ole vielä alkanut — luvut perustuvat historiallisiin keskiarvoihin (2023–2025 arvio), eivät todellisiin katsojalukuihin.*
+*Lähde: Ottelut.md (2 pelattu kotiottelua)*
 
 ## Kauden ennuste / tilanne
 
-- **Kotiotteluja pelattu**: 0
-- **Arvioitu kokonaiskatsojamäärä (koko kausi)**: 349,800
-- **Arvioitu keskiarvo per ottelu**: 2,650 katsojaa
+- **Kotiotteluja pelattu**: 2
+- **Arvioitu yhteiskatsojamäärä**: 8,600
+- **Keskiarvo per ottelu**: 4,300 katsojaa
 - **Suurin stadionkapasiteetti**: 14,000 katsojaa
 
 ## Joukkuekohtaiset stadionit
 
 | Joukkue | Stadion | Kapasiteetti | Hist. keskiarvo | Kotipelit | Arvio |
 |---------|---------|:------------:|:---------------:|:---------:|:-----:|
-| HJK | Bolt Arena | 10,770 | 5,800 | 0 | — |
+| HJK | Bolt Arena | 10,770 | 5,800 | 1 | 5,800 |
 | SJK | Seinäjoen areena | 13,500 | 3,800 | 0 | — |
 | Ilves | Tammelan stadion | 8,000 | 3,600 | 0 | — |
 | KuPS | Väre Arena | 5,000 | 3,000 | 0 | — |
-| FC Inter | Veritas Stadion | 9,300 | 2,800 | 0 | — |
+| FC Inter | Veritas Stadion | 9,300 | 2,800 | 1 | 2,800 |
 | TPS | Veritas Stadion | 9,300 | 2,500 | 0 | — |
 | FC Lahti | Lahden stadion | 14,000 | 2,200 | 0 | — |
 | AC Oulu | Raatti | 6,000 | 2,000 | 0 | — |

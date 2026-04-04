@@ -74,8 +74,13 @@ class MatchFetcher:
 
     @staticmethod
     def _is_score(s):
-        """Palauttaa True vain oikean muotoiselle tulokselle, esim. '2-1' tai '0–0'."""
-        return bool(re.match(r'^\d+\s*[-–]\s*\d+$', s.strip()))
+        """Palauttaa True vain oikean muotoiselle tulokselle, esim. '2-1', '0–0' tai '0 — 0'."""
+        return bool(re.match(r'^\d+\s*[-–—]\s*\d+$', s.strip()))
+
+    @staticmethod
+    def _normalize_score(s):
+        """Normalisoi tuloksen muotoon '2-1' (korvaa em/en-viivamuodot tavallisella viivalla)."""
+        return re.sub(r'\s*[-–—]\s*', '-', s.strip())
 
     @staticmethod
     def _is_time(s):
@@ -144,8 +149,9 @@ class MatchFetcher:
             # cells[2] = kellonaika (esim. "13:00")
             # cells[3] = linkki ottelusivu
             # cells[4] = kotijoukkue TAI "Koti - Vieras" yhdistettynä
-            # cells[5] = tulos (esim. "2-1") TAI "Seuranta" (seurantanappi)
-            # cells[6] = vierasjoukkue (tai tyhjä jos yhdistetty)
+            # cells[5] = linkit (Ennakko/Seuranta/Tilastot/Raportti) TAI tulos (esim. "2-1")
+            # cells[6] = tulos (esim. "0 — 0") TAI vierasjoukkue
+            # cells[7] = yleisömäärä (jos yhdistetty muoto)
 
             # Ensisijainen strategia: cells[4]=koti, cells[5]=tulos, cells[6]=vieras
             if len(cells) >= 5:
@@ -158,12 +164,18 @@ class MatchFetcher:
                     parts = [p.strip() for p in raw_koti.split(' - ', 1)]
                     koti = parts[0]
                     vieras = parts[1] if len(parts) > 1 else raw_vieras
+                    # Kun muoto on yhdistetty, tulos on cells[6] (cells[5] on linkkipalsta)
+                    if not self._is_score(raw_tulos) and self._is_score(raw_vieras):
+                        raw_tulos = raw_vieras
                 else:
                     koti = raw_koti
                     vieras = raw_vieras
 
                 # Hyväksy tulos vain jos se on oikean muotoinen (esim. "2-1")
-                tulos = raw_tulos if self._is_score(raw_tulos) else '-'
+                if self._is_score(raw_tulos):
+                    tulos = self._normalize_score(raw_tulos)
+                else:
+                    tulos = '-'
 
             # Varastrategia: etsi joukkuenimet kaikista soluista [3+]
             if not koti or not vieras or self._is_time(koti) or self._is_date_with_weekday(koti):
@@ -176,7 +188,7 @@ class MatchFetcher:
                         team_cells.append(t)
                 if len(team_cells) >= 3 and self._is_score(team_cells[1]):
                     koti = team_cells[0]
-                    tulos = team_cells[1]
+                    tulos = self._normalize_score(team_cells[1])
                     vieras = team_cells[2]
                 elif len(team_cells) >= 2:
                     koti = team_cells[0]

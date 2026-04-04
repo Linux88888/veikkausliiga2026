@@ -20,7 +20,7 @@ from fetch_matches import MatchFetcher, MAX_GROUPS
 # ---------------------------------------------------------------------------
 
 def _make_match_row(ottelu_id, pvm, klo, koti, tulos, vieras):
-    """Luo HTML-taulukkorivi yhdelle ottelulle."""
+    """Luo HTML-taulukkorivi yhdelle ottelulle (7-sarakeinen muoto)."""
     return (
         f"<tr>"
         f"<td>{ottelu_id}</td>"
@@ -30,6 +30,25 @@ def _make_match_row(ottelu_id, pvm, klo, koti, tulos, vieras):
         f"<td>{koti}</td>"
         f"<td>{tulos}</td>"
         f"<td>{vieras}</td>"
+        f"</tr>"
+    )
+
+
+def _make_match_row_8col(ottelu_id, pvm, klo, combined, links, score, attendance="0"):
+    """Luo HTML-taulukkorivi (8-sarakeinen muoto, veikkausliiga.com:n uusi rakenne).
+
+    cells[4] = 'Koti - Vieras', cells[5] = linkit, cells[6] = tulos, cells[7] = yleisö.
+    """
+    return (
+        f"<tr>"
+        f"<td>{ottelu_id}</td>"
+        f"<td>{pvm}</td>"
+        f"<td>{klo}</td>"
+        f"<td>{pvm}<br>{klo}</td>"
+        f"<td>{combined}</td>"
+        f"<td>{links}</td>"
+        f"<td>{score}</td>"
+        f"<td>{attendance}</td>"
         f"</tr>"
     )
 
@@ -134,6 +153,60 @@ class TestParseMatchesFromHtml(unittest.TestCase):
         self.assertEqual(len(matches), 1)
         self.assertEqual(matches[0]["koti"],   "HJK")
         self.assertEqual(matches[0]["vieras"], "Ilves")
+
+    def test_8col_played_match_em_dash(self):
+        """8-sarakeinen muoto: em-viiva-tulos (esim. '0 \u2014 0') parsitaan oikein."""
+        html = _make_html_page([
+            _make_match_row_8col(
+                "1", "La 4.4.2026", "13:00",
+                combined="FC Inter - VPS",
+                links="Ennakko\nSeuranta\nTilastot\nRaportti",
+                score="0 \u2014 0",
+                attendance="3401",
+            )
+        ])
+        matches = self.fetcher._parse_matches_from_html(html)
+        self.assertEqual(len(matches), 1)
+        m = matches[0]
+        self.assertEqual(m["koti"],   "FC Inter")
+        self.assertEqual(m["vieras"], "VPS")
+        self.assertEqual(m["tulos"],  "0-0")
+
+    def test_8col_played_match_em_dash_nonzero(self):
+        """8-sarakeinen muoto: em-viiva-tulos '3 \u2014 0' normalisoidaan '3-0':ksi."""
+        html = _make_html_page([
+            _make_match_row_8col(
+                "2", "La 4.4.2026", "15:00",
+                combined="HJK - SJK",
+                links="Ennakko\nSeuranta\nTilastot",
+                score="3 \u2014 0",
+                attendance="5041",
+            )
+        ])
+        matches = self.fetcher._parse_matches_from_html(html)
+        self.assertEqual(len(matches), 1)
+        m = matches[0]
+        self.assertEqual(m["koti"],   "HJK")
+        self.assertEqual(m["vieras"], "SJK")
+        self.assertEqual(m["tulos"],  "3-0")
+
+    def test_8col_upcoming_match(self):
+        """8-sarakeinen muoto: tuleva ottelu (score='-') parsitaan tulos='-':ksi."""
+        html = _make_html_page([
+            _make_match_row_8col(
+                "3", "La 4.4.2026", "17:00",
+                combined="FF Jaro - FC Lahti",
+                links="Ennakko\nSeuranta",
+                score="-",
+                attendance="-",
+            )
+        ])
+        matches = self.fetcher._parse_matches_from_html(html)
+        self.assertEqual(len(matches), 1)
+        m = matches[0]
+        self.assertEqual(m["koti"],   "FF Jaro")
+        self.assertEqual(m["vieras"], "FC Lahti")
+        self.assertEqual(m["tulos"],  "-")
 
 
 class TestFetchMatchesMultipleGroups(unittest.TestCase):
@@ -281,7 +354,8 @@ class TestIsScoreAndHelpers(unittest.TestCase):
 
     def test_is_score_valid(self):
         # "2\u20131" käyttää ajatusviivaa tavuviivan sijaan (veikkausliiga.com käyttää molempia)
-        for s in ["2-1", "0-0", "3-2", "10-0", "2\u20131"]:
+        # "0 \u2014 0" käyttää em-viivaa välilyönneillä (veikkausliiga.com:n uusi formaatti)
+        for s in ["2-1", "0-0", "3-2", "10-0", "2\u20131", "0 \u2014 0", "3 \u2014 0"]:
             self.assertTrue(self.fetcher._is_score(s))
 
     def test_is_score_invalid(self):
