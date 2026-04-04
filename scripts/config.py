@@ -126,15 +126,15 @@ PREDICTED_ORDER = [
 
 # Sarjataulukkoennuste: ero veikkaukseen (sijoituksia) → pisteet
 STANDINGS_SCORING = {
-    0: 3,  # Täsmälleen oikein
-    1: 2,  # 1 sijoitus väärin
-    2: 1,  # 2 sijoitusta väärin
-    # >= 3 sijoitusta väärin: 0 pistettä
+    0: 10,  # Täsmälleen oikein
+    # >= 1 sijoitus väärin: 0 pistettä
 }
 
 # Maalintekijäennuste
 SCORER_SCORING = {
-    "in_list": 2,  # Pelaaja top-5 listalla (sijoituksella ei merkitystä)
+    "in_list": 10,  # Pelaaja top-listalla
+    "goal": 2,      # Per maali
+    "assist": 1,    # Per syöttö
 }
 
 # Kuinka monen parhaan maalintekijän lista otetaan huomioon

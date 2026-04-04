@@ -207,13 +207,17 @@ class StatsProcessor:
 
         Returns
         -------
-        (players: list[str], is_dummy: bool)
+        (players: list[dict], is_dummy: bool)
+            Kukin dict sisältää avaimet: pelaaja, maalit, syotot
         """
         if count is None:
             count = TOP_SCORERS_COUNT
         players, is_dummy = self.fetch_full_player_stats()
         players_sorted = sorted(players, key=lambda x: x['maalit'], reverse=True)
-        top = [p['pelaaja'] for p in players_sorted[:count]]
+        top = [
+            {"pelaaja": p["pelaaja"], "maalit": p["maalit"], "syotot": p["syotot"]}
+            for p in players_sorted[:count]
+        ]
         if top:
             logger.info(f"✓ Maalintekijät haettu: {len(top)} pelaajaa")
             return top, is_dummy
@@ -239,16 +243,16 @@ class StatsProcessor:
     def _create_dummy_scorers(self, count=10):
         """Luo testidatan maalintekijöille jos haku epäonnistuu"""
         dummy = [
-            "Karjalainen, Rasmus",
-            "Lappalainen, Lassi",
-            "Engvall, Gustav",
-            "Borchers, Mads",
-            "Vikström, Rudi",
-            "Toivio, Toni",
-            "Havenaar, Mike",
-            "Pennanen, Timi",
-            "Lindström, Joni",
-            "Oduya, Wisdom",
+            {"pelaaja": "Karjalainen, Rasmus", "maalit": 0, "syotot": 0},
+            {"pelaaja": "Lappalainen, Lassi",  "maalit": 0, "syotot": 0},
+            {"pelaaja": "Engvall, Gustav",     "maalit": 0, "syotot": 0},
+            {"pelaaja": "Borchers, Mads",      "maalit": 0, "syotot": 0},
+            {"pelaaja": "Vikström, Rudi",      "maalit": 0, "syotot": 0},
+            {"pelaaja": "Toivio, Toni",        "maalit": 0, "syotot": 0},
+            {"pelaaja": "Havenaar, Mike",      "maalit": 0, "syotot": 0},
+            {"pelaaja": "Pennanen, Timi",      "maalit": 0, "syotot": 0},
+            {"pelaaja": "Lindström, Joni",     "maalit": 0, "syotot": 0},
+            {"pelaaja": "Oduya, Wisdom",       "maalit": 0, "syotot": 0},
         ]
         logger.warning(f"⚠ Käytetään esimerkkidataa maalintekijöille: {len(dummy[:count])} pelaajaa")
         return dummy[:count]
