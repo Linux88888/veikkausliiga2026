@@ -91,7 +91,11 @@ class TestEmptyPredictionHandling(unittest.TestCase):
         self.actual_standings = ["HJK", "KuPS", "FC Inter", "SJK", "Ilves",
                                   "VPS", "FF Jaro", "FC Lahti", "IFK Mariehamn",
                                   "IF Gnistan", "AC Oulu", "TPS"]
-        self.actual_scorers = ["Plange, Luke", "Karjalainen, Rasmus", "Odutayo, Colin"]
+        self.actual_scorers = [
+            {"pelaaja": "Plange, Luke",        "joukkue": "HJK", "maalit": 5, "syotot": 2, "sijoitus": "1"},
+            {"pelaaja": "Karjalainen, Rasmus", "joukkue": "KuPS", "maalit": 4, "syotot": 3, "sijoitus": "2"},
+            {"pelaaja": "Odutayo, Colin",      "joukkue": "SJK", "maalit": 3, "syotot": 1, "sijoitus": "3"},
+        ]
 
     def test_empty_standings_prediction_gives_zero_points(self):
         """Tyhjä sarjataulukkoennuste tuottaa 0 pistettä."""
