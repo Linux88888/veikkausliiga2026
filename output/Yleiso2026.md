@@ -1,6 +1,6 @@
 # Veikkausliiga 2026 - Yleisömäärät
 
-*Analysoitu: 2026-04-04 15:28:50*
+*Analysoitu: 2026-04-04 15:31:09*
 
 *Lähde: Ottelut.md (2 pelattu kotiottelua)*
 
