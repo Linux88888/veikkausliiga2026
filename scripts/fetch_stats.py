@@ -168,7 +168,11 @@ class StatsProcessor:
                     if not logged_first_row:
                         logger.info(f"Pelaajataulukkorakenne: {len(cells)} saraketta, esimerkkisolu: {[c.get_text().strip()[:15] for c in cells]}")
                         logged_first_row = True
-                    # Tyypillinen rakenne: [sijoitus, pelaaja, joukkue, ottelut, maalit, syötöt, keltaiset, punaiset]
+                    # Rakenne (veikkausliiga.com 2026):
+                    # [0]=sijoitus, [1]=pelaaja, [2]=joukkue, [3]=O(ottelut),
+                    # [4]=A(minuutit), [5]=M(maalit), [6]=S(syötöt),
+                    # [7]=AK, [8]=VS, [9]=VU, [10]=R,
+                    # [11]=KK(keltaiset), [12]=PK(punaiset), ...
                     def safe_int(idx):
                         try:
                             return int(cells[idx].get_text().strip()) if len(cells) > idx else 0
@@ -183,10 +187,10 @@ class StatsProcessor:
                             'pelaaja': player_name,
                             'joukkue': team,
                             'ottelut': safe_int(3),
-                            'maalit': safe_int(4),
-                            'syotot': safe_int(5),
-                            'keltaiset': safe_int(6),
-                            'punaiset': safe_int(7),
+                            'maalit': safe_int(5),
+                            'syotot': safe_int(6),
+                            'keltaiset': safe_int(11),
+                            'punaiset': safe_int(12),
                         })
 
             if players:
