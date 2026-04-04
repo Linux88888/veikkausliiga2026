@@ -291,7 +291,7 @@ class PredictionScorer:
                 f.write("| Ero sijoituksissa | Pisteet |\n")
                 f.write("|:-----------------:|:-------:|\n")
                 f.write(f"| 0 (täsmäosuma) | {STANDINGS_SCORING.get(0, 10)} p |\n")
-                f.write(f"| ≥ 1 sijoitus | 0 p |\n\n")
+                f.write(f"| ≥ 1 sijoitus | {STANDINGS_SCORING.get(1, 0)} p |\n\n")
 
                 f.write(f"**Maalintekijät** (maks. {max_scorers} p, top-{TOP_SCORERS_COUNT} lista)\n\n")
                 f.write("| Tilanne | Pisteet |\n")
