@@ -1,6 +1,6 @@
 # Veikkausliiga 2026 - Ottelut
 
-*Päivitetty: 2026-04-04 15:54:30*
+*Päivitetty: 2026-04-04 16:10:27*
 
 *Lähde: https://www.veikkausliiga.com/tilastot/2026/veikkausliiga/ottelut/*
 
@@ -8,7 +8,7 @@
 
 | Pelattu | Tulossa | Yhteensä | Edistyminen |
 |:-------:|:-------:|:--------:|:-----------:|
-| **2** | **130** | **132** | 2% |
+| **5** | **127** | **132** | 4% |
 
 ## Pelatut ottelut
 
@@ -16,14 +16,14 @@
 |------------|------|-------|--------|
 | La 4.4.2026 | FC Inter | 0-0 | VPS |
 | La 4.4.2026 | HJK | 3-0 | SJK |
+| La 4.4.2026 | FF Jaro | 0-1 | FC Lahti |
+| La 4.4.2026 | IFK Mariehamn | 1-1 | TPS |
+| La 4.4.2026 | Ilves | 1-3 | KuPS |
 
 ## Tulevat ottelut
 
 | Päivämäärä | Koti | Vieras |
 |------------|------|--------|
-| La 4.4.2026 | FF Jaro | FC Lahti |
-| La 4.4.2026 | IFK Mariehamn | TPS |
-| La 4.4.2026 | Ilves | KuPS |
 | La 4.4.2026 | IF Gnistan | AC Oulu |
 | Pe 10.4.2026 | TPS | FC Lahti |
 | Pe 10.4.2026 | SJK | IFK Mariehamn |
@@ -153,4 +153,4 @@
 | Ma 31.8.2026 | VPS | FC Lahti |
 
 ---
-*Yhteensä 132 ottelua (2 pelattu, 130 tulossa)*
+*Yhteensä 132 ottelua (5 pelattu, 127 tulossa)*
