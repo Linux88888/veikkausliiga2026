@@ -1,6 +1,6 @@
 # Veikkausliiga 2026 - Otteluennusteet
 
-*Analysoitu: 2026-04-04 16:10:26*
+*Analysoitu: 2026-04-04 16:11:32*
 
 *Ennusteet perustuvat joukkueiden historialliseen menestykseen ja vahvuusluokituksiin — eivät pelaaja- tai loukkaantumistietoihin.*
 
@@ -27,9 +27,6 @@
 
 | Koti | Vieras | Koti-% | Tasapeli-% | Vieras-% | Yli 2.5 % |
 |------|--------|:------:|:----------:|:--------:|:---------:|
-| FF Jaro | FC Lahti | 47% | 27% | 26% | 60% |
-| IFK Mariehamn | TPS | 45% | 27% | 28% | 59% |
-| Ilves | KuPS | 42% | 26% | 32% | 67% |
 | IF Gnistan | AC Oulu | 50% | 28% | 22% | 58% |
 
 ### Pe 10.4.2026
@@ -394,4 +391,4 @@
 | VPS | FC Lahti | 47% | 27% | 26% | 60% |
 
 ---
-*Yhteensä 130 ennustetta*
+*Yhteensä 127 ennustetta*
