@@ -17,47 +17,47 @@ class TestCalculateStandingsPoints(unittest.TestCase):
         self.scorer = PredictionScorer()
 
     def test_perfect_prediction(self):
-        """Täsmälleen oikea ennuste → 3 pistettä per joukkue"""
+        """Täsmälleen oikea ennuste → 10 pistettä per joukkue"""
         teams = ["HJK", "KuPS", "FC Inter"]
         pts, details = self.scorer.calculate_standings_points(teams, teams)
-        self.assertEqual(pts, 9)
+        self.assertEqual(pts, 30)
         for d in details:
-            self.assertEqual(d["pisteet"], 3)
+            self.assertEqual(d["pisteet"], 10)
             self.assertEqual(d["ero"], 0)
 
     def test_one_off_prediction(self):
-        """Ero 1 sijoitus → 2 pistettä"""
+        """Ero 1 sijoitus → 0 pistettä"""
         predicted = ["HJK", "KuPS", "FC Inter"]
         actual    = ["KuPS", "HJK", "FC Inter"]
         pts, details = self.scorer.calculate_standings_points(predicted, actual)
-        # HJK: pred=1, act=2, ero=1 → 2p
-        # KuPS: pred=2, act=1, ero=1 → 2p
-        # FC Inter: pred=3, act=3, ero=0 → 3p
-        self.assertEqual(pts, 7)
-        self.assertEqual(details[0]["pisteet"], 2)
-        self.assertEqual(details[1]["pisteet"], 2)
-        self.assertEqual(details[2]["pisteet"], 3)
+        # HJK: pred=1, act=2, ero=1 → 0p
+        # KuPS: pred=2, act=1, ero=1 → 0p
+        # FC Inter: pred=3, act=3, ero=0 → 10p
+        self.assertEqual(pts, 10)
+        self.assertEqual(details[0]["pisteet"], 0)
+        self.assertEqual(details[1]["pisteet"], 0)
+        self.assertEqual(details[2]["pisteet"], 10)
 
     def test_two_off_prediction(self):
-        """Ero 2 sijoitusta → 1 piste"""
+        """Ero 2 sijoitusta → 0 pistettä"""
         predicted = ["HJK", "KuPS", "FC Inter"]
         actual    = ["FC Inter", "KuPS", "HJK"]
         pts, details = self.scorer.calculate_standings_points(predicted, actual)
-        # HJK: pred=1, act=3, ero=2 → 1p
-        # KuPS: pred=2, act=2, ero=0 → 3p
-        # FC Inter: pred=3, act=1, ero=2 → 1p
-        self.assertEqual(pts, 5)
+        # HJK: pred=1, act=3, ero=2 → 0p
+        # KuPS: pred=2, act=2, ero=0 → 10p
+        # FC Inter: pred=3, act=1, ero=2 → 0p
+        self.assertEqual(pts, 10)
 
     def test_large_error_gives_zero(self):
-        """Ero ≥ 3 sijoitusta → 0 pistettä"""
+        """Ero ≥ 1 sijoitusta → 0 pistettä"""
         predicted = ["HJK", "KuPS", "FC Inter", "SJK"]
         actual    = ["SJK", "FC Inter", "KuPS", "HJK"]
         pts, details = self.scorer.calculate_standings_points(predicted, actual)
         # HJK: pred=1, act=4, ero=3 → 0p
-        # KuPS: pred=2, act=3, ero=1 → 2p
-        # FC Inter: pred=3, act=2, ero=1 → 2p
+        # KuPS: pred=2, act=3, ero=1 → 0p
+        # FC Inter: pred=3, act=2, ero=1 → 0p
         # SJK: pred=4, act=1, ero=3 → 0p
-        self.assertEqual(pts, 4)
+        self.assertEqual(pts, 0)
         self.assertEqual(details[0]["pisteet"], 0)
         self.assertEqual(details[3]["pisteet"], 0)
 
@@ -66,10 +66,10 @@ class TestCalculateStandingsPoints(unittest.TestCase):
         predicted = ["HJK", "KuPS", "SJK"]
         actual    = ["HJK", "KuPS"]  # SJK puuttuu
         pts, details = self.scorer.calculate_standings_points(predicted, actual)
-        # HJK: pred=1, act=1, ero=0 → 3p
-        # KuPS: pred=2, act=2, ero=0 → 3p
+        # HJK: pred=1, act=1, ero=0 → 10p
+        # KuPS: pred=2, act=2, ero=0 → 10p
         # SJK: puuttuu → 0p
-        self.assertEqual(pts, 6)
+        self.assertEqual(pts, 20)
         self.assertEqual(details[2]["pisteet"], 0)
         self.assertEqual(details[2]["toteutunut"], "-")
         self.assertIsNone(details[2]["ero"])
@@ -90,27 +90,40 @@ class TestCalculateScorerPoints(unittest.TestCase):
         self.scorer = PredictionScorer()
 
     def test_exact_scorer(self):
-        """Pelaaja top-listalla oikeassa sijoituksessa → 2 pistettä (sijoitus ei merkitse)"""
+        """Pelaaja top-listalla → 10 p + maalit*2 + syötöt*1"""
         predicted = ["Plange, Luke", "Karjalainen, Rasmus"]
-        actual    = ["Plange, Luke", "Karjalainen, Rasmus"]
+        actual = [
+            {"pelaaja": "Plange, Luke",        "maalit": 3, "syotot": 1},
+            {"pelaaja": "Karjalainen, Rasmus",  "maalit": 2, "syotot": 0},
+        ]
         pts, details = self.scorer.calculate_scorer_points(predicted, actual)
-        self.assertEqual(pts, 4)
-        for d in details:
-            self.assertEqual(d["pisteet"], 2)
+        # Plange: 10 + 3*2 + 1*1 = 17
+        # Karjalainen: 10 + 2*2 + 0*1 = 14
+        self.assertEqual(pts, 31)
+        self.assertEqual(details[0]["pisteet"], 17)
+        self.assertEqual(details[1]["pisteet"], 14)
 
     def test_in_list_scorer(self):
-        """Pelaaja listalla mutta väärässä sijoituksessa → 2 pistettä"""
+        """Pelaaja listalla mutta eri sijoituksessa → 10 p + maalit*2 + syötöt*1"""
         predicted = ["Plange, Luke", "Karjalainen, Rasmus"]
-        actual    = ["Karjalainen, Rasmus", "Plange, Luke"]
+        actual = [
+            {"pelaaja": "Karjalainen, Rasmus",  "maalit": 2, "syotot": 1},
+            {"pelaaja": "Plange, Luke",         "maalit": 1, "syotot": 2},
+        ]
         pts, details = self.scorer.calculate_scorer_points(predicted, actual)
-        self.assertEqual(pts, 4)
-        self.assertEqual(details[0]["pisteet"], 2)
-        self.assertEqual(details[1]["pisteet"], 2)
+        # Plange: 10 + 1*2 + 2*1 = 14
+        # Karjalainen: 10 + 2*2 + 1*1 = 15
+        self.assertEqual(pts, 29)
+        self.assertEqual(details[0]["pisteet"], 14)
+        self.assertEqual(details[1]["pisteet"], 15)
 
     def test_not_in_list_scorer(self):
         """Pelaaja ei top-listalla → 0 pistettä"""
         predicted = ["Tuntematon Pelaaja"]
-        actual    = ["Plange, Luke", "Karjalainen, Rasmus"]
+        actual = [
+            {"pelaaja": "Plange, Luke",        "maalit": 5, "syotot": 2},
+            {"pelaaja": "Karjalainen, Rasmus",  "maalit": 3, "syotot": 1},
+        ]
         pts, details = self.scorer.calculate_scorer_points(predicted, actual)
         self.assertEqual(pts, 0)
         self.assertEqual(details[0]["pisteet"], 0)
@@ -118,12 +131,24 @@ class TestCalculateScorerPoints(unittest.TestCase):
     def test_mixed_scorer(self):
         """Yhdistelmä top-listalla ja ei listalla"""
         predicted = ["Plange, Luke", "Odutayo, Colin", "Tuntematon"]
-        actual    = ["Plange, Luke", "Karjalainen, Rasmus", "Odutayo, Colin"]
+        actual = [
+            {"pelaaja": "Plange, Luke",    "maalit": 4, "syotot": 0},
+            {"pelaaja": "Karjalainen, Rasmus", "maalit": 3, "syotot": 2},
+            {"pelaaja": "Odutayo, Colin",  "maalit": 2, "syotot": 1},
+        ]
         pts, details = self.scorer.calculate_scorer_points(predicted, actual)
-        # Plange: top-listalla sija 1 → 2p
-        # Odutayo: top-listalla sija 3 → 2p
-        # Tuntematon: ei listalla → 0p
-        self.assertEqual(pts, 4)
+        # Plange: 10 + 4*2 + 0*1 = 18
+        # Odutayo: 10 + 2*2 + 1*1 = 15
+        # Tuntematon: 0
+        self.assertEqual(pts, 33)
+
+    def test_scorer_goals_assists_zero(self):
+        """Pelaaja listalla mutta 0 maalia/syöttöä → vain 10 p"""
+        predicted = ["Plange, Luke"]
+        actual = [{"pelaaja": "Plange, Luke", "maalit": 0, "syotot": 0}]
+        pts, details = self.scorer.calculate_scorer_points(predicted, actual)
+        self.assertEqual(pts, 10)
+        self.assertEqual(details[0]["pisteet"], 10)
 
 
 class TestIsScoreHelper(unittest.TestCase):

@@ -6,15 +6,14 @@ verraten niitä kauden todellisiin tuloksiin.
 
 Pisteytysjärjestelmä:
   Sarjataulukko:
-    Ero 0 (täsmäosuma)  → 3 pistettä
-    Ero 1 sijoitus      → 2 pistettä
-    Ero 2 sijoitusta    → 1 piste
-    Ero ≥ 3 sijoitusta  → 0 pistettä
+    Täsmäosuma (ero 0)  → 10 pistettä
+    Ero ≥ 1 sijoitusta  → 0 pistettä
 
   Maalintekijät:
-    Täsmäosuma (oikea sijoitus) → 5 pistettä
-    Pelaaja top-listalla        → 2 pistettä
-    Ei top-listalla             → 0 pistettä
+    Pelaaja top-listalla → 10 pistettä
+    Per maali            →  2 pistettä
+    Per syöttö           →  1 piste
+    Ei top-listalla      →  0 pistettä
 """
 
 import logging
@@ -37,8 +36,8 @@ try:
 except ImportError as e:
     print(f"Varoitus (config): {e}")
     PARTICIPANTS = []
-    STANDINGS_SCORING = {0: 3, 1: 2, 2: 1}
-    SCORER_SCORING = {"exact": 5, "in_list": 2}
+    STANDINGS_SCORING = {0: 10}
+    SCORER_SCORING = {"in_list": 10, "goal": 2, "assist": 1}
     TOP_SCORERS_COUNT = 10
     TEAMS_2026 = []
     TEAM_LOGOS = {}
@@ -113,32 +112,52 @@ class PredictionScorer:
 
         Parameters
         ----------
-        predicted : list[str]  – pelaajat ennustusjärjestyksessä
-        actual    : list[str]  – pelaajat toteutuneen maalimäärän mukaan
+        predicted : list[str]   – pelaajat ennustusjärjestyksessä
+        actual    : list[dict]  – pelaajat toteutuneen maalimäärän mukaan
+                                  (kukin dict: pelaaja, maalit, syotot)
 
         Returns
         -------
         (total_points: int, details: list[dict])
         """
-        actual_pos = {player: i + 1 for i, player in enumerate(actual)}
+        # Rakennetaan hakemisto: pelaajan nimi → {pos, maalit, syotot}
+        actual_dict = {}
+        for i, p in enumerate(actual, 1):
+            actual_dict[p["pelaaja"]] = {
+                "pos": i,
+                "maalit": p["maalit"],
+                "syotot": p["syotot"],
+            }
         total = 0
         details = []
 
         for pred_i, player in enumerate(predicted, 1):
-            act_i = actual_pos.get(player)
-            if act_i is None:
+            stats = actual_dict.get(player)
+            if stats is None:
                 pts = 0
+                act_pos = "-"
+                goals = 0
+                assists = 0
                 status = "Ei top-listalla"
             else:
-                pts = SCORER_SCORING.get("in_list", 2)
-                status = f"✅ Top-5 listalla (sija {act_i})"
+                act_pos = stats["pos"]
+                goals = stats["maalit"]
+                assists = stats["syotot"]
+                pts = (
+                    SCORER_SCORING.get("in_list", 10)
+                    + goals * SCORER_SCORING.get("goal", 2)
+                    + assists * SCORER_SCORING.get("assist", 1)
+                )
+                status = f"✅ Top-listalla (sija {act_pos})"
 
             total += pts
             details.append(
                 {
                     "pelaaja": player,
                     "veikkausi": pred_i,
-                    "toteutunut": act_i if act_i is not None else "-",
+                    "toteutunut": act_pos,
+                    "maalit": goals,
+                    "syotot": assists,
                     "pisteet": pts,
                     "tila": status,
                 }
@@ -192,8 +211,23 @@ class PredictionScorer:
             len(PARTICIPANTS[0].get("standings_prediction", [])) if PARTICIPANTS else 0,
             len(actual_standings),
         ) or 12
-        max_standings = STANDINGS_SCORING.get(0, 3) * n_teams
-        max_scorers = SCORER_SCORING.get("exact", 5) * TOP_SCORERS_COUNT
+        max_standings = STANDINGS_SCORING.get(0, 10) * n_teams
+
+        # Laske maksimipisteet maalintekijöistä: paras mahdollinen tulos jos
+        # kaikki veikkaajat osuisivat top-listalle oikeiden tilastojen kanssa
+        n_scorers_predicted = max(
+            (len(p.get("scorers_prediction", [])) for p in PARTICIPANTS if p.get("scorers_prediction")),
+            default=5,
+        ) or 5
+        if actual_scorers:
+            max_scorers = sum(
+                SCORER_SCORING.get("in_list", 10)
+                + p["maalit"] * SCORER_SCORING.get("goal", 2)
+                + p["syotot"] * SCORER_SCORING.get("assist", 1)
+                for p in actual_scorers[:n_scorers_predicted]
+            )
+        else:
+            max_scorers = SCORER_SCORING.get("in_list", 10) * n_scorers_predicted
 
         def team_cell(team):
             """Palauttaa taulukkosolu joukkueen logolla ja nimellä."""
@@ -256,14 +290,15 @@ class PredictionScorer:
                 f.write("**Sarjataulukko** (maks. " + str(max_standings) + " p)\n\n")
                 f.write("| Ero sijoituksissa | Pisteet |\n")
                 f.write("|:-----------------:|:-------:|\n")
-                for diff, pts in sorted(STANDINGS_SCORING.items()):
-                    f.write(f"| {diff} sijoitusta | {pts} p |\n")
-                f.write(f"| ≥ 3 sijoitusta | 0 p |\n\n")
+                f.write(f"| 0 (täsmäosuma) | {STANDINGS_SCORING.get(0, 10)} p |\n")
+                f.write(f"| ≥ 1 sijoitus | {STANDINGS_SCORING.get(1, 0)} p |\n\n")
 
                 f.write(f"**Maalintekijät** (maks. {max_scorers} p, top-{TOP_SCORERS_COUNT} lista)\n\n")
                 f.write("| Tilanne | Pisteet |\n")
                 f.write("|:-------:|:-------:|\n")
-                f.write(f"| ✅ Top-5 listalla | {SCORER_SCORING.get('in_list', 2)} p |\n")
+                f.write(f"| ✅ Top-listalla | {SCORER_SCORING.get('in_list', 10)} p |\n")
+                f.write(f"| ⚽ Per maali | {SCORER_SCORING.get('goal', 2)} p |\n")
+                f.write(f"| 🎯 Per syöttö | {SCORER_SCORING.get('assist', 1)} p |\n")
                 f.write("| ❌ Ei listalla | 0 p |\n\n")
                 f.write("</details>\n\n")
 
@@ -280,11 +315,11 @@ class PredictionScorer:
                 # ---- Toteutuneet maalintekijät ----
                 f.write("## ⚽ Toteutuneet maalintekijät (top)\n\n")
                 if actual_scorers:
-                    f.write("| # | Pelaaja |\n")
-                    f.write("|:-:|--------|\n")
-                    for i, player in enumerate(actual_scorers, 1):
+                    f.write("| # | Pelaaja | M | S |\n")
+                    f.write("|:-:|--------|:-:|:-:|\n")
+                    for i, p in enumerate(actual_scorers, 1):
                         medal_icon = {1: "🥇", 2: "🥈", 3: "🥉"}.get(i, "")
-                        f.write(f"| {i} | {medal_icon} {player} |\n")
+                        f.write(f"| {i} | {medal_icon} {p['pelaaja']} | {p['maalit']} | {p['syotot']} |\n")
                 else:
                     f.write("*Maalintekijätietoja ei vielä saatavilla.*\n")
                 f.write("\n---\n\n")
@@ -320,9 +355,6 @@ class PredictionScorer:
                             elif d["ero"] == 0:
                                 diff_icon = "✅"
                                 ero_display = d["ero"]
-                            elif d["ero"] <= 2:
-                                diff_icon = "🟡"
-                                ero_display = d["ero"]
                             else:
                                 diff_icon = "❌"
                                 ero_display = d["ero"]
@@ -339,12 +371,13 @@ class PredictionScorer:
                         f"({g_pct}%) {pct_bar(r['scorer_points'], max_scorers, 15)}\n\n"
                     )
                     if has_scorers:
-                        f.write("| Veikkaama sija | Pelaaja | Toteutunut sija | Pisteet | Tila |\n")
-                        f.write("|:--------------:|---------|:---------------:|:-------:|------|\n")
+                        f.write("| Veikkaama sija | Pelaaja | Toteutunut sija | Maalit | Syötöt | Pisteet | Tila |\n")
+                        f.write("|:--------------:|---------|:---------------:|:------:|:------:|:-------:|------|\n")
                         for d in r["scorer_details"]:
                             f.write(
                                 f"| {d['veikkausi']} | {d['pelaaja']} "
-                                f"| {d['toteutunut']} | {d['pisteet']} | {d['tila']} |\n"
+                                f"| {d['toteutunut']} | {d['maalit']} | {d['syotot']} "
+                                f"| {d['pisteet']} | {d['tila']} |\n"
                             )
                     f.write("\n---\n\n")
 
