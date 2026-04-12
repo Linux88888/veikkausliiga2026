@@ -1,6 +1,6 @@
 # Veikkausliiga 2026 - Ottelut
 
-*Päivitetty: 2026-04-04 16:14:11*
+*Päivitetty: 2026-04-12 06:37:01*
 
 *Lähde: https://www.veikkausliiga.com/tilastot/2026/veikkausliiga/ottelut/*
 
@@ -8,7 +8,7 @@
 
 | Pelattu | Tulossa | Yhteensä | Edistyminen |
 |:-------:|:-------:|:--------:|:-----------:|
-| **5** | **127** | **132** | 4% |
+| **12** | **120** | **132** | 9% |
 
 ## Pelatut ottelut
 
@@ -19,18 +19,18 @@
 | La 4.4.2026 | FF Jaro | 0-1 | FC Lahti |
 | La 4.4.2026 | IFK Mariehamn | 1-1 | TPS |
 | La 4.4.2026 | Ilves | 1-3 | KuPS |
+| La 4.4.2026 | IF Gnistan | 1-5 | AC Oulu |
+| Pe 10.4.2026 | TPS | 2-1 | FC Lahti |
+| Pe 10.4.2026 | SJK | 3-0 | IFK Mariehamn |
+| Pe 10.4.2026 | VPS | 0-0 | FF Jaro |
+| La 11.4.2026 | KuPS | 1-0 | IF Gnistan |
+| La 11.4.2026 | HJK | 0-1 | AC Oulu |
+| La 11.4.2026 | FC Inter | 2-1 | Ilves |
 
 ## Tulevat ottelut
 
 | Päivämäärä | Koti | Vieras |
 |------------|------|--------|
-| La 4.4.2026 | IF Gnistan | AC Oulu |
-| Pe 10.4.2026 | TPS | FC Lahti |
-| Pe 10.4.2026 | SJK | IFK Mariehamn |
-| Pe 10.4.2026 | VPS | FF Jaro |
-| La 11.4.2026 | KuPS | IF Gnistan |
-| La 11.4.2026 | HJK | AC Oulu |
-| La 11.4.2026 | FC Inter | Ilves |
 | La 18.4.2026 | IF Gnistan | HJK |
 | La 18.4.2026 | FF Jaro | KuPS |
 | La 18.4.2026 | AC Oulu | VPS |
@@ -153,4 +153,4 @@
 | Ma 31.8.2026 | VPS | FC Lahti |
 
 ---
-*Yhteensä 132 ottelua (5 pelattu, 127 tulossa)*
+*Yhteensä 132 ottelua (12 pelattu, 120 tulossa)*
