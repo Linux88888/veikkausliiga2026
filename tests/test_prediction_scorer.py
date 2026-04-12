@@ -118,7 +118,7 @@ class TestCalculateScorerPoints(unittest.TestCase):
         self.assertEqual(details[1]["pisteet"], 15)
 
     def test_not_in_list_scorer(self):
-        """Pelaaja ei top-listalla → 0 pistettä"""
+        """Pelaaja ei top-listalla eikä tilastoissa → 0 pistettä"""
         predicted = ["Tuntematon Pelaaja"]
         actual = [
             {"pelaaja": "Plange, Luke",        "maalit": 5, "syotot": 2},
@@ -127,6 +127,31 @@ class TestCalculateScorerPoints(unittest.TestCase):
         pts, details = self.scorer.calculate_scorer_points(predicted, actual)
         self.assertEqual(pts, 0)
         self.assertEqual(details[0]["pisteet"], 0)
+
+    def test_outside_top_n_but_has_goals(self):
+        """Pelaaja ei top-listalla mutta on tehnyt maaleja → maalit+syötöt lasketaan, ei in_list-bonusta"""
+        predicted = ["Ulkopuolinen, Pelaaja"]
+        actual = [
+            {"pelaaja": "Plange, Luke",    "maalit": 5, "syotot": 2},
+            {"pelaaja": "Karjalainen, Rasmus", "maalit": 3, "syotot": 1},
+        ]
+        all_players = {
+            "Ulkopuolinen, Pelaaja": {"maalit": 2, "syotot": 3},
+        }
+        pts, details = self.scorer.calculate_scorer_points(predicted, actual, all_players)
+        # 2*2 + 3*1 = 7  (ei in_list-bonusta koska ei top-listalla)
+        self.assertEqual(pts, 7)
+        self.assertEqual(details[0]["maalit"], 2)
+        self.assertEqual(details[0]["syotot"], 3)
+        self.assertEqual(details[0]["toteutunut"], "-")
+
+    def test_outside_top_n_no_goals_no_assists(self):
+        """Pelaaja ei top-listalla eikä ole tehnyt maaleja/syöttöjä → 0 pistettä"""
+        predicted = ["Nolla, Pelaaja"]
+        actual = [{"pelaaja": "Plange, Luke", "maalit": 5, "syotot": 2}]
+        all_players = {"Nolla, Pelaaja": {"maalit": 0, "syotot": 0}}
+        pts, details = self.scorer.calculate_scorer_points(predicted, actual, all_players)
+        self.assertEqual(pts, 0)
 
     def test_mixed_scorer(self):
         """Yhdistelmä top-listalla ja ei listalla"""

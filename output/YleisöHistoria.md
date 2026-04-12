@@ -1,6 +1,6 @@
 # 👥 Veikkausliiga — Top 50 kaikkien aikojen yleisömäärät
 
-*Päivitetty: 2026-04-12 06:53:09*
+*Päivitetty: 2026-04-12 07:01:08*
 
 *Lähde: veikkausliiga.com (kaudet 1990–2025)*
 

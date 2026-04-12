@@ -1,6 +1,6 @@
 # 🏆 Veikkausliiga 2026 — Veikkaukset
 
-*Päivitetty: 2026-04-12 06:53:11*
+*Päivitetty: 2026-04-12 07:01:10*
 
 ---
 
@@ -11,8 +11,8 @@
 | Sija | Osallistuja | Sarjataulukko | Maalintekijät | Yhteensä |
 |:----:|-------------|:-------------:|:-------------:|:--------:|
 | 🥇 | **dude island** | 30/120 ██░░░░░░░░ | 14/68 ██░░░░░░░░ | 🎯 **44** |
-| 🥈 | **Ville Viikinki** | 0/120 ░░░░░░░░░░ | 28/68 ████░░░░░░ | 🎯 **28** |
-| 🥉 | **VV** | 10/120 █░░░░░░░░░ | 14/68 ██░░░░░░░░ | 🎯 **24** |
+| 🥈 | **Ville Viikinki** | 0/120 ░░░░░░░░░░ | 33/68 █████░░░░░ | 🎯 **33** |
+| 🥉 | **VV** | 10/120 █░░░░░░░░░ | 19/68 ███░░░░░░░ | 🎯 **29** |
 
 <details>
 <summary>📋 Pisteytysjärjestelmä</summary>
@@ -28,10 +28,11 @@
 
 | Tilanne | Pisteet |
 |:-------:|:-------:|
-| ✅ Top-listalla | 10 p |
-| ⚽ Per maali | 2 p |
-| 🎯 Per syöttö | 1 p |
-| ❌ Ei listalla | 0 p |
+| ✅ Top-10-listalla | 10 p |
+| ⚽ Per maali (kaikille) | 2 p |
+| 🎯 Per syöttö (kaikille) | 1 p |
+| ⚠️ Top-10-listan ulkopuolella | vain maalit+syötöt |
+| ❌ Ei tilastoja | 0 p |
 
 </details>
 
@@ -97,14 +98,14 @@
 | Veikkaama sija | Pelaaja | Toteutunut sija | Maalit | Syötöt | Pisteet | Tila |
 |:--------------:|---------|:---------------:|:------:|:------:|:-------:|------|
 | 1 | Karjalainen, Rasmus | 1 | 2 | 0 | 14 | ✅ Top-listalla (sija 1) |
-| 2 | Lappalainen, Lassi | - | 0 | 0 | 0 | Ei top-listalla |
-| 3 | Engvall, Gustav | - | 0 | 0 | 0 | Ei top-listalla |
-| 4 | Borchers, Mads | - | 0 | 0 | 0 | Ei top-listalla |
-| 5 | Vikström, Rudi | - | 0 | 0 | 0 | Ei top-listalla |
+| 2 | Lappalainen, Lassi | - | 0 | 0 | 0 | ⚠️ Top-10-listan ulkopuolella |
+| 3 | Engvall, Gustav | - | 0 | 0 | 0 | ⚠️ Top-10-listan ulkopuolella |
+| 4 | Borchers, Mads | - | 0 | 0 | 0 | ⚠️ Top-10-listan ulkopuolella |
+| 5 | Vikström, Rudi | - | 0 | 0 | 0 | ⚠️ Top-10-listan ulkopuolella |
 
 ---
 
-### Ville Viikinki — 28 pistettä
+### Ville Viikinki — 33 pistettä
 
 **Sarjataulukko:** 0/120 p (0%) ░░░░░░░░░░░░░░░
 
@@ -123,19 +124,19 @@
 | 11 | <img src="../logos/tps.svg" width="18" height="18"> TPS | 3 | ❌ 8 | 0 |
 | 12 | <img src="../logos/mariehamn.svg" width="18" height="18"> IFK Mariehamn | 10 | ❌ 2 | 0 |
 
-**Maalintekijät:** 28/68 p (41%) ██████░░░░░░░░░
+**Maalintekijät:** 33/68 p (49%) ███████░░░░░░░░
 
 | Veikkaama sija | Pelaaja | Toteutunut sija | Maalit | Syötöt | Pisteet | Tila |
 |:--------------:|---------|:---------------:|:------:|:------:|:-------:|------|
-| 1 | Paananen, Kasper | - | 0 | 0 | 0 | Ei top-listalla |
+| 1 | Paananen, Kasper | - | 1 | 1 | 3 | ⚠️ Top-10-listan ulkopuolella |
 | 2 | Karjalainen, Rasmus | 1 | 2 | 0 | 14 | ✅ Top-listalla (sija 1) |
-| 3 | Pukki, Teemu | - | 0 | 0 | 0 | Ei top-listalla |
+| 3 | Pukki, Teemu | - | 1 | 0 | 2 | ⚠️ Top-10-listan ulkopuolella |
 | 4 | Körkkö, Julius | 2 | 2 | 0 | 14 | ✅ Top-listalla (sija 2) |
-| 5 | Huovila, Vilho | - | 0 | 0 | 0 | Ei top-listalla |
+| 5 | Huovila, Vilho | - | 0 | 0 | 0 | ⚠️ Top-10-listan ulkopuolella |
 
 ---
 
-### VV — 24 pistettä
+### VV — 29 pistettä
 
 **Sarjataulukko:** 10/120 p (8%) █░░░░░░░░░░░░░░
 
@@ -154,15 +155,15 @@
 | 11 | <img src="../logos/mariehamn.svg" width="18" height="18"> IFK Mariehamn | 10 | ❌ 1 | 0 |
 | 12 | <img src="../logos/tps.svg" width="18" height="18"> TPS | 3 | ❌ 9 | 0 |
 
-**Maalintekijät:** 14/68 p (21%) ███░░░░░░░░░░░░
+**Maalintekijät:** 19/68 p (28%) ████░░░░░░░░░░░
 
 | Veikkaama sija | Pelaaja | Toteutunut sija | Maalit | Syötöt | Pisteet | Tila |
 |:--------------:|---------|:---------------:|:------:|:------:|:-------:|------|
-| 1 | Barbosa, Neemias | - | 0 | 0 | 0 | Ei top-listalla |
+| 1 | Barbosa, Neemias | - | 0 | 0 | 0 | Ei listalla |
 | 2 | Karjalainen, Rasmus | 1 | 2 | 0 | 14 | ✅ Top-listalla (sija 1) |
-| 3 | Paananen, Kasper | - | 0 | 0 | 0 | Ei top-listalla |
-| 4 | Engvall, Gustav | - | 0 | 0 | 0 | Ei top-listalla |
-| 5 | Pukki, Teemu | - | 0 | 0 | 0 | Ei top-listalla |
+| 3 | Paananen, Kasper | - | 1 | 1 | 3 | ⚠️ Top-10-listan ulkopuolella |
+| 4 | Engvall, Gustav | - | 0 | 0 | 0 | ⚠️ Top-10-listan ulkopuolella |
+| 5 | Pukki, Teemu | - | 1 | 0 | 2 | ⚠️ Top-10-listan ulkopuolella |
 
 ---
 

@@ -10,10 +10,13 @@ Pisteytysjärjestelmä:
     Ero ≥ 1 sijoitusta  → 0 pistettä
 
   Maalintekijät:
-    Pelaaja top-listalla → 10 pistettä
-    Per maali            →  2 pistettä
-    Per syöttö           →  1 piste
-    Ei top-listalla      →  0 pistettä
+    Pelaaja top-N listalla → 10 pistettä (in_list-bonus)
+    Per maali (kaikille)   →  2 pistettä
+    Per syöttö (kaikille)  →  1 piste
+    Ei tilastoja           →  0 pistettä
+
+  Huom: maalit ja syötöt lasketaan kaikille veikkatuille pelaajille,
+  myös niille jotka ovat top-N listan ulkopuolella.
 """
 
 import logging
@@ -106,15 +109,18 @@ class PredictionScorer:
 
         return total, details
 
-    def calculate_scorer_points(self, predicted, actual):
+    def calculate_scorer_points(self, predicted, actual, all_players=None):
         """
         Laskee pisteet maalintekijäennusteesta.
 
         Parameters
         ----------
-        predicted : list[str]   – pelaajat ennustusjärjestyksessä
-        actual    : list[dict]  – pelaajat toteutuneen maalimäärän mukaan
-                                  (kukin dict: pelaaja, maalit, syotot)
+        predicted   : list[str]   – pelaajat ennustusjärjestyksessä
+        actual      : list[dict]  – pelaajat top-N listan mukaan
+                                    (kukin dict: pelaaja, maalit, syotot)
+        all_players : dict | None – kaikki pelaajat nimi → {maalit, syotot};
+                                    käytetään maalien/syöttöjen laskemiseen
+                                    myös top-N listan ulkopuolisille pelaajille
 
         Returns
         -------
@@ -134,11 +140,23 @@ class PredictionScorer:
         for pred_i, player in enumerate(predicted, 1):
             stats = actual_dict.get(player)
             if stats is None:
-                pts = 0
-                act_pos = "-"
-                goals = 0
-                assists = 0
-                status = "Ei top-listalla"
+                # Pelaaja ei top-N listalla — tarkistetaan täydet tilastot
+                full = all_players.get(player) if all_players else None
+                if full is not None:
+                    goals = full["maalit"]
+                    assists = full["syotot"]
+                    pts = (
+                        goals * SCORER_SCORING.get("goal", 2)
+                        + assists * SCORER_SCORING.get("assist", 1)
+                    )
+                    act_pos = "-"
+                    status = f"⚠️ Top-{len(actual)}-listan ulkopuolella"
+                else:
+                    pts = 0
+                    act_pos = "-"
+                    goals = 0
+                    assists = 0
+                    status = "Ei listalla"
             else:
                 act_pos = stats["pos"]
                 goals = stats["maalit"]
@@ -169,7 +187,7 @@ class PredictionScorer:
     # Päälogiikka
     # ------------------------------------------------------------------
 
-    def score_all(self, actual_standings, actual_scorers):
+    def score_all(self, actual_standings, actual_scorers, all_players=None):
         """Laskee pisteet kaikille osallistujille"""
         results = []
 
@@ -181,6 +199,7 @@ class PredictionScorer:
             g_pts, g_details = self.calculate_scorer_points(
                 participant.get("scorers_prediction", []),
                 actual_scorers,
+                all_players,
             )
             results.append(
                 {
@@ -296,10 +315,11 @@ class PredictionScorer:
                 f.write(f"**Maalintekijät** (maks. {max_scorers} p, top-{TOP_SCORERS_COUNT} lista)\n\n")
                 f.write("| Tilanne | Pisteet |\n")
                 f.write("|:-------:|:-------:|\n")
-                f.write(f"| ✅ Top-listalla | {SCORER_SCORING.get('in_list', 10)} p |\n")
-                f.write(f"| ⚽ Per maali | {SCORER_SCORING.get('goal', 2)} p |\n")
-                f.write(f"| 🎯 Per syöttö | {SCORER_SCORING.get('assist', 1)} p |\n")
-                f.write("| ❌ Ei listalla | 0 p |\n\n")
+                f.write(f"| ✅ Top-{TOP_SCORERS_COUNT}-listalla | {SCORER_SCORING.get('in_list', 10)} p |\n")
+                f.write(f"| ⚽ Per maali (kaikille) | {SCORER_SCORING.get('goal', 2)} p |\n")
+                f.write(f"| 🎯 Per syöttö (kaikille) | {SCORER_SCORING.get('assist', 1)} p |\n")
+                f.write(f"| ⚠️ Top-{TOP_SCORERS_COUNT}-listan ulkopuolella | vain maalit+syötöt |\n")
+                f.write("| ❌ Ei tilastoja | 0 p |\n\n")
                 f.write("</details>\n\n")
 
                 f.write("---\n\n")
@@ -446,8 +466,23 @@ class PredictionScorer:
         actual_standings = [s["joukkue"] for s in standings]
         is_dummy_standings = any(s.get("_is_dummy") for s in standings)
 
-        # Todellinen maalintekijälista
-        actual_scorers, is_dummy_scorers = processor.fetch_top_scorers(count=TOP_SCORERS_COUNT)
+        # Todellinen maalintekijälista — haetaan kerran, johdetaan sekä
+        # top-N lista (in_list-bonus) että täysi hakemisto (maalit/syötöt kaikille)
+        all_player_stats, is_dummy_scorers = processor.fetch_full_player_stats()
+        all_players_sorted = sorted(all_player_stats, key=lambda x: x["maalit"], reverse=True)
+        actual_scorers = [
+            {"pelaaja": p["pelaaja"], "maalit": p["maalit"], "syotot": p["syotot"]}
+            for p in all_players_sorted[:TOP_SCORERS_COUNT]
+        ]
+        if not actual_scorers:
+            actual_scorers = processor._create_dummy_scorers(TOP_SCORERS_COUNT)
+            is_dummy_scorers = True
+
+        # Täysi pelaajahakemisto maalien/syöttöjen tarkistamiseen top-N listan ulkopuolelta
+        all_players_dict = {
+            p["pelaaja"]: {"maalit": p["maalit"], "syotot": p["syotot"]}
+            for p in all_player_stats
+        }
 
         is_dummy = is_dummy_standings or is_dummy_scorers
 
@@ -456,7 +491,7 @@ class PredictionScorer:
             return False
 
         # Laske pisteet
-        results = self.score_all(actual_standings, actual_scorers)
+        results = self.score_all(actual_standings, actual_scorers, all_players_dict)
         logger.info(f"✓ Pisteet laskettu: {len(results)} osallistujaa")
         for r in results:
             logger.info(f"   {r['name']}: {r['total_points']} pistettä "
