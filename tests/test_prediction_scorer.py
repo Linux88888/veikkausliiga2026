@@ -175,6 +175,24 @@ class TestCalculateScorerPoints(unittest.TestCase):
         self.assertEqual(pts, 10)
         self.assertEqual(details[0]["pisteet"], 10)
 
+    def test_pukki_outside_top_n_gets_goal_points(self):
+        """Pukki veikattuna, ei top-listalla, mutta on tehnyt maalin → 2 pistettä ja maalit=1 merkitty"""
+        predicted = ["Pukki, Teemu"]
+        actual = [
+            {"pelaaja": "Karjalainen, Rasmus", "maalit": 5, "syotot": 0},
+            {"pelaaja": "Körkkö, Julius",       "maalit": 4, "syotot": 0},
+        ]
+        all_players = {
+            "Pukki, Teemu": {"maalit": 1, "syotot": 0},
+        }
+        pts, details = self.scorer.calculate_scorer_points(predicted, actual, all_players)
+        # 1 maali * 2 p = 2 p; ei in_list-bonusta koska ei top-listalla
+        self.assertEqual(pts, 2)
+        self.assertEqual(details[0]["maalit"], 1)
+        self.assertEqual(details[0]["pisteet"], 2)
+        self.assertEqual(details[0]["toteutunut"], "-")
+        self.assertIn("Top-", details[0]["tila"])  # status kertoo, ettei ole listalla
+
 
 class TestIsScoreHelper(unittest.TestCase):
     def setUp(self):

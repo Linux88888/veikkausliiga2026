@@ -236,6 +236,7 @@ class StatsProcessor:
             {'sijoitus': '8',  'pelaaja': 'Pennanen, Timi',      'joukkue': 'FC Inter', 'ottelut': 0, 'maalit': 0, 'syotot': 0, 'keltaiset': 0, 'punaiset': 0},
             {'sijoitus': '9',  'pelaaja': 'Lindström, Joni',     'joukkue': 'TPS',      'ottelut': 0, 'maalit': 0, 'syotot': 0, 'keltaiset': 0, 'punaiset': 0},
             {'sijoitus': '10', 'pelaaja': 'Oduya, Wisdom',       'joukkue': 'FC Lahti', 'ottelut': 0, 'maalit': 0, 'syotot': 0, 'keltaiset': 0, 'punaiset': 0},
+            {'sijoitus': '11', 'pelaaja': 'Pukki, Teemu',        'joukkue': 'HJK',      'ottelut': 0, 'maalit': 1, 'syotot': 0, 'keltaiset': 0, 'punaiset': 0},
         ]
         logger.warning(f"⚠ Käytetään esimerkkidataa pelaajatilastoille: {len(dummy)} pelaajaa")
         return dummy
