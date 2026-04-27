@@ -1,6 +1,6 @@
 # Veikkausliiga 2026 - Ottelut
 
-*Päivitetty: 2026-04-19 15:28:17*
+*Päivitetty: 2026-04-27 05:50:19*
 
 *Lähde: https://www.veikkausliiga.com/tilastot/2026/veikkausliiga/ottelut/*
 
@@ -8,7 +8,7 @@
 
 | Pelattu | Tulossa | Yhteensä | Edistyminen |
 |:-------:|:-------:|:--------:|:-----------:|
-| **18** | **114** | **132** | 14% |
+| **25** | **107** | **132** | 19% |
 
 ## Pelatut ottelut
 
@@ -32,18 +32,18 @@
 | La 18.4.2026 | FC Lahti | 0-2 | FC Inter |
 | La 18.4.2026 | TPS | 2-0 | SJK |
 | La 18.4.2026 | IFK Mariehamn | 2-2 | Ilves |
+| Ke 22.4.2026 | KuPS | 3-2 | AC Oulu |
+| Pe 24.4.2026 | TPS | 1-1 | IF Gnistan |
+| Pe 24.4.2026 | VPS | 3-2 | Ilves |
+| Pe 24.4.2026 | SJK | 1-1 | FF Jaro |
+| La 25.4.2026 | FC Lahti | 2-1 | AC Oulu |
+| La 25.4.2026 | FC Inter | 1-0 | IFK Mariehamn |
+| Su 26.4.2026 | KuPS | 1-1 | HJK |
 
 ## Tulevat ottelut
 
 | Päivämäärä | Koti | Vieras |
 |------------|------|--------|
-| Ke 22.4.2026 | KuPS | AC Oulu |
-| Pe 24.4.2026 | TPS | IF Gnistan |
-| Pe 24.4.2026 | VPS | Ilves |
-| Pe 24.4.2026 | SJK | FF Jaro |
-| La 25.4.2026 | FC Lahti | AC Oulu |
-| La 25.4.2026 | FC Inter | IFK Mariehamn |
-| Su 26.4.2026 | KuPS | HJK |
 | Ke 29.4.2026 | FC Inter | HJK |
 | La 2.5.2026 | SJK | Ilves |
 | La 2.5.2026 | FF Jaro | TPS |
@@ -153,4 +153,4 @@
 | Ma 31.8.2026 | VPS | FC Lahti |
 
 ---
-*Yhteensä 132 ottelua (18 pelattu, 114 tulossa)*
+*Yhteensä 132 ottelua (25 pelattu, 107 tulossa)*
