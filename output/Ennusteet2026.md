@@ -1,6 +1,6 @@
 # Veikkausliiga 2026 - Otteluennusteet
 
-*Analysoitu: 2026-04-19 15:28:14*
+*Analysoitu: 2026-04-27 05:50:55*
 
 *Ennusteet perustuvat joukkueiden historialliseen menestykseen ja vahvuusluokituksiin — eivät pelaaja- tai loukkaantumistietoihin.*
 
@@ -22,33 +22,6 @@
 | IF Gnistan | 50 |
 
 ## Ennustetut ottelut
-
-### Ke 22.4.2026
-
-| Koti | Vieras | Koti-% | Tasapeli-% | Vieras-% | Yli 2.5 % |
-|------|--------|:------:|:----------:|:--------:|:---------:|
-| KuPS ⭐ | AC Oulu | 75% | 20% | 5% | 64% |
-
-### Pe 24.4.2026
-
-| Koti | Vieras | Koti-% | Tasapeli-% | Vieras-% | Yli 2.5 % |
-|------|--------|:------:|:----------:|:--------:|:---------:|
-| TPS ⭐ | IF Gnistan | 59% | 27% | 14% | 59% |
-| VPS | Ilves ⭐ | 35% | 25% | 40% | 62% |
-| SJK ⭐ | FF Jaro | 67% | 25% | 8% | 62% |
-
-### La 25.4.2026
-
-| Koti | Vieras | Koti-% | Tasapeli-% | Vieras-% | Yli 2.5 % |
-|------|--------|:------:|:----------:|:--------:|:---------:|
-| FC Lahti ⭐ | AC Oulu | 60% | 26% | 14% | 60% |
-| FC Inter ⭐ | IFK Mariehamn | 67% | 25% | 8% | 60% |
-
-### Su 26.4.2026
-
-| Koti | Vieras | Koti-% | Tasapeli-% | Vieras-% | Yli 2.5 % |
-|------|--------|:------:|:----------:|:--------:|:---------:|
-| KuPS | HJK | 49% | 27% | 24% | 69% |
 
 ### Ke 29.4.2026
 
@@ -358,4 +331,4 @@
 | VPS | FC Lahti | 47% | 27% | 26% | 60% |
 
 ---
-*Yhteensä 114 ennustetta*
+*Yhteensä 107 ennustetta*
