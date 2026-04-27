@@ -88,7 +88,12 @@ class PredictionScorer:
             return predicted_name
         for actual_name in name_dict:
             if actual_name.endswith(predicted_name):
-                return actual_name
+                # Varmista, että vastaavuus alkaa sanarajalta (välilyönti ennen
+                # ennustettua nimeä), jotta "son, John" ei vahingossa vastaa
+                # "Anderson, Johnson" tai vastaavaa.
+                prefix_len = len(actual_name) - len(predicted_name)
+                if prefix_len == 0 or actual_name[prefix_len - 1] == " ":
+                    return actual_name
         return None
 
     def calculate_standings_points(self, predicted, actual):
