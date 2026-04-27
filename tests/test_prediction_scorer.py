@@ -194,6 +194,58 @@ class TestCalculateScorerPoints(unittest.TestCase):
         self.assertIn("Top-", details[0]["tila"])  # status kertoo, ettei ole listalla
 
 
+class TestResolvePlayerName(unittest.TestCase):
+    """Testaa yhdyssukunimien osittaista vastaavuutta"""
+
+    def setUp(self):
+        self.scorer = PredictionScorer()
+        self.name_dict = {
+            "Benavenuto Barbosa, Neemias": {"maalit": 1, "syotot": 0},
+            "Moreno Ciorciari, Jaime Jose": {"maalit": 3, "syotot": 1},
+            "Karjalainen, Rasmus": {"maalit": 4, "syotot": 1},
+        }
+
+    def test_exact_match(self):
+        """Tarkka vastaavuus toimii edelleen"""
+        self.assertEqual(
+            self.scorer._resolve_player_name("Karjalainen, Rasmus", self.name_dict),
+            "Karjalainen, Rasmus",
+        )
+
+    def test_compound_surname_partial_match(self):
+        """Lyhennys yhdyssukunimestä löytää oikean pelaajan"""
+        self.assertEqual(
+            self.scorer._resolve_player_name("Barbosa, Neemias", self.name_dict),
+            "Benavenuto Barbosa, Neemias",
+        )
+
+    def test_no_match_returns_none(self):
+        """Tuntematon nimi palauttaa None"""
+        self.assertIsNone(
+            self.scorer._resolve_player_name("Pukki, Teemu", self.name_dict)
+        )
+
+    def test_no_false_positive_substring(self):
+        """Ei väärää vastaavuutta puhtaalla osajoukkona (ei sanaraja)"""
+        # "son, John" ei saa vastata "Anderson, Johnson" (ei välilyöntirajaa)
+        name_dict = {"Anderson, Johnson": {"maalit": 1, "syotot": 0}}
+        self.assertIsNone(
+            self.scorer._resolve_player_name("son, John", name_dict)
+        )
+
+
+    def test_compound_surname_integrated_scoring(self):
+        """Yhdyssukunimivastaavuus toimii pisteytyksessä päästä päähän"""
+        predicted = ["Barbosa, Neemias"]
+        actual = [{"pelaaja": "Benavenuto Barbosa, Neemias", "maalit": 1, "syotot": 0}]
+        all_players = {"Benavenuto Barbosa, Neemias": {"maalit": 1, "syotot": 0}}
+        pts, details = self.scorer.calculate_scorer_points(predicted, actual, all_players)
+        # 10 (in_list) + 1*2 (goal) = 12
+        self.assertEqual(pts, 12)
+        self.assertEqual(details[0]["maalit"], 1)
+        self.assertIn("Top-listalla", details[0]["tila"])
+
+
 class TestIsScoreHelper(unittest.TestCase):
     def setUp(self):
         from fetch_matches import MatchFetcher

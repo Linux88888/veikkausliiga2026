@@ -1,6 +1,6 @@
 # 🏆 Veikkausliiga 2026 — Veikkaukset
 
-*Päivitetty: 2026-04-27 08:21:38*
+*Päivitetty: 2026-04-27 08:33:53*
 
 ---
 
@@ -11,7 +11,7 @@
 | Sija | Osallistuja | Sarjataulukko | Maalintekijät | Yhteensä |
 |:----:|-------------|:-------------:|:-------------:|:--------:|
 | 🥇 | **Ville Viikinki** | 10/120 █░░░░░░░░░ | 54/84 ██████░░░░ | 🎯 **64** |
-| 🥈 | **VV** | 10/120 █░░░░░░░░░ | 38/84 █████░░░░░ | 🎯 **48** |
+| 🥈 | **VV** | 10/120 █░░░░░░░░░ | 40/84 █████░░░░░ | 🎯 **50** |
 | 🥉 | **dude island** | 20/120 ██░░░░░░░░ | 23/84 ███░░░░░░░ | 🎯 **43** |
 
 <details>
@@ -105,7 +105,7 @@
 
 ---
 
-### VV — 48 pistettä
+### VV — 50 pistettä
 
 **Sarjataulukko:** 10/120 p (8%) █░░░░░░░░░░░░░░
 
@@ -124,11 +124,11 @@
 | 11 | <img src="../logos/mariehamn.svg" width="18" height="18"> IFK Mariehamn | 10 | ❌ 1 | 0 |
 | 12 | <img src="../logos/tps.svg" width="18" height="18"> TPS | 4 | ❌ 8 | 0 |
 
-**Maalintekijät:** 38/84 p (45%) ███████░░░░░░░░
+**Maalintekijät:** 40/84 p (48%) ███████░░░░░░░░
 
 | Veikkaama sija | Pelaaja | Toteutunut sija | Maalit | Syötöt | Pisteet | Tila |
 |:--------------:|---------|:---------------:|:------:|:------:|:-------:|------|
-| 1 | Barbosa, Neemias | - | 0 | 0 | 0 | Ei listalla |
+| 1 | Barbosa, Neemias | - | 1 | 0 | 2 | ⚠️ Top-10-listan ulkopuolella |
 | 2 | Karjalainen, Rasmus | 1 | 4 | 1 | 19 | ✅ Top-listalla (sija 1) |
 | 3 | Paananen, Kasper | - | 1 | 1 | 3 | ⚠️ Top-10-listan ulkopuolella |
 | 4 | Engvall, Gustav | - | 0 | 0 | 0 | ⚠️ Top-10-listan ulkopuolella |

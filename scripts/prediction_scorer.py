@@ -68,6 +68,34 @@ class PredictionScorer:
     def _standings_points_for_diff(self, diff):
         return STANDINGS_SCORING.get(diff, 0)
 
+    def _resolve_player_name(self, predicted_name, name_dict):
+        """Etsii pelaajan nimen hakemistosta, tukee lyhennettyjä yhdyssukunimiä.
+
+        Yrittää ensin tarkkaa vastaavuutta, sitten tarkistaa päättyykö jokin
+        todellinen nimi ennustettuun nimeen (esim. "Barbosa, Neemias" löytää
+        "Benavenuto Barbosa, Neemias").
+
+        Parameters
+        ----------
+        predicted_name : str  – ennustettu nimi (esim. "Barbosa, Neemias")
+        name_dict      : dict – hakemisto nimi → data
+
+        Returns
+        -------
+        matched_name : str | None
+        """
+        if predicted_name in name_dict:
+            return predicted_name
+        for actual_name in name_dict:
+            if actual_name.endswith(predicted_name):
+                # Varmista, että vastaavuus alkaa sanarajalta (välilyönti ennen
+                # ennustettua nimeä), jotta "son, John" ei vahingossa vastaa
+                # "Anderson, Johnson" tai vastaavaa.
+                prefix_len = len(actual_name) - len(predicted_name)
+                if prefix_len == 0 or actual_name[prefix_len - 1] == " ":
+                    return actual_name
+        return None
+
     def calculate_standings_points(self, predicted, actual):
         """
         Laskee pisteet sarjataulukkoennusteesta.
@@ -138,10 +166,12 @@ class PredictionScorer:
         details = []
 
         for pred_i, player in enumerate(predicted, 1):
-            stats = actual_dict.get(player)
+            matched_name = self._resolve_player_name(player, actual_dict)
+            stats = actual_dict.get(matched_name) if matched_name else None
             if stats is None:
                 # Pelaaja ei top-N listalla — tarkistetaan täydet tilastot
-                full = all_players.get(player) if all_players else None
+                full_name = self._resolve_player_name(player, all_players) if all_players else None
+                full = all_players.get(full_name) if full_name else None
                 if full is not None:
                     goals = full["maalit"]
                     assists = full["syotot"]
