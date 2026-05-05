@@ -40,23 +40,27 @@ def _parse_played_matches(output_dir: Path):
     Lukee Ottelut.md ja palauttaa pelattujen kotiotteluiden yleisömäärät
     joukkueittain sekä pelattujen otteluiden kokonaismäärän.
 
-    Palauttaa (home_games, played_total) missä
-    home_games = {joukkue: [att1, att2, ...]} ja att=0 jos ei tietoa.
+    Palauttaa (home_games, played_total, match_rows) missä
+    home_games = {joukkue: [att1, att2, ...]} ja att=0 jos ei tietoa,
+    match_rows = lista diktejä {pvm, koti, vieras, tulos, yleiso}.
     """
     ottelut_path = output_dir / "Ottelut.md"
     home_games: dict = {}
     played_total = 0
+    match_rows: list = []
 
     if not ottelut_path.exists():
-        return home_games, played_total
+        return home_games, played_total, match_rows
 
     in_played = False
     yleiso_col_idx = -1  # sarakeindeksi Yleisö-sarakkeelle (-1 = ei löydy)
+    header_parts: list = []
 
     for line in ottelut_path.read_text(encoding="utf-8").splitlines():
         if "## Pelatut ottelut" in line:
             in_played = True
             yleiso_col_idx = -1
+            header_parts = []
             continue
         if "## Tulevat ottelut" in line:
             in_played = False
@@ -68,6 +72,7 @@ def _parse_played_matches(output_dir: Path):
 
         # Otsikkorivi: etsi Yleisö-sarakkeen indeksi
         if "Koti" in parts:
+            header_parts = parts
             _fi_table = str.maketrans("äÄöÖ", "aAoO")
             for i, p in enumerate(parts):
                 if p.translate(_fi_table).lower() in ("yleiso", "katsojat", "yleisomr"):
@@ -81,8 +86,10 @@ def _parse_played_matches(output_dir: Path):
 
         # Datarivi
         if len(parts) >= 4:
+            pvm = parts[0] if len(parts) > 0 else ""
             koti = parts[1]
             tulos = parts[2]
+            vieras = parts[3] if len(parts) > 3 else ""
             if re.match(r'^\d+\s*[-–]\s*\d+$', tulos.strip()):
                 att = 0
                 if yleiso_col_idx >= 0 and len(parts) > yleiso_col_idx:
@@ -92,8 +99,15 @@ def _parse_played_matches(output_dir: Path):
                         att = int(att_str)
                 home_games.setdefault(koti, []).append(att)
                 played_total += 1
+                match_rows.append({
+                    "pvm": pvm,
+                    "koti": koti,
+                    "vieras": vieras,
+                    "tulos": tulos,
+                    "yleiso": att,
+                })
 
-    return home_games, played_total
+    return home_games, played_total, match_rows
 
 
 class AttendanceAnalyzer:
@@ -141,9 +155,14 @@ class AttendanceAnalyzer:
             total_estimated += team_est
             real_matches_total += len(real_atts)
 
-            # Koko kauden arvio: todelliset + estimoidut pelatut + jäljellä olevat
+            # Todellinen keskiarvo per peli (jos dataa saatavilla)
+            actual_avg = round(team_real / len(real_atts)) if real_atts else 0
+
+            # Koko kauden arvio: todelliset + estimoidut + jäljellä olevat
+            # Jäljellä oleviin käytetään todellista keskiarvoa jos saatavilla, muuten hist.
             games_remaining = HOME_GAMES_PER_TEAM - games_played
-            season_est = team_played_total + games_remaining * hist_avg
+            proj_avg = actual_avg if actual_avg > 0 else hist_avg
+            season_est = team_played_total + games_remaining * proj_avg
 
             per_team.append({
                 "joukkue": team,
@@ -153,6 +172,7 @@ class AttendanceAnalyzer:
                 "kotipelit_pelattu": games_played,
                 "real_katsojat": team_real,
                 "real_peli_maara": len(real_atts),
+                "actual_avg": actual_avg,
                 "arvio_katsojat": team_played_total,
                 "kausi_arvio": season_est,
             })
@@ -195,7 +215,7 @@ class AttendanceAnalyzer:
         logger.info("YLEISÖMÄÄRÄ-ANALYYSI - Veikkausliiga 2026")
         logger.info("=" * 60)
 
-        home_games, played_total = _parse_played_matches(self.output_dir)
+        home_games, played_total, match_rows = _parse_played_matches(self.output_dir)
         per_team, summary, is_real = self._build_attendance_data(home_games, played_total)
 
         logger.info(f"✓ Kotiotteluja pelattu: {played_total}")
@@ -246,57 +266,80 @@ class AttendanceAnalyzer:
             f.write(f"- **{label_avg}**: {summary['average_per_match']:,} katsojaa\n")
             f.write(f"- **Suurin stadionkapasiteetti**: {summary['highest_capacity']:,} katsojaa\n\n")
 
+            # --- Joukkuekohtainen taulukko ---
             f.write("## Joukkuekohtaiset stadionit\n\n")
             if is_real and played_total > 0:
                 f.write(
-                    "| Joukkue | Stadion | Kapasiteetti | Hist. keskiarvo "
-                    "| Kotipelit | Todelliset katsojat | Arvio |\n"
+                    "| Joukkue | Stadion | Kapasiteetti | Ennuste ka. "
+                    "| Kotipelit | Toteutunut ka. | Ero ennusteesta | Todelliset katsojat | Kausiarvio |\n"
                 )
                 f.write(
-                    "|---------|---------|:------------:|:---------------:"
-                    "|:---------:|:--------------------:|:-----:|\n"
+                    "|---------|---------|:------------:|:-----------:"
+                    "|:---------:|:--------------:|:---------------:|:--------------------:|:----------:|\n"
                 )
-                for row in sorted(per_team, key=lambda r: r["hist_keskiarvo"], reverse=True):
+                for row in sorted(per_team, key=lambda r: r["real_katsojat"] if r["real_katsojat"] > 0 else r["hist_keskiarvo"] * r["kotipelit_pelattu"], reverse=True):
                     real_str = (
                         f"{row['real_katsojat']:,}"
                         if row['real_peli_maara'] > 0
                         else "—"
                     )
-                    arvio_str = (
-                        f"{row['arvio_katsojat']:,}"
-                        if row['kotipelit_pelattu'] > 0
+                    actual_avg_str = (
+                        f"{row['actual_avg']:,}"
+                        if row['actual_avg'] > 0
                         else "—"
                     )
+                    if row['actual_avg'] > 0:
+                        diff = row['actual_avg'] - row['hist_keskiarvo']
+                        sign = "+" if diff >= 0 else ""
+                        diff_str = f"{sign}{diff:,}"
+                    else:
+                        diff_str = "—"
+                    season_str = f"{int(row['kausi_arvio']):,}"
                     f.write(
                         f"| {row['joukkue']} | {row['stadion']} "
                         f"| {row['kapasiteetti']:,} "
                         f"| {row['hist_keskiarvo']:,} "
                         f"| {row['kotipelit_pelattu']} "
+                        f"| {actual_avg_str} "
+                        f"| {diff_str} "
                         f"| {real_str} "
-                        f"| {arvio_str} |\n"
+                        f"| {season_str} |\n"
                     )
             else:
                 f.write(
-                    "| Joukkue | Stadion | Kapasiteetti | Hist. keskiarvo | Kotipelit | Arvio |\n"
+                    "| Joukkue | Stadion | Kapasiteetti | Ennuste ka. | Kotipelit | Kausiarvio |\n"
                 )
-                f.write("|---------|---------|:------------:|:---------------:|:---------:|:-----:|\n")
+                f.write("|---------|---------|:------------:|:-----------:|:---------:|:----------:|\n")
                 for row in sorted(per_team, key=lambda r: r["hist_keskiarvo"], reverse=True):
-                    arvio_str = (
-                        f"{row['arvio_katsojat']:,}"
-                        if row['kotipelit_pelattu'] > 0
-                        else "—"
-                    )
+                    season_str = f"{int(row['kausi_arvio']):,}"
                     f.write(
                         f"| {row['joukkue']} | {row['stadion']} "
                         f"| {row['kapasiteetti']:,} "
                         f"| {row['hist_keskiarvo']:,} "
                         f"| {row['kotipelit_pelattu']} "
-                        f"| {arvio_str} |\n"
+                        f"| {season_str} |\n"
+                    )
+
+            # --- Ottelukohtainen yleisölistaus ---
+            played_with_att = [m for m in match_rows if m["yleiso"] > 0]
+            if played_with_att:
+                f.write("\n## Pelattujen otteluiden yleisömäärät\n\n")
+                f.write("| Päivämäärä | Koti | Tulos | Vieras | Yleisö |\n")
+                f.write("|------------|------|-------|--------|-------:|\n")
+                for m in match_rows:
+                    att_str = f"{m['yleiso']:,}" if m["yleiso"] > 0 else "—"
+                    f.write(
+                        f"| {m['pvm']} | {m['koti']} | {m['tulos']} "
+                        f"| {m['vieras']} | {att_str} |\n"
                     )
 
             f.write("\n")
             f.write("---\n")
-            f.write("*Hist. keskiarvo = historiallinen keskiyleisö kotiotteluissa (2023–2025 arvio)*\n")
+            f.write(
+                "*Ennuste ka. = historiallinen keskiyleisö kotiotteluissa (2023–2025 arvio). "
+                "Kausiarvio = todelliset katsojat + jäljellä olevien otteluiden arvio "
+                "(käytetään toteutunutta keskiarvoa jos saatavilla, muuten ennustetta).*\n"
+            )
 
         logger.info(f"✓ Raportti tallennettu: {report_path}")
         return True
