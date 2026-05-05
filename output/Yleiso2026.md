@@ -1,14 +1,14 @@
 # Veikkausliiga 2026 - Yleisömäärät
 
-*Analysoitu: 2026-05-05 05:17:11*
+*Analysoitu: 2026-05-05 05:27:50*
 
-*Lähde: Ottelut.md (31 pelattu kotiottelua)*
+*Lähde: Ottelut.md (31 pelattu kotiottelua) — todellisia katsojalukuja ei vielä saatavilla, käytetään historiallisia arvioita.*
 
 ## Kauden ennuste / tilanne
 
 - **Kotiotteluja pelattu**: 31
-- **Arvioitu yhteiskatsojamäärä**: 84,100
-- **Keskiarvo per ottelu**: 2,712 katsojaa
+- **Arvioitu yhteiskatsojamäärä (todelliset + estimoidut)**: 84,100
+- **Arvioitu keskiarvo per ottelu**: 2,712 katsojaa
 - **Suurin stadionkapasiteetti**: 14,000 katsojaa
 
 ## Joukkuekohtaiset stadionit
