@@ -20,7 +20,7 @@ STADIUM_INFO = {
     "HJK":           {"stadion": "Bolt Arena",           "kapasiteetti": 10770, "hist_keskiarvo": 5800},
     "KuPS":          {"stadion": "Väre Arena",            "kapasiteetti": 5000,  "hist_keskiarvo": 3000},
     "FC Inter":      {"stadion": "Veritas Stadion",       "kapasiteetti": 9300,  "hist_keskiarvo": 2800},
-    "SJK":           {"stadion": "Seinäjoen areena",      "kapasiteetti": 13500, "hist_keskiarvo": 3800},
+    "SJK":           {"stadion": "OmaSP Stadion",          "kapasiteetti": 6075,  "hist_keskiarvo": 3800},
     "FC Lahti":      {"stadion": "Lahden stadion",        "kapasiteetti": 14000, "hist_keskiarvo": 2200},
     "Ilves":         {"stadion": "Tammelan stadion",      "kapasiteetti": 8000,  "hist_keskiarvo": 3600},
     "FF Jaro":       {"stadion": "Centralplan",           "kapasiteetti": 3000,  "hist_keskiarvo": 1800},
