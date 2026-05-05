@@ -200,11 +200,20 @@ class MatchFetcher:
             if not tulos:
                 tulos = '-'
 
+            # Yleisömäärä: cells[7] 8-sarakkeisessa muodossa
+            yleiso = 0
+            if len(cells) > 7:
+                raw_att = cell_texts[7].strip()
+                clean_att = re.sub(r'[^\d]', '', raw_att)
+                if clean_att:
+                    yleiso = int(clean_att)
+
             matches.append({
                 'pvm': pvm,
                 'koti': koti,
                 'tulos': tulos,
                 'vieras': vieras,
+                'yleiso': yleiso,
             })
 
         return matches
@@ -245,16 +254,16 @@ class MatchFetcher:
     def _create_dummy_matches(self):
         """Luo esimerkkidatan jos haku epäonnistuu"""
         dummy_matches = [
-            {'pvm': '2026-04-01', 'koti': 'HJK',      'tulos': '2-1', 'vieras': 'Ilves',    '_is_dummy': True},
-            {'pvm': '2026-04-01', 'koti': 'KuPS',     'tulos': '1-1', 'vieras': 'FC Inter', '_is_dummy': True},
-            {'pvm': '2026-04-01', 'koti': 'SJK',      'tulos': '3-0', 'vieras': 'VPS',      '_is_dummy': True},
-            {'pvm': '2026-04-05', 'koti': 'FC Lahti', 'tulos': '-',   'vieras': 'HJK',      '_is_dummy': True},
-            {'pvm': '2026-04-05', 'koti': 'Ilves',    'tulos': '-',   'vieras': 'KuPS',     '_is_dummy': True},
-            {'pvm': '2026-04-05', 'koti': 'FF Jaro',  'tulos': '-',   'vieras': 'SJK',      '_is_dummy': True},
-            {'pvm': '2026-04-08', 'koti': 'VPS',      'tulos': '-',   'vieras': 'FC Lahti', '_is_dummy': True},
-            {'pvm': '2026-04-08', 'koti': 'FC Inter', 'tulos': '-',   'vieras': 'FF Jaro',  '_is_dummy': True},
-            {'pvm': '2026-04-12', 'koti': 'HJK',      'tulos': '-',   'vieras': 'KuPS',     '_is_dummy': True},
-            {'pvm': '2026-04-12', 'koti': 'AC Oulu',  'tulos': '-',   'vieras': 'Ilves',    '_is_dummy': True},
+            {'pvm': '2026-04-01', 'koti': 'HJK',      'tulos': '2-1', 'vieras': 'Ilves',    'yleiso': 0, '_is_dummy': True},
+            {'pvm': '2026-04-01', 'koti': 'KuPS',     'tulos': '1-1', 'vieras': 'FC Inter', 'yleiso': 0, '_is_dummy': True},
+            {'pvm': '2026-04-01', 'koti': 'SJK',      'tulos': '3-0', 'vieras': 'VPS',      'yleiso': 0, '_is_dummy': True},
+            {'pvm': '2026-04-05', 'koti': 'FC Lahti', 'tulos': '-',   'vieras': 'HJK',      'yleiso': 0, '_is_dummy': True},
+            {'pvm': '2026-04-05', 'koti': 'Ilves',    'tulos': '-',   'vieras': 'KuPS',     'yleiso': 0, '_is_dummy': True},
+            {'pvm': '2026-04-05', 'koti': 'FF Jaro',  'tulos': '-',   'vieras': 'SJK',      'yleiso': 0, '_is_dummy': True},
+            {'pvm': '2026-04-08', 'koti': 'VPS',      'tulos': '-',   'vieras': 'FC Lahti', 'yleiso': 0, '_is_dummy': True},
+            {'pvm': '2026-04-08', 'koti': 'FC Inter', 'tulos': '-',   'vieras': 'FF Jaro',  'yleiso': 0, '_is_dummy': True},
+            {'pvm': '2026-04-12', 'koti': 'HJK',      'tulos': '-',   'vieras': 'KuPS',     'yleiso': 0, '_is_dummy': True},
+            {'pvm': '2026-04-12', 'koti': 'AC Oulu',  'tulos': '-',   'vieras': 'Ilves',    'yleiso': 0, '_is_dummy': True},
         ]
         logger.warning(f"⚠ Käytetään esimerkkidataa (veikkausliiga.com ei tavoitettavissa): {len(dummy_matches)} ottelua")
         return dummy_matches
@@ -285,10 +294,12 @@ class MatchFetcher:
 
                 if played:
                     f.write("## Pelatut ottelut\n\n")
-                    f.write("| Päivämäärä | Koti | Tulos | Vieras |\n")
-                    f.write("|------------|------|-------|--------|\n")
+                    f.write("| Päivämäärä | Koti | Tulos | Vieras | Yleisö |\n")
+                    f.write("|------------|------|-------|--------|--------|\n")
                     for m in played:
-                        f.write(f"| {m['pvm']} | {m['koti']} | {m['tulos']} | {m['vieras']} |\n")
+                        att = m.get('yleiso', 0)
+                        att_str = f"{att:,}".replace(",", "\u202f") if att > 0 else "—"
+                        f.write(f"| {m['pvm']} | {m['koti']} | {m['tulos']} | {m['vieras']} | {att_str} |\n")
                     f.write("\n")
 
                 if upcoming:
