@@ -1,6 +1,6 @@
 # Veikkausliiga 2026 - Ottelut
 
-*Päivitetty: 2026-04-27 08:35:35*
+*Päivitetty: 2026-05-05 05:16:29*
 
 *Lähde: https://www.veikkausliiga.com/tilastot/2026/veikkausliiga/ottelut/*
 
@@ -8,7 +8,7 @@
 
 | Pelattu | Tulossa | Yhteensä | Edistyminen |
 |:-------:|:-------:|:--------:|:-----------:|
-| **25** | **107** | **132** | 19% |
+| **31** | **101** | **132** | 23% |
 
 ## Pelatut ottelut
 
@@ -39,17 +39,17 @@
 | La 25.4.2026 | FC Lahti | 2-1 | AC Oulu |
 | La 25.4.2026 | FC Inter | 1-0 | IFK Mariehamn |
 | Su 26.4.2026 | KuPS | 1-1 | HJK |
+| Ke 29.4.2026 | FC Inter | 1-1 | HJK |
+| La 2.5.2026 | SJK | 1-1 | Ilves |
+| La 2.5.2026 | FF Jaro | 2-2 | TPS |
+| La 2.5.2026 | IFK Mariehamn | 0-1 | VPS |
+| La 2.5.2026 | AC Oulu | 2-0 | KuPS |
+| Ma 4.5.2026 | HJK | 1-0 | FC Lahti |
 
 ## Tulevat ottelut
 
 | Päivämäärä | Koti | Vieras |
 |------------|------|--------|
-| Ke 29.4.2026 | FC Inter | HJK |
-| La 2.5.2026 | SJK | Ilves |
-| La 2.5.2026 | FF Jaro | TPS |
-| La 2.5.2026 | IFK Mariehamn | VPS |
-| La 2.5.2026 | AC Oulu | KuPS |
-| Ma 4.5.2026 | HJK | FC Lahti |
 | Ti 5.5.2026 | IF Gnistan | FC Inter |
 | Pe 8.5.2026 | Ilves | AC Oulu |
 | Pe 8.5.2026 | TPS | HJK |
@@ -153,4 +153,4 @@
 | Ma 31.8.2026 | VPS | FC Lahti |
 
 ---
-*Yhteensä 132 ottelua (25 pelattu, 107 tulossa)*
+*Yhteensä 132 ottelua (31 pelattu, 101 tulossa)*
