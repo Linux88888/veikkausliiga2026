@@ -158,6 +158,13 @@ class AttendanceAnalyzer:
             # Todellinen keskiarvo per peli (jos dataa saatavilla)
             actual_avg = round(team_real / len(real_atts)) if real_atts else 0
 
+            # Korkein ja matalin yleisö kotipeleissä
+            max_att = max(real_atts) if real_atts else 0
+            min_att = min(real_atts) if real_atts else 0
+
+            # Täyttöaste (%) todellisen keskiarvon perusteella
+            fill_pct = round(actual_avg / info["kapasiteetti"] * 100, 1) if actual_avg > 0 else 0.0
+
             # Koko kauden arvio: todelliset + estimoidut + jäljellä olevat
             # Jäljellä oleviin käytetään todellista keskiarvoa jos saatavilla, muuten hist.
             games_remaining = HOME_GAMES_PER_TEAM - games_played
@@ -173,6 +180,9 @@ class AttendanceAnalyzer:
                 "real_katsojat": team_real,
                 "real_peli_maara": len(real_atts),
                 "actual_avg": actual_avg,
+                "max_att": max_att,
+                "min_att": min_att,
+                "fill_pct": fill_pct,
                 "arvio_katsojat": team_played_total,
                 "kausi_arvio": season_est,
             })
@@ -318,6 +328,30 @@ class AttendanceAnalyzer:
                         f"| {row['hist_keskiarvo']:,} "
                         f"| {row['kotipelit_pelattu']} "
                         f"| {season_str} |\n"
+                    )
+
+            # --- Katsojasuosio-ranking joukkueittain ---
+            ranked = [r for r in per_team if r["actual_avg"] > 0]
+            if ranked:
+                ranked_sorted = sorted(ranked, key=lambda r: r["actual_avg"], reverse=True)
+                f.write("\n## Katsojasuosio joukkueittain\n\n")
+                f.write(
+                    "| # | Joukkue | Toteutunut ka. | Korkein | Matalin | Täyttöaste | Kotipelit |\n"
+                )
+                f.write(
+                    "|:-:|---------|:--------------:|:-------:|:-------:|:----------:|:---------:|\n"
+                )
+                for rank, row in enumerate(ranked_sorted, start=1):
+                    max_str = f"{row['max_att']:,}" if row["max_att"] > 0 else "—"
+                    min_str = f"{row['min_att']:,}" if row["min_att"] > 0 else "—"
+                    fill_str = f"{row['fill_pct']:.1f} %"
+                    f.write(
+                        f"| {rank} | {row['joukkue']} "
+                        f"| {row['actual_avg']:,} "
+                        f"| {max_str} "
+                        f"| {min_str} "
+                        f"| {fill_str} "
+                        f"| {row['real_peli_maara']} |\n"
                     )
 
             # --- Ottelukohtainen yleisölistaus ---

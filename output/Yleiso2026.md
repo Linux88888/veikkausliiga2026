@@ -1,6 +1,6 @@
 # Veikkausliiga 2026 - Yleisömäärät
 
-*Analysoitu: 2026-05-05 05:38:48*
+*Analysoitu: 2026-05-05 05:42:44*
 
 *Lähde: Ottelut.md (31 pelattu kotiottelua, 31 todellisella katsojaluvulla)*
 
@@ -28,6 +28,23 @@
 | AC Oulu | Raatti | 6,000 | 2,000 | 2 | 2,374 | +374 | 4,748 | 26,114 |
 | FC Lahti | Lahden stadion | 14,000 | 2,200 | 2 | 2,254 | +54 | 4,508 | 24,794 |
 | IFK Mariehamn | Wiklöf Holding Arena | 3,000 | 1,600 | 3 | 1,068 | -532 | 3,205 | 11,749 |
+
+## Katsojasuosio joukkueittain
+
+| # | Joukkue | Toteutunut ka. | Korkein | Matalin | Täyttöaste | Kotipelit |
+|:-:|---------|:--------------:|:-------:|:-------:|:----------:|:---------:|
+| 1 | HJK | 4,871 | 5,052 | 4,519 | 45.2 % | 3 |
+| 2 | Ilves | 4,774 | 4,774 | 4,774 | 59.7 % | 1 |
+| 3 | VPS | 3,032 | 3,724 | 2,341 | 55.1 % | 2 |
+| 4 | KuPS | 2,866 | 3,108 | 2,610 | 57.3 % | 3 |
+| 5 | FC Inter | 2,762 | 3,401 | 2,418 | 29.7 % | 4 |
+| 6 | SJK | 2,730 | 3,037 | 2,448 | 20.2 % | 3 |
+| 7 | TPS | 2,552 | 2,828 | 2,354 | 27.4 % | 3 |
+| 8 | IF Gnistan | 2,462 | 3,070 | 1,853 | 82.1 % | 2 |
+| 9 | AC Oulu | 2,374 | 2,869 | 1,879 | 39.6 % | 2 |
+| 10 | FC Lahti | 2,254 | 2,763 | 1,745 | 16.1 % | 2 |
+| 11 | FF Jaro | 2,040 | 2,470 | 1,786 | 68.0 % | 3 |
+| 12 | IFK Mariehamn | 1,068 | 1,258 | 944 | 35.6 % | 3 |
 
 ## Pelattujen otteluiden yleisömäärät
 
