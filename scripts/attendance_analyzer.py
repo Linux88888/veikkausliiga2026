@@ -68,10 +68,9 @@ def _parse_played_matches(output_dir: Path):
 
         # Otsikkorivi: etsi Yleisö-sarakkeen indeksi
         if "Koti" in parts:
+            _fi_table = str.maketrans("äÄöÖ", "aAoO")
             for i, p in enumerate(parts):
-                if re.sub(r'[äÄöÖ]', lambda m: {'ä': 'a', 'Ä': 'A', 'ö': 'o', 'Ö': 'O'}[m.group()], p).lower() in (
-                    "yleiso", "katsojat", "yleisomr",
-                ):
+                if p.translate(_fi_table).lower() in ("yleiso", "katsojat", "yleisomr"):
                     yleiso_col_idx = i
                     break
             continue
