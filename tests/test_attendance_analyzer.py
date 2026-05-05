@@ -70,7 +70,7 @@ class TestParsePlayedMatches(unittest.TestCase):
     def test_no_file_returns_empty(self):
         """Tiedosto puuttuu → tyhjä dict, played=0."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            home_games, total = _parse_played_matches(Path(tmpdir))
+            home_games, total, _ = _parse_played_matches(Path(tmpdir))
         self.assertEqual(home_games, {})
         self.assertEqual(total, 0)
 
@@ -78,7 +78,7 @@ class TestParsePlayedMatches(unittest.TestCase):
         """Tyhjä tiedosto → tyhjä dict, played=0."""
         with tempfile.TemporaryDirectory() as tmpdir:
             (Path(tmpdir) / "Ottelut.md").write_text("", encoding="utf-8")
-            home_games, total = _parse_played_matches(Path(tmpdir))
+            home_games, total, _ = _parse_played_matches(Path(tmpdir))
         self.assertEqual(home_games, {})
         self.assertEqual(total, 0)
 
@@ -89,7 +89,7 @@ class TestParsePlayedMatches(unittest.TestCase):
                 "## Tulevat ottelut\n\n| Päivämäärä | Koti | Vieras |\n",
                 encoding="utf-8",
             )
-            home_games, total = _parse_played_matches(Path(tmpdir))
+            home_games, total, _ = _parse_played_matches(Path(tmpdir))
         self.assertEqual(home_games, {})
         self.assertEqual(total, 0)
 
@@ -102,7 +102,7 @@ class TestParsePlayedMatches(unittest.TestCase):
         ]
         with tempfile.TemporaryDirectory() as tmpdir:
             _write_ottelut(Path(tmpdir), played)
-            home_games, total = _parse_played_matches(Path(tmpdir))
+            home_games, total, _ = _parse_played_matches(Path(tmpdir))
 
         self.assertEqual(total, 3)
         self.assertEqual(len(home_games["HJK"]), 2)
@@ -119,7 +119,7 @@ class TestParsePlayedMatches(unittest.TestCase):
         ]
         with tempfile.TemporaryDirectory() as tmpdir:
             _write_ottelut(Path(tmpdir), played)
-            home_games, total = _parse_played_matches(Path(tmpdir))
+            home_games, total, _ = _parse_played_matches(Path(tmpdir))
 
         self.assertEqual(total, 2)
         self.assertEqual(home_games["HJK"], [5041])
@@ -133,7 +133,7 @@ class TestParsePlayedMatches(unittest.TestCase):
         ]
         with tempfile.TemporaryDirectory() as tmpdir:
             _write_ottelut(Path(tmpdir), played)
-            home_games, total = _parse_played_matches(Path(tmpdir))
+            home_games, total, _ = _parse_played_matches(Path(tmpdir))
 
         self.assertEqual(total, 1)
         self.assertEqual(home_games["HJK"], [0])
@@ -149,7 +149,7 @@ class TestParsePlayedMatches(unittest.TestCase):
         ]
         with tempfile.TemporaryDirectory() as tmpdir:
             _write_ottelut(Path(tmpdir), played, upcoming)
-            home_games, total = _parse_played_matches(Path(tmpdir))
+            home_games, total, _ = _parse_played_matches(Path(tmpdir))
 
         self.assertEqual(total, 1)
         self.assertIn("HJK", home_games)
@@ -167,7 +167,7 @@ class TestParsePlayedMatches(unittest.TestCase):
         ]
         with tempfile.TemporaryDirectory() as tmpdir:
             _write_ottelut(Path(tmpdir), played)
-            home_games, total = _parse_played_matches(Path(tmpdir))
+            home_games, total, _ = _parse_played_matches(Path(tmpdir))
 
         self.assertEqual(total, 3)
         self.assertEqual(len(home_games["HJK"]), 3)
@@ -369,7 +369,7 @@ class TestAnalyzeIntegration(unittest.TestCase):
     def test_report_contains_hist_footer(self):
         """Raportin lopussa on historialliset tiedot selitys."""
         _, report = self._run_analyze()
-        self.assertIn("Hist. keskiarvo", report)
+        self.assertIn("Ennuste ka.", report)
 
 
 # ---------------------------------------------------------------------------
