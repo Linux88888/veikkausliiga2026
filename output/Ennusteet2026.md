@@ -1,6 +1,6 @@
 # Veikkausliiga 2026 - Otteluennusteet
 
-*Analysoitu: 2026-06-06 08:53:35*
+*Analysoitu: 2026-06-06 08:54:17*
 
 *Ennusteet perustuvat joukkueiden historialliseen menestykseen ja vahvuusluokituksiin — eivät pelaaja- tai loukkaantumistietoihin.*
 
@@ -22,61 +22,6 @@
 | IF Gnistan | 50 |
 
 ## Ennustetut ottelut
-
-### La 16.5.2026
-
-| Koti | Vieras | Koti-% | Tasapeli-% | Vieras-% | Yli 2.5 % |
-|------|--------|:------:|:----------:|:--------:|:---------:|
-| HJK ⭐ | Ilves | 65% | 25% | 10% | 68% |
-| IFK Mariehamn | KuPS ⭐ | 20% | 22% | 58% | 63% |
-| SJK ⭐ | FC Inter | 57% | 27% | 16% | 64% |
-| AC Oulu | TPS | 47% | 27% | 26% | 59% |
-| IF Gnistan | FF Jaro | 47% | 27% | 26% | 58% |
-
-### Ma 18.5.2026
-
-| Koti | Vieras | Koti-% | Tasapeli-% | Vieras-% | Yli 2.5 % |
-|------|--------|:------:|:----------:|:--------:|:---------:|
-| FC Lahti ⭐ | VPS | 57% | 27% | 16% | 60% |
-
-### Ke 20.5.2026
-
-| Koti | Vieras | Koti-% | Tasapeli-% | Vieras-% | Yli 2.5 % |
-|------|--------|:------:|:----------:|:--------:|:---------:|
-| Ilves ⭐ | FC Inter | 59% | 27% | 14% | 64% |
-| KuPS ⭐ | FF Jaro | 74% | 21% | 5% | 64% |
-
-### Pe 22.5.2026
-
-| Koti | Vieras | Koti-% | Tasapeli-% | Vieras-% | Yli 2.5 % |
-|------|--------|:------:|:----------:|:--------:|:---------:|
-| VPS | HJK ⭐ | 22% | 22% | 56% | 64% |
-
-### La 23.5.2026
-
-| Koti | Vieras | Koti-% | Tasapeli-% | Vieras-% | Yli 2.5 % |
-|------|--------|:------:|:----------:|:--------:|:---------:|
-| FC Inter ⭐ | TPS | 60% | 26% | 14% | 61% |
-| FF Jaro ⭐ | IFK Mariehamn | 57% | 27% | 16% | 58% |
-| Ilves ⭐ | IF Gnistan | 72% | 23% | 5% | 61% |
-| KuPS ⭐ | FC Lahti | 72% | 23% | 5% | 65% |
-| SJK ⭐ | AC Oulu | 70% | 24% | 6% | 61% |
-
-### La 30.5.2026
-
-| Koti | Vieras | Koti-% | Tasapeli-% | Vieras-% | Yli 2.5 % |
-|------|--------|:------:|:----------:|:--------:|:---------:|
-| HJK ⭐ | IFK Mariehamn | 77% | 19% | 4% | 64% |
-| IF Gnistan | SJK ⭐ | 32% | 24% | 44% | 61% |
-| KuPS ⭐ | FC Inter | 69% | 25% | 6% | 66% |
-| TPS ⭐ | VPS | 54% | 28% | 18% | 60% |
-| FC Lahti | Ilves | 40% | 26% | 34% | 63% |
-
-### Su 31.5.2026
-
-| Koti | Vieras | Koti-% | Tasapeli-% | Vieras-% | Yli 2.5 % |
-|------|--------|:------:|:----------:|:--------:|:---------:|
-| AC Oulu | FF Jaro | 49% | 27% | 24% | 59% |
 
 ### La 13.6.2026
 
@@ -283,4 +228,4 @@
 | VPS | FC Lahti | 47% | 27% | 26% | 60% |
 
 ---
-*Yhteensä 94 ennustetta*
+*Yhteensä 74 ennustetta*
