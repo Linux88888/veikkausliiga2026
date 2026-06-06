@@ -1,6 +1,6 @@
 # Veikkausliiga 2026 - Ottelut
 
-*Päivitetty: 2026-05-11 04:56:23*
+*Päivitetty: 2026-06-06 08:54:19*
 
 *Lähde: https://www.veikkausliiga.com/tilastot/2026/veikkausliiga/ottelut/*
 
@@ -8,7 +8,7 @@
 
 | Pelattu | Tulossa | Yhteensä | Edistyminen |
 |:-------:|:-------:|:--------:|:-----------:|
-| **38** | **94** | **132** | 29% |
+| **58** | **74** | **132** | 44% |
 
 ## Pelatut ottelut
 
@@ -52,31 +52,31 @@
 | La 9.5.2026 | FC Inter | 2-0 | FF Jaro | 2 556 |
 | La 9.5.2026 | VPS | 1-1 | IF Gnistan | 2 436 |
 | Su 10.5.2026 | FC Lahti | 1-1 | IFK Mariehamn | 2 182 |
+| La 16.5.2026 | HJK | 2-2 | Ilves | 5 052 |
+| La 16.5.2026 | IFK Mariehamn | 1-1 | KuPS | 961 |
+| La 16.5.2026 | SJK | 1-3 | FC Inter | 2 254 |
+| La 16.5.2026 | AC Oulu | 1-0 | TPS | 1 637 |
+| La 16.5.2026 | IF Gnistan | 5-0 | FF Jaro | 2 090 |
+| Ma 18.5.2026 | FC Lahti | 1-1 | VPS | 1 902 |
+| Ke 20.5.2026 | Ilves | 1-3 | FC Inter | 3 410 |
+| Ke 20.5.2026 | KuPS | 3-0 | FF Jaro | 3 040 |
+| Pe 22.5.2026 | VPS | 2-1 | HJK | 3 109 |
+| La 23.5.2026 | FC Inter | 2-1 | TPS | 8 102 |
+| La 23.5.2026 | FF Jaro | 3-0 | IFK Mariehamn | 1 826 |
+| La 23.5.2026 | Ilves | 2-0 | IF Gnistan | 4 003 |
+| La 23.5.2026 | KuPS | 2-1 | FC Lahti | 2 882 |
+| La 23.5.2026 | SJK | 0-1 | AC Oulu | 4 568 |
+| La 30.5.2026 | HJK | 1-0 | IFK Mariehamn | 5 786 |
+| La 30.5.2026 | FC Lahti | 5-0 | Ilves | 2 102 |
+| La 30.5.2026 | IF Gnistan | 3-2 | SJK | 2 103 |
+| La 30.5.2026 | KuPS | 1-1 | FC Inter | 2 884 |
+| La 30.5.2026 | TPS | 1-0 | VPS | 2 223 |
+| Su 31.5.2026 | AC Oulu | 2-1 | FF Jaro | 1 742 |
 
 ## Tulevat ottelut
 
 | Päivämäärä | Koti | Vieras |
 |------------|------|--------|
-| La 16.5.2026 | HJK | Ilves |
-| La 16.5.2026 | IFK Mariehamn | KuPS |
-| La 16.5.2026 | SJK | FC Inter |
-| La 16.5.2026 | AC Oulu | TPS |
-| La 16.5.2026 | IF Gnistan | FF Jaro |
-| Ma 18.5.2026 | FC Lahti | VPS |
-| Ke 20.5.2026 | Ilves | FC Inter |
-| Ke 20.5.2026 | KuPS | FF Jaro |
-| Pe 22.5.2026 | VPS | HJK |
-| La 23.5.2026 | FC Inter | TPS |
-| La 23.5.2026 | FF Jaro | IFK Mariehamn |
-| La 23.5.2026 | Ilves | IF Gnistan |
-| La 23.5.2026 | KuPS | FC Lahti |
-| La 23.5.2026 | SJK | AC Oulu |
-| La 30.5.2026 | HJK | IFK Mariehamn |
-| La 30.5.2026 | IF Gnistan | SJK |
-| La 30.5.2026 | KuPS | FC Inter |
-| La 30.5.2026 | TPS | VPS |
-| La 30.5.2026 | FC Lahti | Ilves |
-| Su 31.5.2026 | AC Oulu | FF Jaro |
 | La 13.6.2026 | FC Inter | AC Oulu |
 | La 13.6.2026 | Ilves | TPS |
 | La 13.6.2026 | FF Jaro | HJK |
@@ -153,4 +153,4 @@
 | Ma 31.8.2026 | VPS | FC Lahti |
 
 ---
-*Yhteensä 132 ottelua (38 pelattu, 94 tulossa)*
+*Yhteensä 132 ottelua (58 pelattu, 74 tulossa)*
