@@ -1,6 +1,6 @@
 # Veikkausliiga 2026 - Otteluennusteet
 
-*Analysoitu: 2026-07-17 04:58:58*
+*Analysoitu: 2026-07-17 04:59:35*
 
 *Ennusteet perustuvat joukkueiden historialliseen menestykseen ja vahvuusluokituksiin — eivät pelaaja- tai loukkaantumistietoihin.*
 
@@ -22,78 +22,6 @@
 | IF Gnistan | 50 |
 
 ## Ennustetut ottelut
-
-### La 13.6.2026
-
-| Koti | Vieras | Koti-% | Tasapeli-% | Vieras-% | Yli 2.5 % |
-|------|--------|:------:|:----------:|:--------:|:---------:|
-| FC Inter ⭐ | AC Oulu | 65% | 25% | 10% | 60% |
-| Ilves ⭐ | TPS | 67% | 25% | 8% | 63% |
-| FF Jaro | HJK ⭐ | 22% | 22% | 56% | 64% |
-| VPS | KuPS ⭐ | 25% | 23% | 52% | 64% |
-| FC Lahti | SJK | 42% | 26% | 32% | 63% |
-| IFK Mariehamn ⭐ | IF Gnistan | 52% | 28% | 20% | 57% |
-
-### Ke 17.6.2026
-
-| Koti | Vieras | Koti-% | Tasapeli-% | Vieras-% | Yli 2.5 % |
-|------|--------|:------:|:----------:|:--------:|:---------:|
-| HJK ⭐ | FC Inter | 71% | 24% | 5% | 66% |
-| Ilves ⭐ | FF Jaro | 69% | 25% | 6% | 62% |
-| TPS | KuPS ⭐ | 27% | 23% | 50% | 64% |
-| IF Gnistan | FC Lahti | 42% | 26% | 32% | 59% |
-| SJK ⭐ | VPS | 67% | 25% | 8% | 62% |
-
-### To 18.6.2026
-
-| Koti | Vieras | Koti-% | Tasapeli-% | Vieras-% | Yli 2.5 % |
-|------|--------|:------:|:----------:|:--------:|:---------:|
-| AC Oulu ⭐ | IFK Mariehamn | 54% | 28% | 18% | 58% |
-
-### Ti 23.6.2026
-
-| Koti | Vieras | Koti-% | Tasapeli-% | Vieras-% | Yli 2.5 % |
-|------|--------|:------:|:----------:|:--------:|:---------:|
-| FC Lahti ⭐ | TPS | 55% | 27% | 18% | 60% |
-| KuPS ⭐ | Ilves | 62% | 26% | 12% | 67% |
-| VPS ⭐ | AC Oulu | 55% | 27% | 18% | 59% |
-| FC Inter | SJK | 47% | 27% | 26% | 64% |
-| FF Jaro ⭐ | IF Gnistan | 57% | 27% | 16% | 58% |
-| IFK Mariehamn | HJK ⭐ | 17% | 21% | 62% | 64% |
-
-### La 27.6.2026
-
-| Koti | Vieras | Koti-% | Tasapeli-% | Vieras-% | Yli 2.5 % |
-|------|--------|:------:|:----------:|:--------:|:---------:|
-| Ilves ⭐ | SJK | 54% | 28% | 18% | 65% |
-| HJK ⭐ | KuPS | 55% | 27% | 18% | 69% |
-| IFK Mariehamn | FC Inter ⭐ | 37% | 25% | 38% | 60% |
-| IF Gnistan | VPS | 47% | 27% | 26% | 58% |
-| TPS ⭐ | FF Jaro | 54% | 28% | 18% | 60% |
-| AC Oulu | FC Lahti | 44% | 26% | 30% | 60% |
-
-### La 4.7.2026
-
-| Koti | Vieras | Koti-% | Tasapeli-% | Vieras-% | Yli 2.5 % |
-|------|--------|:------:|:----------:|:--------:|:---------:|
-| FC Lahti ⭐ | IF Gnistan | 62% | 26% | 12% | 59% |
-| FF Jaro | Ilves ⭐ | 35% | 25% | 40% | 62% |
-| SJK ⭐ | TPS | 65% | 25% | 10% | 62% |
-| VPS ⭐ | IFK Mariehamn | 57% | 27% | 16% | 58% |
-
-### Pe 10.7.2026
-
-| Koti | Vieras | Koti-% | Tasapeli-% | Vieras-% | Yli 2.5 % |
-|------|--------|:------:|:----------:|:--------:|:---------:|
-| VPS | SJK ⭐ | 37% | 25% | 38% | 62% |
-
-### La 11.7.2026
-
-| Koti | Vieras | Koti-% | Tasapeli-% | Vieras-% | Yli 2.5 % |
-|------|--------|:------:|:----------:|:--------:|:---------:|
-| FC Lahti | HJK ⭐ | 27% | 23% | 50% | 65% |
-| IF Gnistan ⭐ | IFK Mariehamn | 52% | 28% | 20% | 57% |
-| TPS ⭐ | AC Oulu | 57% | 27% | 16% | 59% |
 
 ### La 18.7.2026
 
@@ -228,4 +156,4 @@
 | VPS | FC Lahti | 47% | 27% | 26% | 60% |
 
 ---
-*Yhteensä 74 ennustetta*
+*Yhteensä 42 ennustetta*

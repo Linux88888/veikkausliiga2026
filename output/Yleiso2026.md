@@ -1,50 +1,50 @@
 # Veikkausliiga 2026 - Yleisömäärät
 
-*Analysoitu: 2026-07-17 04:58:58*
+*Analysoitu: 2026-07-17 04:59:35*
 
-*Lähde: Ottelut.md (58 pelattu kotiottelua, 58 todellisella katsojaluvulla)*
+*Lähde: Ottelut.md (90 pelattu kotiottelua, 90 todellisella katsojaluvulla)*
 
 ## Kauden ennuste / tilanne
 
-- **Kotiotteluja pelattu**: 58
-- **Todelliset katsojat** (58 ottelussa): 165,974
-- **Arvioitu yhteiskatsojamäärä (todelliset + estimoidut)**: 165,974
-- **Keskiarvo per ottelu**: 2,861 katsojaa
+- **Kotiotteluja pelattu**: 90
+- **Todelliset katsojat** (90 ottelussa): 263,584
+- **Arvioitu yhteiskatsojamäärä (todelliset + estimoidut)**: 263,584
+- **Keskiarvo per ottelu**: 2,928 katsojaa
 - **Suurin stadionkapasiteetti**: 14,000 katsojaa
 
 ## Joukkuekohtaiset stadionit
 
 | Joukkue | Stadion | Kapasiteetti | Ennuste ka. | Kotipelit | Toteutunut ka. | Ero ennusteesta | Todelliset katsojat | Kausiarvio |
 |---------|---------|:------------:|:-----------:|:---------:|:--------------:|:---------------:|:--------------------:|:----------:|
-| HJK | Bolt Arena | 10,770 | 5,800 | 5 | 5,090 | -710 | 25,450 | 55,990 |
-| FC Inter | Veritas Stadion | 9,300 | 2,800 | 6 | 3,618 | +818 | 21,706 | 39,796 |
-| KuPS | Väre Arena | 5,000 | 3,000 | 7 | 2,902 | -98 | 20,313 | 31,921 |
-| Ilves | Tammelan stadion | 8,000 | 3,600 | 4 | 4,124 | +524 | 16,495 | 45,363 |
-| SJK | OmaSP Stadion | 6,075 | 3,800 | 5 | 3,003 | -797 | 15,013 | 33,031 |
-| TPS | Veritas Stadion | 9,300 | 2,500 | 5 | 2,685 | +185 | 13,427 | 29,537 |
-| VPS | Hietalahden stadion | 5,500 | 1,500 | 4 | 2,902 | +1,402 | 11,610 | 31,924 |
-| IF Gnistan | Helsingfors stadion | 3,000 | 1,200 | 5 | 2,205 | +1,005 | 11,027 | 24,257 |
-| FC Lahti | Lahden stadion | 14,000 | 2,200 | 5 | 2,139 | -61 | 10,694 | 23,528 |
-| AC Oulu | Raatti | 6,000 | 2,000 | 4 | 2,032 | +32 | 8,127 | 22,351 |
-| FF Jaro | Centralplan | 3,000 | 1,800 | 4 | 1,986 | +186 | 7,946 | 21,848 |
-| IFK Mariehamn | Wiklöf Holding Arena | 3,000 | 1,600 | 4 | 1,042 | -558 | 4,166 | 11,460 |
+| HJK | Bolt Arena | 10,770 | 5,800 | 7 | 5,469 | -331 | 38,280 | 60,156 |
+| FC Inter | Veritas Stadion | 9,300 | 2,800 | 8 | 3,553 | +753 | 28,427 | 39,086 |
+| Ilves | Tammelan stadion | 8,000 | 3,600 | 7 | 4,003 | +403 | 28,020 | 44,032 |
+| VPS | Hietalahden stadion | 5,500 | 1,500 | 8 | 3,114 | +1,614 | 24,910 | 34,252 |
+| KuPS | Väre Arena | 5,000 | 3,000 | 8 | 3,090 | +90 | 24,722 | 33,992 |
+| FC Lahti | Lahden stadion | 14,000 | 2,200 | 9 | 2,492 | +292 | 22,427 | 27,411 |
+| SJK | OmaSP Stadion | 6,075 | 3,800 | 7 | 3,015 | -785 | 21,106 | 33,166 |
+| TPS | Veritas Stadion | 9,300 | 2,500 | 8 | 2,638 | +138 | 21,102 | 29,016 |
+| IF Gnistan | Helsingfors stadion | 3,000 | 1,200 | 8 | 2,169 | +969 | 17,354 | 23,861 |
+| FF Jaro | Centralplan | 3,000 | 1,800 | 7 | 2,147 | +347 | 15,027 | 23,615 |
+| AC Oulu | Raatti | 6,000 | 2,000 | 6 | 2,100 | +100 | 12,598 | 23,098 |
+| IFK Mariehamn | Wiklöf Holding Arena | 3,000 | 1,600 | 7 | 1,373 | -227 | 9,611 | 15,103 |
 
 ## Katsojasuosio joukkueittain
 
 | # | Joukkue | Toteutunut ka. | Korkein | Matalin | Täyttöaste | Kotipelit |
 |:-:|---------|:--------------:|:-------:|:-------:|:----------:|:---------:|
-| 1 | HJK | 5,090 | 5,786 | 4,519 | 47.3 % | 5 |
-| 2 | Ilves | 4,124 | 4,774 | 3,410 | 51.5 % | 4 |
-| 3 | FC Inter | 3,618 | 8,102 | 2,418 | 38.9 % | 6 |
-| 4 | SJK | 3,003 | 4,568 | 2,254 | 49.4 % | 5 |
-| 5 | KuPS | 2,902 | 3,108 | 2,610 | 58.0 % | 7 |
-| 6 | VPS | 2,902 | 3,724 | 2,341 | 52.8 % | 4 |
-| 7 | TPS | 2,685 | 3,547 | 2,223 | 28.9 % | 5 |
-| 8 | IF Gnistan | 2,205 | 3,070 | 1,853 | 73.5 % | 5 |
-| 9 | FC Lahti | 2,139 | 2,763 | 1,745 | 15.3 % | 5 |
-| 10 | AC Oulu | 2,032 | 2,869 | 1,637 | 33.9 % | 4 |
-| 11 | FF Jaro | 1,986 | 2,470 | 1,786 | 66.2 % | 4 |
-| 12 | IFK Mariehamn | 1,042 | 1,258 | 944 | 34.7 % | 4 |
+| 1 | HJK | 5,469 | 6,748 | 4,519 | 50.8 % | 7 |
+| 2 | Ilves | 4,003 | 4,774 | 3,410 | 50.0 % | 7 |
+| 3 | FC Inter | 3,553 | 8,102 | 2,418 | 38.2 % | 8 |
+| 4 | VPS | 3,114 | 3,724 | 2,341 | 56.6 % | 8 |
+| 5 | KuPS | 3,090 | 4,409 | 2,610 | 61.8 % | 8 |
+| 6 | SJK | 3,015 | 4,568 | 2,254 | 49.6 % | 7 |
+| 7 | TPS | 2,638 | 3,547 | 2,223 | 28.4 % | 8 |
+| 8 | FC Lahti | 2,492 | 4,152 | 1,745 | 17.8 % | 9 |
+| 9 | IF Gnistan | 2,169 | 3,070 | 1,853 | 72.3 % | 8 |
+| 10 | FF Jaro | 2,147 | 2,783 | 1,786 | 71.6 % | 7 |
+| 11 | AC Oulu | 2,100 | 2,869 | 1,637 | 35.0 % | 6 |
+| 12 | IFK Mariehamn | 1,373 | 2,457 | 944 | 45.8 % | 7 |
 
 ## Pelattujen otteluiden yleisömäärät
 
@@ -108,6 +108,38 @@
 | La 30.5.2026 | KuPS | 1-1 | FC Inter | 2,884 |
 | La 30.5.2026 | TPS | 1-0 | VPS | 2,223 |
 | Su 31.5.2026 | AC Oulu | 2-1 | FF Jaro | 1,742 |
+| La 13.6.2026 | FC Inter | 0-0 | AC Oulu | 3,716 |
+| La 13.6.2026 | Ilves | 1-0 | TPS | 4,137 |
+| La 13.6.2026 | FF Jaro | 2-5 | HJK | 2,783 |
+| La 13.6.2026 | VPS | 1-1 | KuPS | 2,397 |
+| La 13.6.2026 | FC Lahti | 2-3 | SJK | 1,926 |
+| La 13.6.2026 | IFK Mariehamn | 0-3 | IF Gnistan | 2,457 |
+| Ke 17.6.2026 | HJK | 3-3 | FC Inter | 6,082 |
+| Ke 17.6.2026 | Ilves | 5-0 | FF Jaro | 3,458 |
+| Ke 17.6.2026 | TPS | 1-2 | KuPS | 2,857 |
+| Ke 17.6.2026 | IF Gnistan | 1-0 | FC Lahti | 2,013 |
+| Ke 17.6.2026 | SJK | 1-2 | VPS | 3,633 |
+| To 18.6.2026 | AC Oulu | 2-1 | IFK Mariehamn | 1,807 |
+| Ti 23.6.2026 | FC Lahti | 0-0 | TPS | 3,225 |
+| Ti 23.6.2026 | KuPS | 4-3 | Ilves | 4,409 |
+| Ti 23.6.2026 | VPS | 5-1 | AC Oulu | 3,532 |
+| Ti 23.6.2026 | FC Inter | 1-1 | SJK | 3,005 |
+| Ti 23.6.2026 | FF Jaro | 1-1 | IF Gnistan | 2,129 |
+| Ti 23.6.2026 | IFK Mariehamn | 0-4 | HJK | 1,502 |
+| La 27.6.2026 | Ilves | 2-2 | SJK | 3,930 |
+| La 27.6.2026 | HJK | 0-4 | KuPS | 6,748 |
+| La 27.6.2026 | IFK Mariehamn | 0-2 | FC Inter | 1,486 |
+| La 27.6.2026 | IF Gnistan | 1-1 | VPS | 2,137 |
+| La 27.6.2026 | TPS | 3-2 | FF Jaro | 2,572 |
+| La 27.6.2026 | AC Oulu | 1-1 | FC Lahti | 2,664 |
+| La 4.7.2026 | FC Lahti | 1-0 | IF Gnistan | 2,430 |
+| La 4.7.2026 | FF Jaro | 2-1 | Ilves | 2,169 |
+| La 4.7.2026 | SJK | 3-1 | TPS | 2,460 |
+| La 4.7.2026 | VPS | 4-0 | IFK Mariehamn | 3,653 |
+| Pe 10.7.2026 | VPS | 1-0 | SJK | 3,718 |
+| La 11.7.2026 | FC Lahti | 2-0 | HJK | 4,152 |
+| La 11.7.2026 | IF Gnistan | 4-2 | IFK Mariehamn | 2,177 |
+| La 11.7.2026 | TPS | 3-0 | AC Oulu | 2,246 |
 
 ---
 *Ennuste ka. = historiallinen keskiyleisö kotiotteluissa (2023–2025 arvio). Kausiarvio = todelliset katsojat + jäljellä olevien otteluiden arvio (käytetään toteutunutta keskiarvoa jos saatavilla, muuten ennustetta).*

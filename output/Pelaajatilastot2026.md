@@ -1,6 +1,6 @@
 # ⚽ Veikkausliiga 2026 — Pelaajatilastot
 
-*Päivitetty: 2026-07-17 04:58:58*
+*Päivitetty: 2026-07-17 04:59:35*
 
 *Lähde: [https://www.veikkausliiga.com/tilastot/2026/veikkausliiga/pelaajat/](https://www.veikkausliiga.com/tilastot/2026/veikkausliiga/pelaajat/)*
 
